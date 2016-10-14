@@ -1,3 +1,5 @@
+require 'ruby-mpd'
+
 class JukeController < ApplicationController
   before_action :initialize_mpd
 
