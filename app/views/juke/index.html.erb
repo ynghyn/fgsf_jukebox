@@ -1,26 +1,62 @@
-<h1>예수인교회 Jukebox</h1>
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+          <h3 class="masthead-brand">예수인교회 Jukebox</h3>
+          <nav>
+            <ul class="nav masthead-nav">
+              <li>
+                <a href="/juke/previous"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></a>
+              </li>
+              <% if @mpd.playing? %>
+                <li>
+                  <a href="/juke/pause"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></a>
+                </li>
+              <% else %>
+                <li>
+                  <a href="/juke/play"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>
+                </li>
+              <% end %>
+              <li>
+                <a href="/juke/next"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></a>
+              </li>
+              <li>
+                <a href="/juke/stop"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></a>
+              </li>
+              <li>
+                <a href="/juke/clear"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
 
-<% if @mpd.queue.present? && (@mpd.paused? || @mpd.stopped?) %>
-  <p><a href="/juke/play">Start playing</a></p>
-<% elsif @mpd.playing? %>
-  <p><a href="/juke/stop">Stop playing</a></p>
-<% end %>
+      <div class="inner cover">
+        <p class="lead font-15">Previous:</p>
+        <p class="lead">Playing Now:<br><%= playing_now(@mpd.current_song) %></p>
+        <p class="lead font-15">Next:</p>
+      </div>
 
-<% if @mpd.queue.present? %>
-  <p><a href="/juke/clear">Clear queue</a></p>
-<% end %>
+      <div class="mastfoot">
+        <div class="inner">
+          <p>FGSF Media team <a href=#">fgsfmedia@gmail.com </a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<br>
-<p>Playing Now: <%= @mpd.current_song.try(:file) || 'none' %></p>
+<script>
+  setTimeout(function() { window.location=window.location;},5000);
+</script>
+
 <p>
   Queue:<br>
   <% @mpd.queue.each do |song| %>
-    <%= song.file %><br>
+    <% unless song.file == JukeController::CASSETTE_EFFECT %>
+      <%= song.file.split('/').last %><br>
+    <% end %>
   <% end %>
+  <% @mpd.disconnect %>
 </p>
-
-<% @mpd.disconnect %>
-
-<script>
-  setTimeout(function() { window.location=window.location;},10000);
-</script>
