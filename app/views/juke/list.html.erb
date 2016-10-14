@@ -1,0 +1,6 @@
+<% @songs.each do |song| %>
+  <a href="/juke/add_song?song_name=<%= song.file %>" class="list-group-item">
+    <%= song.file %>
+  </a>
+  <br>
+<% end %>

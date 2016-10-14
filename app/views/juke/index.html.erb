@@ -1,32 +1,22 @@
-<div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <div class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner">
-          <h3 class="masthead-brand">FGSF</h3>
-          <nav>
-            <ul class="nav masthead-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Playlist</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
+<h1>예수인교회 Jukebox</h1>
 
-      <div class="inner cover">
-        <h1 class="cover-heading">예수인교회 Jukebox</h1>
-        <p class="lead">Play your favorite music here</p>
-      </div>
+<% if @mpd.queue.present? && (@mpd.paused? || @mpd.stopped?) %>
+  <p><a href="/juke/play">Start playing</a></p>
+<% elsif @mpd.playing? %>
+  <p><a href="/juke/stop">Stop playing</a></p>
+<% end %>
 
-      <div class="mastfoot">
-        <div class="inner">
-          <p>FGSF Media</p>
-        </div>
-      </div>
+<% if @mpd.queue.present? %>
+  <p><a href="/juke/clear">Clear queue</a></p>
+<% end %>
 
-    </div>
+<br>
+<p>Playing Now: <%= @mpd.current_song.try(:file) || 'none' %></p>
+<p>
+  Queue:<br>
+  <% @mpd.queue.each do |song| %>
+    <%= song.file %><br>
+  <% end %>
+</p>
 
-  </div>
-
-</div>
+<% @mpd.disconnect %>
