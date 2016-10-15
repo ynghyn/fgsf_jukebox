@@ -14,9 +14,61 @@ module JukeHelper
     if song.try(:file) && song.file.include?(JukeController::CASSETTE_EFFECT)
       'changing tape..'
     elsif song.try(:file)
-      song.file.split('/').last
+      normalize_file_name(song.file)
     else
       'choose thy song from /juke/list'
+    end
+  end
+
+  def previous_songs(mpd)
+    if mpd.queue.present? && mpd.current_song
+      variable = if mpd.current_song.file.include?(JukeController::CASSETTE_EFFECT)
+        1
+      else
+        0
+      end
+      curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
+      [
+        get_song_in_pos(mpd, curr_song_in_queue, -6+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, -4+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, -2+variable)
+      ].compact
+    else
+      []
+    end
+  end
+
+  def next_songs(mpd)
+    if mpd.queue.present? && mpd.current_song
+      variable = if mpd.current_song.file.include?(JukeController::CASSETTE_EFFECT)
+        -1
+      else
+        0
+      end
+      curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
+      [
+        get_song_in_pos(mpd, curr_song_in_queue, 2+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, 4+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, 6+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, 8+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, 10+variable),
+        get_song_in_pos(mpd, curr_song_in_queue, 12+variable),
+      ].compact
+    else
+      []
+    end
+  end
+
+  def normalize_file_name(file_name)
+    file_name.split('/').last.split('.')[-2]
+  end
+
+  private
+
+  def get_song_in_pos(mpd, song, pos)
+    if song.pos + pos >= 0
+      song_in_pos = mpd.queue[song.pos + pos]
+      song_in_pos && normalize_file_name(song_in_pos.file)
     end
   end
 end

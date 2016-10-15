@@ -32,31 +32,17 @@
         </div>
       </div>
 
-      <div class="inner cover">
-        <p class="lead font-15">Previous:</p>
-        <p class="lead">Playing Now:<br><%= playing_now(@mpd.current_song) %></p>
-        <p class="lead font-15">Next:</p>
+      <div class="inner cover" id="playing_now">
+        <%= render partial: 'playing_now' %>
       </div>
 
       <div class="mastfoot">
         <div class="inner">
-          <p>FGSF Media team <a href=#">fgsfmedia@gmail.com </a></p>
+          <p>FGSF Media team - Give us your feedback! <a href=#">fgsfmedia@gmail.com</a></p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  setTimeout(function() { window.location=window.location;},5000);
-</script>
-
-<p>
-  Queue:<br>
-  <% @mpd.queue.each do |song| %>
-    <% unless song.file == JukeController::CASSETTE_EFFECT %>
-      <%= song.file.split('/').last %><br>
-    <% end %>
-  <% end %>
-  <% @mpd.disconnect %>
-</p>
+<% @mpd.disconnect if @mpd.connected? %>
