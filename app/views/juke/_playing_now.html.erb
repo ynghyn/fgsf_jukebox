@@ -1,0 +1,15 @@
+<p class="lead font-14 text-align-left">
+  Previous:<br>
+  <% previous_songs(@mpd).each do |song_name| %>
+    <%= song_name %><br>
+  <% end %>
+</p>
+<p class="lead font-20">Playing Now:<br><%= playing_now(@mpd.current_song) %></p>
+<p class="lead font-14 text-align-left">
+  Next:<br>
+  <% next_songs(@mpd).each do |song_name| %>
+    <%= song_name %><br>
+  <% end %>
+</p>
+
+<% @mpd.disconnect if @mpd.connected? %>

@@ -8,6 +8,10 @@ class JukeController < ApplicationController
   def index
   end
 
+  def playing_now
+    render partial: 'playing_now'
+  end
+
   def list
     @songs = @mpd.songs.select { |song| !song.file.include?(CASSETTE_EFFECT) }
     @mpd.disconnect
