@@ -28,10 +28,15 @@ module JukeHelper
         0
       end
       curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
+      item_remaining = curr_song_in_queue.pos - 6 + variable
+      more_songs = if item_remaining/2 > 0
+        "...+#{item_remaining/2}"
+      end
       [
+        more_songs,
         get_song_in_pos(mpd, curr_song_in_queue, -6+variable),
         get_song_in_pos(mpd, curr_song_in_queue, -4+variable),
-        get_song_in_pos(mpd, curr_song_in_queue, -2+variable)
+        get_song_in_pos(mpd, curr_song_in_queue, -2+variable),
       ].compact
     else
       []
@@ -46,13 +51,15 @@ module JukeHelper
         0
       end
       curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
+      item_remaining = mpd.queue.size - curr_song_in_queue.pos - 6 - variable
+      more_songs = if item_remaining/2 > 0
+        "...+#{item_remaining/2}"
+      end
       [
         get_song_in_pos(mpd, curr_song_in_queue, 2+variable),
         get_song_in_pos(mpd, curr_song_in_queue, 4+variable),
         get_song_in_pos(mpd, curr_song_in_queue, 6+variable),
-        get_song_in_pos(mpd, curr_song_in_queue, 8+variable),
-        get_song_in_pos(mpd, curr_song_in_queue, 10+variable),
-        get_song_in_pos(mpd, curr_song_in_queue, 12+variable),
+        more_songs,
       ].compact
     else
       []

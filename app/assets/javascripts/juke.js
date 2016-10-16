@@ -1,9 +1,14 @@
 $(document).ready(
   function() {
-    setInterval(function() {
-      $('#playing_now').load('/juke/playing_now');
-    }, 2000);
-
-    setTimeout(function() { window.location=window.location;}, 60000);
+    $('.btn_add_song').click(function(data) {
+      var url = this.name;
+      $.getJSON(url, function() {
+        $(".notice" ).show();
+        $(".notice" ).fadeOut(2000);
+        $('div.notice').text('추가되었습니다');
+      });
+    });
   }
 );
+
+

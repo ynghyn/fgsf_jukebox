@@ -9,7 +9,7 @@
               <li>
                 <a href="/juke/previous"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></a>
               </li>
-              <% if @mpd.playing? %>
+              <% if MPD_INSTANCE.playing? %>
                 <li>
                   <a href="/juke/pause"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></a>
                 </li>
@@ -45,4 +45,10 @@
   </div>
 </div>
 
-<% @mpd.disconnect if @mpd.connected? %>
+<script>
+  setInterval(function() {
+    $('#playing_now').load('/juke/playing_now');
+  }, 2000);
+
+  setTimeout(function() { window.location=window.location;}, 60000);
+</script>
