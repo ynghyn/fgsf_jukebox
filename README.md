@@ -13,7 +13,7 @@ A jukebox where music plays on a central hub with ability for users to DJ the so
 
 ## Configuration
 - Follow this[1-page guide](http://crunchbang.org/forums/viewtopic.php?id=17386) to get your MPD server up and running
-
+- Need to restrat MPD every once a while (not sure why)
 
 ### Database
 `Coming soon.`

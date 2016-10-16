@@ -1,8 +1,6 @@
 require 'ruby-mpd'
 
 class JukeController < ApplicationController
-  before_action :initialize_mpd
-
   CASSETTE_EFFECT = 'cassette.wav'.freeze
 
   def index
@@ -13,70 +11,56 @@ class JukeController < ApplicationController
   end
 
   def list
-    @songs = @mpd.songs.select { |song| !song.file.include?(CASSETTE_EFFECT) }
-    @mpd.disconnect
+    @songs = MPD_INSTANCE.songs.select { |song| !song.file.include?(CASSETTE_EFFECT) }
   end
 
   def add_song
     if !params[:song_name].present?
       flash.alert = 'You must select a song'
-    elsif @mpd.current_song
-      @mpd.add(CASSETTE_EFFECT)
-      @mpd.add(params[:song_name])
-      @mpd.play if @mpd.stopped?
+    elsif MPD_INSTANCE.current_song
+      MPD_INSTANCE.add(CASSETTE_EFFECT)
+      MPD_INSTANCE.add(params[:song_name])
+      MPD_INSTANCE.play if MPD_INSTANCE.stopped?
     else
-      @mpd.clear
-      @mpd.add(CASSETTE_EFFECT)
-      @mpd.add(params[:song_name])
-      @mpd.play
+      MPD_INSTANCE.clear
+      MPD_INSTANCE.add(CASSETTE_EFFECT)
+      MPD_INSTANCE.add(params[:song_name])
+      MPD_INSTANCE.play
     end
-    @mpd.disconnect
-    redirect_to juke_list_path
+    respond_to do |format|
+      format.json {}
+    end
   end
 
   def pause
-    @mpd.pause = true if @mpd.playing?
-    @mpd.disconnect
+    MPD_INSTANCE.pause = true if MPD_INSTANCE.playing?
     redirect_to juke_index_path
   end
 
   def stop
-    @mpd.stop if @mpd.playing?
-    @mpd.disconnect
+    MPD_INSTANCE.stop if MPD_INSTANCE.playing?
     redirect_to juke_index_path
   end
 
   def next
-    @mpd.next
-    @mpd.disconnect
+    MPD_INSTANCE.next
     redirect_to juke_index_path
   end
 
   # Go back twice because of 'cassette' effect queues
   def previous
-    @mpd.previous
-    @mpd.previous
-    @mpd.disconnect
+    MPD_INSTANCE.previous
+    MPD_INSTANCE.previous
     redirect_to juke_index_path
   end
 
   def play
-    @mpd.play if @mpd.queue.present? && (@mpd.paused? || @mpd.stopped?)
-    @mpd.disconnect
+    MPD_INSTANCE.play if MPD_INSTANCE.queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
     redirect_to juke_index_path
   end
 
   def clear
-    @mpd.clear unless @mpd.queue.present?
-    @mpd.disconnect
+    MPD_INSTANCE.clear
     redirect_to juke_index_path
-  end
-
-  private
-
-  def initialize_mpd
-    @mpd = MPD.new
-    @mpd.connect
-    @mpd.update
   end
 end
