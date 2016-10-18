@@ -1,11 +1,20 @@
 $(document).ready(
   function() {
-    $('.btn_add_song').click(function(data) {
+    $('.btn_add_song').click(function() {
       var url = this.name;
+      var $this = $(this);
       $.getJSON(url, function() {
-        $(".notice" ).show();
-        $(".notice" ).fadeOut(2000);
-        $('div.notice').text('추가되었습니다');
+        $this.addClass('btn-primary');
+        $this.fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
+        $this.removeClass('btn-primary');
+      });
+    });
+
+    $('#juke_control').delegate('span', 'click', function() {
+      var url = $(this).attr('data_url');
+      $.getJSON(url, function() {
+        $('li#play_button_container').load('/juke/play_button');
+        $('#playing_now').load('/juke/playing_now');
       });
     });
   }

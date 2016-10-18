@@ -5,27 +5,21 @@
         <div class="inner">
           <h3 class="masthead-brand">예수인교회 Jukebox</h3>
           <nav>
-            <ul class="nav masthead-nav">
+            <ul id='juke_control' class="nav masthead-nav">
               <li>
-                <a href="/juke/previous"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span></a>
+                <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
               </li>
-              <% if MPD_INSTANCE.playing? %>
-                <li>
-                  <a href="/juke/pause"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></a>
-                </li>
-              <% else %>
-                <li>
-                  <a href="/juke/play"><span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>
-                </li>
-              <% end %>
-              <li>
-                <a href="/juke/next"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span></a>
+              <li id="play_button_container">
+                <%= render partial: 'play_button' %>
               </li>
               <li>
-                <a href="/juke/stop"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span></a>
+                <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
               </li>
               <li>
-                <a href="/juke/clear"><span class="glyphicon glyphicon-eject" aria-hidden="true"></span></a>
+                <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+              </li>
+              <li>
+                <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
               </li>
             </ul>
           </nav>
@@ -49,6 +43,4 @@
   setInterval(function() {
     $('#playing_now').load('/juke/playing_now');
   }, 2000);
-
-  setTimeout(function() { window.location=window.location;}, 60000);
 </script>

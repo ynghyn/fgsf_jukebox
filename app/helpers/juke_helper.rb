@@ -2,6 +2,10 @@ module JukeHelper
   LIST_GROUP_ITEM_SUCCESS = 'list-group-item-success'.freeze
   LIST_GROUP_ITEM_INFO = 'list-group-item-info'.freeze
 
+  def is_an_effect?(song)
+    JukeController::ALL_EFFECTS.any? { |effect| song.file.include?(effect) }
+  end
+
   def alternate_list_css(css_class)
     if css_class == LIST_GROUP_ITEM_INFO
       LIST_GROUP_ITEM_SUCCESS
@@ -11,7 +15,7 @@ module JukeHelper
   end
 
   def playing_now(song)
-    if song.try(:file) && song.file.include?(JukeController::CASSETTE_EFFECT)
+    if song.try(:file) && is_an_effect?(song)
       'changing tape..'
     elsif song.try(:file)
       normalize_file_name(song.file)
@@ -21,13 +25,13 @@ module JukeHelper
   end
 
   def previous_songs(mpd)
-    if mpd.queue.present? && mpd.current_song
-      variable = if mpd.current_song.file.include?(JukeController::CASSETTE_EFFECT)
+    if mpd_queue(mpd).present? && current_song(mpd)
+      variable = if is_an_effect?(current_song(mpd))
         1
       else
         0
       end
-      curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
+      curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
       item_remaining = curr_song_in_queue.pos - 6 + variable
       more_songs = if item_remaining/2 > 0
         "...+#{item_remaining/2}"
@@ -44,14 +48,14 @@ module JukeHelper
   end
 
   def next_songs(mpd)
-    if mpd.queue.present? && mpd.current_song
-      variable = if mpd.current_song.file.include?(JukeController::CASSETTE_EFFECT)
+    if mpd_queue(mpd).present? && current_song(mpd)
+      variable = if is_an_effect?(current_song(mpd))
         -1
       else
         0
       end
-      curr_song_in_queue = mpd.queue.find { |m| m == mpd.current_song }
-      item_remaining = mpd.queue.size - curr_song_in_queue.pos - 6 - variable
+      curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
+      item_remaining = mpd_queue(mpd).size - curr_song_in_queue.pos - 6 - variable
       more_songs = if item_remaining/2 > 0
         "...+#{item_remaining/2}"
       end
@@ -74,8 +78,16 @@ module JukeHelper
 
   def get_song_in_pos(mpd, song, pos)
     if song.pos + pos >= 0
-      song_in_pos = mpd.queue[song.pos + pos]
+      song_in_pos = mpd_queue(mpd)[song.pos + pos]
       song_in_pos && normalize_file_name(song_in_pos.file)
     end
+  end
+
+  def current_song(mpd)
+    @current_song ||= mpd.current_song
+  end
+
+  def mpd_queue(mpd)
+    @mpd_queue ||= mpd.queue
   end
 end
