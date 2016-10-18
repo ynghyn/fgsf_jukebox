@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get 'juke/index', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'
+  get 'juke/play_button', to: 'juke#play_button'
   get 'juke/list', to: 'juke#list'
   get 'juke/add_song', to: 'juke#add_song'
   get 'juke/stop', to: 'juke#stop'

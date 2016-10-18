@@ -8,9 +8,8 @@
   <!-- List group -->
   <div class="list-group">
     <% @songs.each do |song| %>
-      <% @css_class = alternate_list_css(@css_class) %>
-      <button type="button" class="btn_add_song list-group-item text-align-center <%= @css_class %>" \
-              name="/juke/add_song?song_name=<%= song.file %>">
+      <button type="button" class="btn_add_song list-group-item text-align-center" \
+              name="/juke/add_song?song_name=<%= URI.encode(song.file) %>">
         <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
       </button>
     <% end %>
