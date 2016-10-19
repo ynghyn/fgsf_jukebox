@@ -1,12 +1,16 @@
 class JukeController < ApplicationController
   include JukeHelper
 
+  before_action :get_or_create_user
   before_action :initialize_mpd
 
   CASSETTE_EFFECT = 'cassette.wav'.freeze
   CD_PLAYER_EFFECT = 'cdplayer.wav'.freeze
   LP_NOISE_EFFECT = 'lpnoise.wav'.freeze
   ALL_EFFECTS = [CASSETTE_EFFECT, CD_PLAYER_EFFECT, LP_NOISE_EFFECT].freeze
+
+  BYPASS_CODE = 'bss'.freeze
+  MAX_QUEUE_COUNT = 3
 
   def index
   end
@@ -28,12 +32,21 @@ class JukeController < ApplicationController
   def add_song
     status, msg = if !params[:song_name].present?
       [400, 'You must select a song']
-    elsif MPD_INSTANCE.current_song
+    elsif cookies[:queue_count].to_i >= MAX_QUEUE_COUNT && params[:bypass] != BYPASS_CODE
+      # Limit to 3 songs per 10 minutes
+      record_and_update_cookie(params[:song_name], false)
+      [429, 'Try again in 10 minutes.']
+    elsif @current_song && song_already_queued?(params[:song_name])
+      record_and_update_cookie(params[:song_name], false)
+      [200, nil]
+    elsif @current_song
+      record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play if MPD_INSTANCE.stopped?
       [200, nil]
     else
+      record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.clear
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
@@ -70,7 +83,7 @@ class JukeController < ApplicationController
 
   # API endpoint
   def play
-    MPD_INSTANCE.play if MPD_INSTANCE.queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
+    MPD_INSTANCE.play if @music_queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
   end
 
   # API endpoint
@@ -82,9 +95,34 @@ class JukeController < ApplicationController
 
   def initialize_mpd
     MPD_INSTANCE.reconnect unless MPD_INSTANCE.connected?
+    @current_song = MPD_INSTANCE.current_song
+    @music_queue = MPD_INSTANCE.queue
   end
 
   def choose_effect
     ALL_EFFECTS[rand(3)]
+  end
+
+  def song_already_queued?(file_name)
+    @current_song
+    @music_queue[@current_song.pos..-1].any? { |song| song.file == file_name }
+  end
+
+  def record_and_update_cookie(song_name, queued)
+    MusicSelection.create(song: song_name, queued: queued, user_id: @current_user.id)
+    if queued
+      count = cookies[:queue_count].to_i
+      cookies[:queue_count] = { value: count + 1, expires: 10.minutes.from_now }
+    end
+  end
+
+  def get_or_create_user
+    if cookies[:user_id] && user = User.find_by_id(cookies[:user_id])
+      user.update_attribute(:last_visited, Time.zone.now)
+      @current_user = user
+    else
+      @current_user = User.create(last_visited: Time.zone.now)
+      cookies[:user_id] = { value: @current_user.id, expires: 3.years.from_now }
+    end
   end
 end
