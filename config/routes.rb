@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'juke#index'
+  root 'juke#list'
 
 
-  get 'juke/index', to: 'juke#index'
+  get 'juke/control', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'
   get 'juke/play_button', to: 'juke#play_button'
   get 'juke/list', to: 'juke#list'
