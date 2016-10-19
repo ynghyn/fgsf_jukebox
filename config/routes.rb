@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'juke#index'
-  
+
 
   get 'juke/index', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'
@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get 'juke/play', to: 'juke#play'
   get 'juke/pause', to: 'juke#pause'
   get 'juke/clear', to: 'juke#clear'
+  get 'juke/title', to: 'juke#title'
+  get 'juke/time', to: 'juke#time'
 end

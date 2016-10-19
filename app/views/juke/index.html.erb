@@ -9,13 +9,15 @@
 					</div>
 				</h2>
 				<header>
-					<h1 id="time"><b><%= Time.now.strftime("%I:%M") %></b></h1>
+					<h1 id="time">
+					<%= render partial: 'time' %>
+				</h1>
 
 				</header>
 
 				<footer>
 					<h1 class="button scrolly" style="margin-top:40px;">
-						<p class="controller"><%= playing_now(MPD_INSTANCE.current_song) %></p>
+						<p class="controller" id="title"><%= render partial: 'title' %></p>
 						<ul id='juke_control' class="nav masthead-nav">
               <li>
                 <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
@@ -23,15 +25,20 @@
               <li id="play_button_container">
                 <%= render partial: 'play_button' %>
               </li>
-              <li>
-                <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-              </li>
-              <li>
-                <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-              </li>
-              <li>
-                <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-              </li>
+
+							<li>
+							  <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+							</li>
+							<li>
+							  <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+							</li>
+							<li>
+							  <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+							</li>
+
+
+
+
             </ul>
 
 					</h1>
@@ -45,4 +52,18 @@
 				</div>
 
 			</section>
-		</div>
+
+
+		<script>
+		  setInterval(function() {
+		    $('#playing_now').load('/juke/playing_now');
+		  }, 2000);
+
+			setInterval(function() {
+				$('#time').load('/juke/time');
+			}, 500);
+
+			setInterval(function() {
+				$('#title').load('/juke/title');
+			}, 500);
+		</script>
