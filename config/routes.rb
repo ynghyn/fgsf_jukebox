@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   get 'juke/clear', to: 'juke#clear'
   get 'juke/title', to: 'juke#title'
   get 'juke/time', to: 'juke#time'
+
+  resources :comments
 end
