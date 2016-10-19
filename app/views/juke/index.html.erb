@@ -41,15 +41,7 @@
 
 
 <script>
-setInterval(function() {
-  $('#playing_now').load('/juke/playing_now');
-}, 2000);
-
-setInterval(function() {
-	$('#time').load('/juke/time');
-}, 1000);
-
-setInterval(function() {
-	$('#title').load('/juke/title');
-}, 500);
+setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 2000);
+setInterval(function() {$('#time').load('/juke/time');}, 1000);
+setInterval(function() {$('#title').load('/juke/title');}, 500);
 </script>
