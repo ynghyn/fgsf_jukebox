@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US" class="app">
   <head>
     <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
     <title>FGSF Jukebox</title>
     <%= csrf_meta_tags %>
 
@@ -12,7 +15,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
   </head>
 
-  <body>
+  <body class="home-page home page page-id-153 page-template page-template-template-parts page-template-template-home page-template-template-partstemplate-home-php no-js">
     <% if flash[:alert] %>
       <div class="alert"><%= flash[:alert] %></div>
     <% elsif flash[:notice] %>

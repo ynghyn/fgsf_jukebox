@@ -1,0 +1,46 @@
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+          <h3 class="masthead-brand">예수인교회 Jukebox</h3>
+          <nav>
+            <ul id='juke_control' class="nav masthead-nav">
+              <li>
+                <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+              </li>
+              <li id="play_button_container">
+                <%= render partial: 'play_button' %>
+              </li>
+              <li>
+                <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+              </li>
+              <li>
+                <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+              </li>
+              <li>
+                <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="inner cover" id="playing_now">
+        <%= render partial: 'playing_now' %>
+      </div>
+
+      <div class="mastfoot">
+        <div class="inner">
+          <p>FGSF Media team - Give us your feedback! <a href="#">fgsfmedia@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  setInterval(function() {
+    $('#playing_now').load('/juke/playing_now');
+  }, 2000);
+</script>ak
