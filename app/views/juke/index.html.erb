@@ -1,69 +1,55 @@
+<section id="header" class="dark">
+	<h2 class="button scrolly" id="playlist">
+		<div class="inner cover" id="playing_now">
+			<%= render partial: 'playing_now' %>
+		</div>
+	</h2>
+	<header>
+		<h1 id="time">
+			<%= render partial: 'time' %>
+		</h1>
+	</header>
+
+	<footer>
+		<h1 class="button scrolly" style="margin-top:40px;">
+			<p class="controller" id="title"><%= render partial: 'title' %></p>
+			<ul id='juke_control' class="nav masthead-nav">
+	      <li>
+	        <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+	      </li>
+	      <li id="play_button_container">
+	        <%= render partial: 'play_button' %>
+	      </li>
+				<li>
+				  <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+				</li>
+				<li>
+				  <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+				</li>
+				<li>
+				  <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+				</li>
+	    </ul>
+		</h1>
+	</footer>
+	<div class="mastfoot">
+		<div class="inner">
+			<p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
+		</div>
+	</div>
+</section>
 
 
+<script>
+setInterval(function() {
+  $('#playing_now').load('/juke/playing_now');
+}, 2000);
 
-				<section id="header" class="dark">
+setInterval(function() {
+	$('#time').load('/juke/time');
+}, 1000);
 
-				<h2 class="button scrolly" id="playlist">
-					<div class="inner cover" id="playing_now">
-						<%= render partial: 'playing_now' %>
-					</div>
-				</h2>
-				<header>
-					<h1 id="time">
-					<%= render partial: 'time' %>
-				</h1>
-
-				</header>
-
-				<footer>
-					<h1 class="button scrolly" style="margin-top:40px;">
-						<p class="controller" id="title"><%= render partial: 'title' %></p>
-						<ul id='juke_control' class="nav masthead-nav">
-              <li>
-                <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-              </li>
-              <li id="play_button_container">
-                <%= render partial: 'play_button' %>
-              </li>
-
-							<li>
-							  <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-							</li>
-							<li>
-							  <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-							</li>
-							<li>
-							  <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-							</li>
-
-
-
-
-            </ul>
-
-					</h1>
-
-
-				</footer>
-				<div class="mastfoot">
-					<div class="inner">
-						<p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
-					</div>
-				</div>
-
-			</section>
-
-
-		<script>
-		  setInterval(function() {
-		    $('#playing_now').load('/juke/playing_now');
-		  }, 2000);
-
-			setInterval(function() {
-				$('#time').load('/juke/time');
-			}, 500);
-
-			setInterval(function() {
-				$('#title').load('/juke/title');
-			}, 500);
-		</script>
+setInterval(function() {
+	$('#title').load('/juke/title');
+}, 500);
+</script>
