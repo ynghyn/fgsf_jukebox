@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'juke#index'
+  
 
   get 'juke/index', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'

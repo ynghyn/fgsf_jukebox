@@ -1,11 +1,11 @@
-<p class="lead font-17 text-align-left">
+<p class="lead font-17 text-align-left" id="playing_now">
   Previous:<br>
   <% previous_songs(MPD_INSTANCE).each do |song_name| %>
     <%= song_name %><br>
   <% end %>
 </p>
-<p class="lead font-30">Playing Now:<br><%= playing_now(MPD_INSTANCE.current_song) %></p>
-<p class="lead font-17 text-align-left">
+<p class="lead font-19" id="playing_now">Playing Now:<br><%= playing_now(MPD_INSTANCE.current_song) %></p>
+<p class="lead font-17 text-align-left" id="playing_now">
   Next:<br>
   <% next_songs(MPD_INSTANCE).each do |song_name| %>
     <%= song_name %><br>
