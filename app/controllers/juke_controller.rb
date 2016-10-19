@@ -38,20 +38,20 @@ class JukeController < ApplicationController
       [429, 'Try again in 10 minutes.']
     elsif @current_song && song_already_queued?(params[:song_name])
       record_and_update_cookie(params[:song_name], false)
-      [200, nil]
+      [200, "#{normalize_file_name(params[:song_name])} already in list"]
     elsif @current_song
       record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play if MPD_INSTANCE.stopped?
-      [200, nil]
+      [200, "#{normalize_file_name(params[:song_name])} has been added"]
     else
       record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.clear
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play
-      [200, nil]
+      [200, "#{normalize_file_name(params[:song_name])} has been added"]
     end
     respond_to do |format|
       format.json { render json: {msg: msg}, status: status }
