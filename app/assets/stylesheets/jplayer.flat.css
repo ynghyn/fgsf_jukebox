@@ -1,9 +1,29 @@
 /*controls*/
+
+.jp-gui{
+	display: none !important;
+}
+div#controller_size{
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+ 	font-size: 1.5em;
+}
+div#volume_bar{
+	width: 95%;
+	margin:0 auto;
+}
+div#mute_button{
+	width:15%;
+}
+
+
 .jp-controls {
 	display: table;
 	table-layout: fixed;
 	border-spacing: 0;
 	width: 100%;
+
 }
 .jp-controls a{
 	cursor: pointer;
@@ -17,7 +37,7 @@
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
-	width: 40px;
+
 	height: 60px;
 }
 div.jp-progress{
@@ -31,6 +51,9 @@ div.jp-progress{
 }
 .jp-title{
 	height: 0;
+	text-align: center;
+	font-size: 1.7em;
+
 }
 .jp-title a{
 	position: relative;
@@ -49,14 +72,17 @@ div.jp-progress{
 	white-space: nowrap;
 }
 .jp-artist{
-	opacity: 0.6;
+	opacity: 0.9;
+	text-align: center;
+	font-size: 1.2em;
+	padding:30px 0;
 }
 
 .jp-play-bar{
 	height: 60px;
 }
 .jp-volume{
-	width: 60px !important;
+
 	padding-right:10px !important;
 }
 .jp-volume-bar-value{
@@ -108,6 +134,7 @@ a.hid{
 	width:100%;
 	height:100%;
 	z-index:1001; /* 1 layer above the others. */
+
 }
 
 .jp-video-full .jp-interface {
@@ -254,6 +281,7 @@ a.jp-playlist-current:before{
 	}
 	.footer .jp-gui{
 		margin: 0 -10px;
+
 	}
 	div.jp-progress{
 		padding: 0 10px;

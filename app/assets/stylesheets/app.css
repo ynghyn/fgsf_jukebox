@@ -2070,6 +2070,7 @@ fieldset[disabled] .btn-dark.active {
 .bg-light.dk,
 .bg-light .dk {
   background-color: #e0eaec;
+  width: 25%;
 }
 .bg-light.dker,
 .bg-light .dker {

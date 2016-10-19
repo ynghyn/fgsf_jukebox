@@ -1,4 +1,17 @@
+img#playing_album_cover{
+  width:80%;
+  margin: 0 auto;
+  padding:15px 0;
+  display: -webkit-box;
+}
 
+div#controller{
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+/****************************************************************/
 img, object, embed {
   max-width: 100%;
   height: auto;
