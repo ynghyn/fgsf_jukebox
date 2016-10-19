@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   get 'juke/play', to: 'juke#play'
   get 'juke/pause', to: 'juke#pause'
   get 'juke/clear', to: 'juke#clear'
+
+  resources :comments
 end
