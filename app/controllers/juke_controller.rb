@@ -1,7 +1,6 @@
 class JukeController < ApplicationController
   include JukeHelper
 
-  before_action :get_or_create_user
   before_action :initialize_mpd
 
   CASSETTE_EFFECT = 'cassette.wav'.freeze
@@ -113,16 +112,6 @@ class JukeController < ApplicationController
     if queued
       count = cookies[:queue_count].to_i
       cookies[:queue_count] = { value: count + 1, expires: 10.minutes.from_now }
-    end
-  end
-
-  def get_or_create_user
-    if cookies[:user_id] && user = User.find_by_id(cookies[:user_id])
-      user.update_attribute(:last_visited, Time.zone.now)
-      @current_user = user
-    else
-      @current_user = User.create(last_visited: Time.zone.now)
-      cookies[:user_id] = { value: @current_user.id, expires: 3.years.from_now }
     end
   end
 end
