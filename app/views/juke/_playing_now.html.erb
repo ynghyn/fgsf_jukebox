@@ -4,7 +4,7 @@
     <%= song_name %><br>
   <% end %>
 </p>
-<p class="lead font-19" id="playing_now">Playing Now:<br><%= playing_now(MPD_INSTANCE.current_song) %></p>
+<p class="lead font-19" id="playing_now"><b>Playing Now:</b><br><%= playing_now(MPD_INSTANCE.current_song) %></p>
 <p class="lead font-17 text-align-left" id="playing_now">
   Next:<br>
   <% next_songs(MPD_INSTANCE).each do |song_name| %>

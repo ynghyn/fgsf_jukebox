@@ -9,14 +9,28 @@
 
 /*      MAIN PAGE      */
 
+/*
+html{
+	background-color: #313a3d;
+	background-attachment: fixed,	fixed;
+	background-image: url(main_01.jpg);
+	background-position:center center;
+	background-size: cover;
+}
+*/
+body{
+	background:none !important;
+}
+
 .controller{
 	width:500px;
 	text-align: center;
-	font-size: 2em;
+	font-size: 1.5em;
+	line-height: normal;
 }
 
 h2#playlist{
-		margin-top:-50px;
+		margin-top:-470px;
 		margin-left: 28em;
     float: right;
     width: 22%;
@@ -34,6 +48,42 @@ h1#time{
 	font-size: 7em !important;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.mastfoot{
+	position: relative;
+}
+
+@media screen and (min-width: 100px) and (max-width: 1410px) {
+
+	h2#playlist{
+		margin: 0;
+		float: none;
+		width: 40em;
+		padding: 20px 0 0 0;
+		position: relative;
+		font-size: .6em;
+		height: 350px;
+	}
+	.controller{
+	font-size: 1.5em;
+	width:100%;
+	.mastfoot{
+		position: relative;
+	}
+}
+
+}
+
+@media screen and (min-width: 100px) and (max-width: 450px) {
+		.controller{
+		font-size: 1.5em;
+		width:100%;
+	}
+	.mastfoot{
+		position: relative;
+	}
+}
+
+
 
 
 /********************************************************************************/
@@ -1534,12 +1584,12 @@ h1#time{
 			top: 0;
 			width: 100%;
 			height: 100%;
-			background: url("images/main_01.jpg") no-repeat center center fixed;
+			background: url("main_01.jpg") no-repeat center center fixed;
 
 			-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
 
 
 		}
@@ -2032,17 +2082,19 @@ h1#time{
 /* Header */
 
 	#header {
-		position: relative;
+		position: absolute;
 		margin: 0;
-		background-image: url("main_01.jpg");
-		background-size: 100%, cover;
-		background-position: top left, center center;
-		background-repeat: repeat, no-repeat;
-		padding: 10em 0 12em 0;
+		background-image: url(main_01.jpg);
+		background-size: cover;
+		background-attachment: fixed,	fixed;
+		background-position: center center;
+		background-repeat: no-repeat;
+		padding: 10em 0 4em 0;
 		text-align: center;
 		color: #fff;
 		width: 100%;
-		height: 100%;
+
+
 	}
 
 		#header header h1 {
@@ -2176,7 +2228,7 @@ h1#time{
 		/* Header */
 
 			#header {
-				padding: 12em 0 12em 0;
+				padding: 12em 0 0 0;
 			}
 
 		/* Main Sections */
@@ -2230,7 +2282,7 @@ h1#time{
 
 			#header {
 				margin: 0 !important;
-				padding: 8em 2em 8em 2em;
+				padding: 8em 2em 0 2em;
 			}
 
 				#header header p {
@@ -2334,7 +2386,8 @@ h1#time{
 		/* Header */
 
 			#header {
-				padding: 6em 20px 6em 20px;
+				padding: 6em 20px 0 20px;
+
 			}
 
 				#header > header {

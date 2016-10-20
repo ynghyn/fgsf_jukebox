@@ -1,9 +1,11 @@
+
 <section id="header" class="dark">
-	<h2 class="button scrolly" id="playlist">
-		<div class="inner cover" id="playing_now">
-			<%= render partial: 'playing_now' %>
-		</div>
-	</h2>
+	<div style="float:right; ">
+		<a href="/juke/list" onclick="window.open(this.href, menubar=no,scrollbars=yes,resizable=no,width=500px,height=700px');">Open Library</a>
+	</div>
+
+
+
 	<header>
 		<h1 id="time">
 			<%= render partial: 'time' %>
@@ -32,6 +34,13 @@
 	    </ul>
 		</h1>
 	</footer>
+
+	<h2 class="button scrolly" id="playlist">
+		<div class="inner cover" id="playing_now">
+			<%= render partial: 'playing_now' %>
+		</div>
+	</h2>
+
 	<div class="mastfoot">
 		<div class="inner">
 			<p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
