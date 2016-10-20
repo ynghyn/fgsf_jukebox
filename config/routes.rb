@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'juke#list'
 
-
   get 'juke/control', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'
   get 'juke/play_button', to: 'juke#play_button'
@@ -14,7 +13,6 @@ Rails.application.routes.draw do
   get 'juke/pause', to: 'juke#pause'
   get 'juke/clear', to: 'juke#clear'
   get 'juke/title', to: 'juke#title'
-  get 'juke/time', to: 'juke#time'
 
   resources :comments
 end

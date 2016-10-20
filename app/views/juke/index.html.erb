@@ -1,16 +1,11 @@
+<div class="mastfoot">
+	<div style="line-height:1.5; width:100%;text-align:right;z-index:100;position:absolute;padding-right:5px;">
+		<a href="/juke/list?bypass=bss" style="text-decoration:none;"onclick="return popup(this, 'Music Library');">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+	</div>
+</div>
 
 <section id="header" class="dark">
-	<div style="float:right; ">
-		<a href="/juke/list" onclick="window.open(this.href, menubar=no,scrollbars=yes,resizable=no,width=500px,height=700px');">Open Library</a>
-	</div>
-
-
-
-	<header>
-		<h1 id="time">
-			<%= render partial: 'time' %>
-		</h1>
-	</header>
+	<header><h1 id="time"><span id="current_time"></span></h1></header>
 
 	<footer>
 		<h1 class="button scrolly" style="margin-top:40px;">
@@ -47,10 +42,37 @@
 		</div>
 	</div>
 </section>
+<script type="text/javascript">
+	(function () {
+	    function checkTime(i) {
+	        return (i < 10) ? "0" + i : i;
+	    }
 
-
+	    function startTime() {
+	        var today = new Date(),
+	            h = checkTime(today.getHours()),
+	            m = checkTime(today.getMinutes()),
+	            s = checkTime(today.getSeconds());
+	        document.getElementById('current_time').innerHTML = h + ":" + m;
+	        t = setTimeout(function () {
+	            startTime()
+	        }, 500);
+	    }
+	    startTime();
+	})();
+</script>
 <script>
-setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 2000);
-setInterval(function() {$('#time').load('/juke/time');}, 1000);
-setInterval(function() {$('#title').load('/juke/title');}, 500);
+	setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 500);
+	setInterval(function() {$('#title').load('/juke/title');}, 500);
+</script>
+
+<script type="text/javascript">
+  function popup(mylink, windowname) {
+    if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href;
+    window.open(href, windowname, 'width=400,height=700');
+    return false;
+  }
 </script>
