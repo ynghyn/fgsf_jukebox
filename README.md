@@ -26,6 +26,7 @@ $ kill -9 PRCESSID
 $ ps aux | grep mpd
 $ kill -9 PROCESSID
 ```
+- Required sound effects are placed under `misc/`. Copy them onto your music dierectory.
 
 ### Database
 `Coming soon.`
