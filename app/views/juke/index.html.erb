@@ -43,4 +43,14 @@
   setInterval(function() {
     $('#playing_now').load('/juke/playing_now');
   }, 2000);
+
+  $('body').keyup(function(e){
+    if(e.keyCode == 32){
+      // user has pressed spacebar
+      $.getJSON('/juke/pause_or_play', function() {
+        $('li#play_button_container').load('/juke/play_button');
+        $('#playing_now').load('/juke/playing_now');
+      });
+    }
+  });
 </script>
