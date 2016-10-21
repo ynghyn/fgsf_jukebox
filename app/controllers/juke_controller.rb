@@ -1,12 +1,13 @@
 class JukeController < ApplicationController
   include JukeHelper
 
+  before_action :get_or_create_user, only: [:index, :list, :add_song]
   before_action :initialize_mpd
 
   CASSETTE_EFFECT = 'cassette.wav'.freeze
+  CASSETTE2_EFFECT = 'cassette2.mp3'.freeze
   CD_PLAYER_EFFECT = 'cdplayer.wav'.freeze
-  LP_NOISE_EFFECT = 'lpnoise.wav'.freeze
-  ALL_EFFECTS = [CASSETTE_EFFECT, CD_PLAYER_EFFECT, LP_NOISE_EFFECT].freeze
+  ALL_EFFECTS = [CASSETTE_EFFECT, CD_PLAYER_EFFECT, CASSETTE2_EFFECT].freeze
 
   BYPASS_CODE = 'bss'.freeze
   MAX_QUEUE_COUNT = 3
@@ -35,26 +36,26 @@ class JukeController < ApplicationController
   def add_song
     status, msg = if !params[:song_name].present?
       [400, 'You must select a song']
+    elsif @current_song && song_already_queued?(params[:song_name])
+      record_and_update_cookie(params[:song_name], false)
+      [200, '이미 예약목록에 있습니다']
     elsif cookies[:queue_count].to_i >= MAX_QUEUE_COUNT && params[:bypass] != BYPASS_CODE
       # Limit to 3 songs per 10 minutes
       record_and_update_cookie(params[:song_name], false)
       [429, 'Try again in 10 minutes.']
-    elsif @current_song && song_already_queued?(params[:song_name])
-      record_and_update_cookie(params[:song_name], false)
-      [200, "#{normalize_file_name(params[:song_name])} already in list"]
     elsif @current_song
       record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play if MPD_INSTANCE.stopped?
-      [200, "#{normalize_file_name(params[:song_name])} has been added"]
+      [200, '예약되었습니다!']
     else
       record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.clear
       MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play
-      [200, "#{normalize_file_name(params[:song_name])} has been added"]
+      [200, '예약되었습니다!']
     end
     respond_to do |format|
       format.json { render json: {msg: msg}, status: status }
@@ -64,6 +65,15 @@ class JukeController < ApplicationController
   # API endpoint
   def pause
     MPD_INSTANCE.pause = true if MPD_INSTANCE.playing?
+  end
+
+  # API endpoint
+  def pause_or_play
+    if MPD_INSTANCE.playing?
+      MPD_INSTANCE.pause = true
+    elsif @music_queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
+      MPD_INSTANCE.play
+    end
   end
 
   # API endpoint
@@ -80,6 +90,7 @@ class JukeController < ApplicationController
   # API endpoint
   # Go back twice because of 'cassette' effect queues
   def previous
+    return if @current_song.pos == 0
     MPD_INSTANCE.previous
     MPD_INSTANCE.previous
   end
@@ -107,7 +118,6 @@ class JukeController < ApplicationController
   end
 
   def song_already_queued?(file_name)
-    @current_song
     @music_queue[@current_song.pos..-1].any? { |song| song.file == file_name }
   end
 
