@@ -49,7 +49,7 @@
       var offset = 7;
       var today = new Date();
       var h = checkTime(today.getUTCHours() - offset);
-      var m = checkTime(today.getMinutes());
+      var m = checkTime(today.getUTCMinutes());
       $('#current_time').text(h + ":" + m);
 
       setTimeout(function () {
