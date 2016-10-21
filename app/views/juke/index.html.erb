@@ -9,7 +9,7 @@
   <header><h1 id="time"><span id="current_time"></span></h1></header>
 
   <footer>
-    <h1 class="button scrolly" style="margin-top:40px;">
+    <h1 class="button scrolly" style="margin-top:40px;background: rgba(255, 255, 255, 0.50);color:black;">
       <p class="controller" id="title"><%= render partial: 'title' %></p>
       <ul id='juke_control' class="nav masthead-nav">
         <li>
@@ -31,17 +31,12 @@
     </h1>
   </footer>
 
-  <h2 class="button scrolly" id="playlist">
+  <h2 class="button scrolly" id="playlist" style="background: rgba(255, 255, 255, 0.50);color:black;">
     <div class="inner cover" id="playing_now">
       <%= render partial: 'playing_now' %>
     </div>
   </h2>
 
-  <div class="mastfoot">
-    <div class="inner">
-      <p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
-    </div>
-  </div>
 </section>
 
 <script type="text/javascript">
@@ -51,20 +46,21 @@
     }
 
     function startTime() {
-      var today = new Date(),
-      h = checkTime(today.getHours()),
-      m = checkTime(today.getMinutes()),
-      s = checkTime(today.getSeconds());
-      document.getElementById('current_time').innerHTML = h + ":" + m;
-      t = setTimeout(function () {
+      var offset = 7;
+      var today = new Date();
+      var h = checkTime(today.getUTCHours() - offset);
+      var m = checkTime(today.getUTCMinutes());
+      $('#current_time').text(h + ":" + m);
+
+      setTimeout(function () {
         startTime()
-      }, 500);
+      }, 10000);
     }
     startTime();
   })();
 
-  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 2000);
-  setInterval(function() {$('#title').load('/juke/title');}, 2000);
+  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 3000);
+  setInterval(function() {$('#title').load('/juke/title');}, 3000);
 
   $('body').keyup(function(e){
     if(e.keyCode == 32){
