@@ -44,36 +44,45 @@
 </section>
 
 <script type="text/javascript">
-(function () {
-  function checkTime(i) {
-    return (i < 10) ? "0" + i : i;
-  }
+  (function () {
+    function checkTime(i) {
+      return (i < 10) ? "0" + i : i;
+    }
 
-  function startTime() {
-    var today = new Date(),
-    h = checkTime(today.getHours()),
-    m = checkTime(today.getMinutes()),
-    s = checkTime(today.getSeconds());
-    document.getElementById('current_time').innerHTML = h + ":" + m;
-    t = setTimeout(function () {
-      startTime()
-    }, 500);
-  }
-  startTime();
-})();
-</script>
-<script>
-setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 500);
-setInterval(function() {$('#title').load('/juke/title');}, 500);
+    function startTime() {
+      var today = new Date(),
+      h = checkTime(today.getHours()),
+      m = checkTime(today.getMinutes()),
+      s = checkTime(today.getSeconds());
+      document.getElementById('current_time').innerHTML = h + ":" + m;
+      t = setTimeout(function () {
+        startTime()
+      }, 500);
+    }
+    startTime();
+  })();
+
+  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 2000);
+  setInterval(function() {$('#title').load('/juke/title');}, 2000);
+
+  $('body').keyup(function(e){
+    if(e.keyCode == 32){
+      // user has pressed spacebar
+      $.getJSON('/juke/pause_or_play', function() {
+        $('li#play_button_container').load('/juke/play_button');
+        $('#playing_now').load('/juke/playing_now');
+      });
+    }
+  });
 </script>
 
 <script type="text/javascript">
-function popup(mylink, windowname) {
-  if (! window.focus)return true;
-  var href;
-  if (typeof(mylink) == 'string') href=mylink;
-  else href=mylink.href;
-  window.open(href, windowname, 'width=400,height=700');
-  return false;
-}
+  function popup(mylink, windowname) {
+    if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href;
+    window.open(href, windowname, 'width=400,height=700');
+    return false;
+  }
 </script>

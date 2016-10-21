@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def get_or_create_user
     if cookies[:user_id] && user = User.find_by_id(cookies[:user_id])
-      user.update_attribute(:last_visited, Time.zone.now)
+      user.update_attribute(:last_visited, Time.zone.now) if 1.hour.ago > user.last_visited
       @current_user = user
     else
       @current_user = User.create(last_visited: Time.zone.now)
