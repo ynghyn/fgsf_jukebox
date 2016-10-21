@@ -84,7 +84,7 @@ class JukeController < ApplicationController
 
   # API endpoint
   def next
-    MPD_INSTANCE.next
+    #MPD_INSTANCE.next
     MPD_INSTANCE.next
   end
 
@@ -92,7 +92,7 @@ class JukeController < ApplicationController
   # Go back twice because of 'cassette' effect queues
   def previous
     return if @current_song.pos == 0
-    MPD_INSTANCE.previous
+    #MPD_INSTANCE.previous
     MPD_INSTANCE.previous
   end
 
