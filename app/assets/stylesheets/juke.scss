@@ -59,6 +59,18 @@ body {
   cursor: pointer;
 }
 
+#list-panel-heading {
+  position:fixed;
+  top: 0;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-image: url(main_01.jpg);
+  text-align: center;
+  color: #fff;
+  z-index: 100;
+}
+
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;

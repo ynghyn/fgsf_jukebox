@@ -1,25 +1,25 @@
+<!-- Default panel contents -->
+<div id="list-panel-heading">
+  <span>
+    FGSF 주크박스
+    <span class="padding-left-10px">
+      <b><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></b>
+    </span>
+  </span>
+</div>
+
 <div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading cover-background-color">
-    Music Library
-    <span class="padding-left-10px"><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></span>
-  </div>
   <!-- List group -->
   <div class="list-group">
     <% @songs.each do |song| %>
     <button type="button" class="btn_add_song list-group-item text-align-center" \
-    name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
-    <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
-  </button>
-  <% end %>
-</div>
-
-<div class="mastfoot">
-  <div class="inner">
-    <p style="text-align:center; color:black; margin-bottom:80px;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
+      name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+      <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
+    </button>
+    <% end %>
   </div>
 </div>
-</div>
+
 <div id="info_screen" class="dark">
   <div>
     <h1 class="button scrolly sml_margin">
@@ -30,5 +30,5 @@
 </div>
 
 <script>
-  setInterval(function() {$('#screen_title').load('/juke/title');}, 1000);
+  setInterval(function() {$('#screen_title').load('/juke/title');}, 2000);
 </script>

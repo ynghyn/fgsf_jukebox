@@ -9,7 +9,7 @@
   <header><h1 id="time"><span id="current_time"></span></h1></header>
 
   <footer>
-    <h1 class="button scrolly" style="margin-top:40px;">
+    <h1 class="button scrolly" style="margin-top:40px;background: rgba(255, 255, 255, 0.50);color:black;">
       <p class="controller" id="title"><%= render partial: 'title' %></p>
       <ul id='juke_control' class="nav masthead-nav">
         <li>
@@ -31,17 +31,12 @@
     </h1>
   </footer>
 
-  <h2 class="button scrolly" id="playlist">
+  <h2 class="button scrolly" id="playlist" style="background: rgba(255, 255, 255, 0.50);color:black;">
     <div class="inner cover" id="playing_now">
       <%= render partial: 'playing_now' %>
     </div>
   </h2>
 
-  <div class="mastfoot">
-    <div class="inner">
-      <p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
-    </div>
-  </div>
 </section>
 
 <script type="text/javascript">
