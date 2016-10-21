@@ -62,8 +62,8 @@
     startTime();
   })();
 
-  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 1000);
-  setInterval(function() {$('#title').load('/juke/title');}, 1000);
+  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 2000);
+  setInterval(function() {$('#title').load('/juke/title');}, 2000);
 
   $('body').keyup(function(e){
     if(e.keyCode == 32){
@@ -77,12 +77,12 @@
 </script>
 
 <script type="text/javascript">
-function popup(mylink, windowname) {
-  if (! window.focus)return true;
-  var href;
-  if (typeof(mylink) == 'string') href=mylink;
-  else href=mylink.href;
-  window.open(href, windowname, 'width=400,height=700');
-  return false;
-}
+  function popup(mylink, windowname) {
+    if (! window.focus)return true;
+    var href;
+    if (typeof(mylink) == 'string') href=mylink;
+    else href=mylink.href;
+    window.open(href, windowname, 'width=400,height=700');
+    return false;
+  }
 </script>
