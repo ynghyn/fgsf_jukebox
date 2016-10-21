@@ -2,23 +2,20 @@ $(document).ready(
   function() {
     $('.btn_add_song').click(function() {
       var url = this.name;
-      var $this = $(this);
       $.getJSON(url, function(data) {
         if (data.status == 200) {
           $('#notice-flash').text(data.msg);
-          $('#notice-flash').fadeIn(500);
-          $('#notice-flash').fadeOut(4000);
-          $this.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+          $('#notice-flash').show();
+          setTimeout(function() {$('#notice-flash').fadeOut(1000)}, 2000);
         } else {
           $('#warning-flash').text(data.msg);
-          $('#warning-flash').fadeIn(500);
-          $('#warning-flash').fadeOut(4000);
-          $this.fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+          $('#warning-flash').show();
+          setTimeout(function() {$('#warning-flash').fadeOut(1000)}, 2000);
         }
       }).error(function() {
         $('#alert-flash').text('Reached limit! 10분후에 또 예약 해주세요~');
-        $('#alert-flash').fadeIn(500);
-        $('#alert-flash').fadeOut(4000);
+        $('#alert-flash').show();
+        setTimeout(function() {$('#alert-flash').fadeOut(1000)}, 2000);
       });
     });
 
