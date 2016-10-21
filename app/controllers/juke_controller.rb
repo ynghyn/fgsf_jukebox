@@ -39,7 +39,7 @@ class JukeController < ApplicationController
       [400, 'You must select a song']
     elsif @current_song && song_already_queued?(params[:song_name])
       record_and_update_cookie(params[:song_name], false)
-      [200, '이미 예약목록에 있습니다']
+      [202, '이미 예약목록에 있습니다']
     elsif cookies['queue_count'].to_i >= MAX_QUEUE_COUNT && params[:bypass] != BYPASS_CODE
       # Limit to 3 songs per 10 minutes
       record_and_update_cookie(params[:song_name], false)
@@ -59,7 +59,7 @@ class JukeController < ApplicationController
       [200, '예약되었습니다!']
     end
     respond_to do |format|
-      format.json { render json: {msg: msg}, status: status }
+      format.json { render json: {msg: msg, status: status}, status: status }
     end
   end
 
@@ -126,7 +126,8 @@ class JukeController < ApplicationController
     MusicSelection.create(song: song_name, queued: queued, user_id: @current_user.id)
     if queued
       count = cookies['queue_count'].to_i
-      response.set_cookie 'queue_count', { value: count + 1, expires: 10.minutes.from_now }
+      cookies['queue_count'] = { value: count + 1, expires: 10.minutes.from_now }
+      #response.set_cookie 'queue_count', { value: count + 1, expires: 10.minutes.from_now }
     end
   end
 end
