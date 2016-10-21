@@ -1,46 +1,79 @@
-<div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <div class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner">
-          <h3 class="masthead-brand">예수인교회 Jukebox</h3>
-          <nav>
-            <ul id='juke_control' class="nav masthead-nav">
-              <li>
-                <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-              </li>
-              <li id="play_button_container">
-                <%= render partial: 'play_button' %>
-              </li>
-              <li>
-                <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-              </li>
-              <li>
-                <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-              </li>
-              <li>
-                <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      <div class="inner cover" id="playing_now">
-        <%= render partial: 'playing_now' %>
-      </div>
-
-      <div class="mastfoot">
-        <div class="inner">
-          <p>FGSF Media team - Give us your feedback! <a href=#">fgsfmedia@gmail.com</a></p>
-        </div>
-      </div>
-    </div>
+<div class="mastfoot">
+  <div style="line-height:1.5; width:100%;text-align:right;z-index:100;position:absolute;padding-right:5px;">
+    <a href="/juke/list?bypass=bss" style="text-decoration:none;"onclick="return popup(this, 'Music Library');">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
   </div>
 </div>
 
+<section id="header" class="dark">
+  <header><h1 id="time"><span id="current_time"></span></h1></header>
+
+  <footer>
+    <h1 class="button scrolly" style="margin-top:40px;">
+      <p class="controller" id="title"><%= render partial: 'title' %></p>
+      <ul id='juke_control' class="nav masthead-nav">
+        <li>
+          <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+        </li>
+        <li id="play_button_container">
+          <%= render partial: 'play_button' %>
+        </li>
+        <li>
+          <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+        </li>
+        <li>
+          <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+        </li>
+        <li>
+          <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+        </li>
+      </ul>
+    </h1>
+  </footer>
+
+  <h2 class="button scrolly" id="playlist">
+    <div class="inner cover" id="playing_now">
+      <%= render partial: 'playing_now' %>
+    </div>
+  </h2>
+
+  <div class="mastfoot">
+    <div class="inner">
+      <p style="text-align:center; color:white;">FGSF Mediateam - Give us your feedback!<b> <a href="#" style="color:#91e7c1;">FGSFmedia@gmail.com</a></b></p>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+(function () {
+  function checkTime(i) {
+    return (i < 10) ? "0" + i : i;
+  }
+
+  function startTime() {
+    var today = new Date(),
+    h = checkTime(today.getHours()),
+    m = checkTime(today.getMinutes()),
+    s = checkTime(today.getSeconds());
+    document.getElementById('current_time').innerHTML = h + ":" + m;
+    t = setTimeout(function () {
+      startTime()
+    }, 500);
+  }
+  startTime();
+})();
+</script>
 <script>
-  setInterval(function() {
-    $('#playing_now').load('/juke/playing_now');
-  }, 2000);
+setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 500);
+setInterval(function() {$('#title').load('/juke/title');}, 500);
+</script>
+
+<script type="text/javascript">
+function popup(mylink, windowname) {
+  if (! window.focus)return true;
+  var href;
+  if (typeof(mylink) == 'string') href=mylink;
+  else href=mylink.href;
+  window.open(href, windowname, 'width=400,height=700');
+  return false;
+}
 </script>

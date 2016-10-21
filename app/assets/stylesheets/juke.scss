@@ -1,6 +1,6 @@
 /*
- * Globals
- */
+* Globals
+*/
 
 /* Links */
 a,
@@ -21,16 +21,16 @@ a:hover {
 
 
 /*
- * Base structure
- */
+* Base structure
+*/
 
 html,
 body {
   height: 100%;
-  background-color: #333;
+
 }
 body {
-  color: #fff;
+
   text-align: center;
   text-shadow: 0 1px 1px rgba(0,0,0,.5);
 }
@@ -104,8 +104,8 @@ body {
 }
 
 /*
- * Header
- */
+* Header
+*/
 .masthead-brand {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -144,14 +144,14 @@ body {
     float: left;
   }
   .masthead-nav {
-    float: right;
+
   }
 }
 
 
 /*
- * Cover
- */
+* Cover
+*/
 
 .cover {
   padding: 0 20px;
@@ -163,18 +163,21 @@ body {
 
 
 /*
- * Footer
- */
+* Footer
+*/
 
 .mastfoot {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
+  font-size: .7em;
+  width: 100% !important;
+
 }
 
 
 /*
- * Affix and center
- */
+* Affix and center
+*/
 
 @media (min-width: 768px) {
   /* Pull out the header and footer */

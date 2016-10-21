@@ -23,6 +23,10 @@ class JukeController < ApplicationController
     render partial: 'playing_now'
   end
 
+  def title
+    render partial: 'title'
+  end
+
   def play_button
     render partial: 'play_button'
   end

@@ -8,16 +8,15 @@
   <!-- List group -->
   <div class="list-group">
     <% @songs.each do |song| %>
-      <button type="button" class="btn_add_song list-group-item text-align-center" \
-              name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
-        <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
-      </button>
-    <% end %>
-  </div>
-
-  <div class="panel-footer cover-background-color">
-    FGSF Media Team -
-    <a href="mailto:fgsfmedia@gmail.com?Subject=Hi team!" target="_top">fgsfmedia@gmail.com</a>
-  </div>
+    <button type="button" class="btn_add_song list-group-item text-align-center" \
+    name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+    <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
+  </button>
+  <% end %>
 </div>
 
+<div class="panel-footer cover-background-color">
+  FGSF Media Team -
+  <a href="mailto:fgsfmedia@gmail.com?Subject=Hi team!" target="_top">fgsfmedia@gmail.com</a>
+</div>
+</div>
