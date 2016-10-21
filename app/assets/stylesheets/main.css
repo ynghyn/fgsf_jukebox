@@ -24,7 +24,7 @@ p#screen_title{
   position: fixed;
   bottom:0;
   margin: 0;
-  background-image: url(main_01.jpg);
+  background-image: url(bar_image.jpg);
   background-size: cover;
   background-position: center center;
   text-align: center;
@@ -1597,22 +1597,6 @@ article:last-child {
   border: 0;
 }
 
-.image:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: url("main_01.jpg") no-repeat center center fixed;
-
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
-
-}
 
 .image img {
   display: block;
@@ -2113,9 +2097,6 @@ button.alt:hover,
   text-align: center;
   color: #fff;
   width: 100%;
-
-
-
 }
 
 #header header h1 {

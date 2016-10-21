@@ -46,14 +46,14 @@ class JukeController < ApplicationController
       [429, 'Try again in 10 minutes.']
     elsif @current_song
       record_and_update_cookie(params[:song_name], true)
-      MPD_INSTANCE.add(choose_effect)
+      #MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play if MPD_INSTANCE.stopped?
       [200, '예약되었습니다!']
     else
       record_and_update_cookie(params[:song_name], true)
       MPD_INSTANCE.clear
-      MPD_INSTANCE.add(choose_effect)
+      #MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play
       [200, '예약되었습니다!']
