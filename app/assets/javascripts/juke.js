@@ -22,13 +22,6 @@ $(document).ready(
         $('#playing_now').load('/juke/playing_now');
       });
     });
-
-    function api_and(url) {
-      $.getJSON(url, function() {
-        $('li#play_button_container').load('/juke/play_button');
-        $('#playing_now').load('/juke/playing_now');
-      });
-    }
   }
 );
 
