@@ -59,9 +59,11 @@
     startTime();
   })();
 
-  setInterval(function() {$('#playing_now').load('/juke/playing_now');}, 3000);
-  setInterval(function() {$('#title').load('/juke/title');}, 3000);
-  setInterval(function() {$('#li#play_button_container').load('/juke/play_button');}, 3000);
+  setInterval(function() {
+    $('#title').load('/juke/title');
+    $('#playing_now').load('/juke/playing_now');
+    $('#li#play_button_container').load('/juke/play_button');
+  }, 3000);
 
   $('body').keyup(function(e){
     if(e.keyCode == 32){

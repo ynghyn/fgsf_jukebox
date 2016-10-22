@@ -1,4 +1,13 @@
 <!-- Default panel contents -->
+<div id="list-panel-heading-non-fixed">
+  <span>
+    FGSF 주크박스
+    <span class="padding-left-10px">
+      <b><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></b>
+    </span>
+  </span>
+</div>
+
 <div id="list-panel-heading">
   <span>
     FGSF 주크박스
@@ -21,6 +30,15 @@
 </div>
 
 <div id="info_screen" class="dark">
+  <div>
+    <h1 class="button scrolly sml_margin">
+      Now Playing...<br>
+      <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
+    </h1>
+  </div>
+</div>
+
+<div id="info_screen_non_fixed" class="dark">
   <div>
     <h1 class="button scrolly sml_margin">
       Now Playing...<br>

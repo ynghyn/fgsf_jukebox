@@ -71,6 +71,23 @@ body {
   z-index: 10;
 }
 
+#list-panel-heading-non-fixed {
+  top: 0;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  color: #fff;
+}
+
+#info_screen_non_fixed {
+  bottom:0;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
   display: table;

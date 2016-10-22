@@ -20,7 +20,7 @@ module JukeHelper
     elsif song.try(:file)
       normalize_file_name(song.file)
     else
-      'choose thy song from /juke/list'
+      ''
     end
   end
 
