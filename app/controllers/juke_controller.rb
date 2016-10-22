@@ -13,6 +13,8 @@ class JukeController < ApplicationController
   BYPASS_CODE = 'bss'.freeze
   MAX_QUEUE_COUNT = 3
 
+  MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
+
   def index
   end
 
@@ -38,20 +40,20 @@ class JukeController < ApplicationController
     status, msg = if !params[:song_name].present?
       [400, 'You must select a song']
     elsif @current_song && song_already_queued?(params[:song_name])
-      record_and_update_cookie(params[:song_name], false)
+      record_music_selection(params[:song_name], false)
       [202, '이미 예약목록에 있습니다']
-    elsif cookies['queue_count'].to_i >= MAX_QUEUE_COUNT && params[:bypass] != BYPASS_CODE
+    elsif params[:bypass] != BYPASS_CODE && reached_limit?
       # Limit to 3 songs per 10 minutes
-      record_and_update_cookie(params[:song_name], false)
+      record_music_selection(params[:song_name], false)
       [429, 'Try again in 10 minutes.']
     elsif @current_song
-      record_and_update_cookie(params[:song_name], true)
+      record_music_selection(params[:song_name], true)
       #MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
       MPD_INSTANCE.play if MPD_INSTANCE.stopped?
       [200, '예약되었습니다!']
     else
-      record_and_update_cookie(params[:song_name], true)
+      record_music_selection(params[:song_name], true)
       MPD_INSTANCE.clear
       #MPD_INSTANCE.add(choose_effect)
       MPD_INSTANCE.add(params[:song_name])
@@ -122,12 +124,11 @@ class JukeController < ApplicationController
     @music_queue[@current_song.pos..-1].any? { |song| song.file == file_name }
   end
 
-  def record_and_update_cookie(song_name, queued)
+  def record_music_selection(song_name, queued)
     MusicSelection.create(song: song_name, queued: queued, user_id: @current_user.id)
-    if queued
-      count = cookies['queue_count'].to_i
-      cookies['queue_count'] = { value: count + 1, expires: 10.minutes.from_now }
-      #response.set_cookie 'queue_count', { value: count + 1, expires: 10.minutes.from_now }
-    end
+  end
+
+  def reached_limit?
+    MusicSelection.where(MUSIC_SELECTION_QUERY, 10.minutes.ago, true, @current_user.id).count >= 3
   end
 end

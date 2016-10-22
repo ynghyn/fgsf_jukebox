@@ -1,29 +1,46 @@
+"use strict";
+
 $(document).ready(
   function() {
+    var setInterval = null;
+    var noticeFlash = $('#notice-flash');
+    var warningFlash = $('#warning-flash');
+    var alertFlash = $('#alert-flash');
+
+    function clearIntervalAndHide() {
+      clearInterval(setInterval);
+      noticeFlash.hide();
+      warningFlash.hide();
+      alertFlash.hide();
+    }
+
     $('.btn_add_song').click(function() {
       var url = this.name;
       $.getJSON(url, function(data) {
+        clearIntervalAndHide();
         if (data.status == 200) {
-          $('#notice-flash').text(data.msg);
-          $('#notice-flash').show();
-          setTimeout(function() {$('#notice-flash').fadeOut(1000)}, 2000);
+          noticeFlash.text(data.msg);
+          noticeFlash.show();
+          setInterval = setTimeout(function() { noticeFlash.fadeOut(1000) }, 2000);
         } else {
-          $('#warning-flash').text(data.msg);
-          $('#warning-flash').show();
-          setTimeout(function() {$('#warning-flash').fadeOut(1000)}, 2000);
+          warningFlash.text(data.msg);
+          warningFlash.show();
+          setInterval = setTimeout(function()  { warningFlash.fadeOut(1000) }, 2000);
         }
       }).error(function() {
-        $('#alert-flash').text('Reached limit! 10분후에 또 예약 해주세요~');
-        $('#alert-flash').show();
-        setTimeout(function() {$('#alert-flash').fadeOut(1000)}, 2000);
+        clearIntervalAndHide();
+        alertFlash.text('Reached limit! 10분후에 또 예약 해주세요~');
+        alertFlash.show();
+        setInterval = setTimeout(function() { alertFlash.fadeOut(1000) }, 2000);
       });
     });
 
     $('#juke_control').delegate('span', 'click', function() {
       var url = $(this).attr('data_url');
       $.getJSON(url, function() {
-        $('li#play_button_container').load('/juke/play_button');
+        $('#title').load('/juke/title');
         $('#playing_now').load('/juke/playing_now');
+        $('li#play_button_container').load('/juke/play_button');
       });
     });
   }
