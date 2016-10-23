@@ -1,13 +1,25 @@
-<p class="lead font-17 text-align-left" >
-  Previous:<br>
-  <% previous_songs(MPD_INSTANCE).each do |song_name| %>
-  <%= song_name %><br>
-  <% end %>
-</p>
-<p class="lead font-19"><b style="color:black;">Playing Now:</b><br><%= playing_now(MPD_INSTANCE.current_song) %></p>
-<p class="lead font-17 text-align-left" >
-  Next:<br>
-  <% next_songs(MPD_INSTANCE).each do |song_name| %>
-  <%= song_name %><br>
-  <% end %>
-</p>
+<div style="height: 600px;">
+  <div style="height: 40%;">
+    <p class="lead font-20 text-align-left" >
+      Previous:<br>
+      <% previous_songs(MPD_INSTANCE).each do |song_name| %>
+        <%= song_name %><br>
+      <% end %>
+    </p>
+  </div>
+  <div style="height: 20%;">
+    <p class="lead font-30">
+      <b>Playing Now:</b><br>
+      <%= playing_now(MPD_INSTANCE.current_song) %>
+    </p>
+  </div>
+  <div style="height: 40%;">
+    <p class="lead font-20 text-align-left" >
+      Next:<br>
+      <% next_songs(MPD_INSTANCE).each do |song_name| %>
+        <%= song_name %><br>
+      <% end %>
+    </p>
+  </div>
+</div>
+

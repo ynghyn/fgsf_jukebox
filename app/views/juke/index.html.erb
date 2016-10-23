@@ -9,7 +9,7 @@
   <header><h1 id="time"><span id="current_time"></span></h1></header>
 
   <footer>
-    <h1 class="button scrolly" style="margin-top:40px;background: rgba(255, 255, 255, 0.50);color:black;">
+    <h1 class="button scrolly" style="margin-top:40px;background: rgba(255, 255, 255, 0.20);">
       <p class="controller" id="title"><%= render partial: 'title' %></p>
       <ul id='juke_control' class="nav masthead-nav">
         <li>
@@ -31,7 +31,7 @@
     </h1>
   </footer>
 
-  <h2 class="button scrolly" id="playlist" style="background: rgba(255, 255, 255, 0.50);color:black;">
+  <h2 class="button scrolly" id="playlist" style="background: rgba(255, 255, 255, 0.20);">
     <div class="inner cover" id="playing_now">
       <%= render partial: 'playing_now' %>
     </div>
@@ -40,33 +40,26 @@
 </section>
 
 <script type="text/javascript">
-  (function () {
-    function checkTime(i) {
-      return (i < 10) ? "0" + i : i;
-    }
+  function checkTime(i) {
+    return (i < 10) ? "0" + i : i;
+  }
 
-    function startTime() {
-      var today = new Date();
-      var h = today.getHours() % 12;
-      var m = checkTime(today.getMinutes());
-      if (today.getHours() / 12 < 1 || today.getHours() == 2) {
-        var suffix = 'AM'
-      } else {
-        var suffix = 'PM'
-      }
-      $('#current_time').text(h + ":" + m + ' ' + suffix);
+  function startTime() {
+    var today = new Date();
+    var h = today.getHours() % 12;
+    var m = checkTime(today.getMinutes());
+    $('#current_time').text(h + ":" + m);
+    setTimeout(function () {
+      startTime()
+    }, 20000);
+  }
 
-      setTimeout(function () {
-        startTime()
-      }, 10000);
-    }
-    startTime();
-  })();
+  startTime();
 
   setInterval(function() {
     $('#title').load('/juke/title');
     $('#playing_now').load('/juke/playing_now');
-    $('#li#play_button_container').load('/juke/play_button');
+    $('li#play_button_container').load('/juke/play_button');
   }, 3000);
 
   $('body').keyup(function(e){
@@ -77,9 +70,7 @@
       });
     }
   });
-</script>
 
-<script type="text/javascript">
   function popup(mylink, windowname) {
     if (! window.focus)return true;
     var href;
