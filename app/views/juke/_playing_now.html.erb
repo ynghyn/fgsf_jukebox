@@ -10,7 +10,7 @@
   <div style="height: 20%;">
     <p class="lead font-25">
       <b>Playing Now:</b><br>
-      <%= truncate(playing_now(MPD_INSTANCE.current_song), :length => 60, :omission => '...') %>
+      <%= truncate(playing_now(MPD_INSTANCE.current_song), :length => 30, :omission => '...') %>
     </p>
   </div>
   <div style="height: 40%;">
