@@ -25,79 +25,25 @@ module JukeHelper
   end
 
   def previous_songs(mpd)
-    if mpd_queue(mpd).present? && current_song(mpd)
+    songs = []
+    if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-      item_remaining = curr_song_in_queue.pos - 3
-      more_songs = if item_remaining > 0
-        "...+#{item_remaining}"
+      (0...curr_song_in_queue.pos).each do |i|
+        songs << mpd_queue(mpd)[i].file
       end
-      [
-        more_songs,
-        get_song_in_pos(mpd, curr_song_in_queue, -3),
-        get_song_in_pos(mpd, curr_song_in_queue, -2),
-        get_song_in_pos(mpd, curr_song_in_queue, -1),
-      ].compact
-    else
-      []
     end
-    # if mpd_queue(mpd).present? && current_song(mpd)
-    #   variable = if is_an_effect?(current_song(mpd))
-    #     1
-    #   else
-    #     0
-    #   end
-    #   curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-    #   item_remaining = curr_song_in_queue.pos - 6 + variable
-    #   more_songs = if item_remaining/2 > 0
-    #     "...+#{item_remaining/2}"
-    #   end
-    #   [
-    #     more_songs,
-    #     get_song_in_pos(mpd, curr_song_in_queue, -6+variable),
-    #     get_song_in_pos(mpd, curr_song_in_queue, -4+variable),
-    #     get_song_in_pos(mpd, curr_song_in_queue, -2+variable),
-    #   ].compact
-    # else
-    #   []
-    # end
+    songs
   end
 
   def next_songs(mpd)
-    if mpd_queue(mpd).present? && current_song(mpd)
+    songs = []
+    if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-      item_remaining = mpd_queue(mpd).size - curr_song_in_queue.pos - 4
-      more_songs = if item_remaining > 0
-        "...+#{item_remaining}"
+      (curr_song_in_queue.pos+1...mpd_queue(mpd).size).each do |i|
+        songs << mpd_queue(mpd)[i].file
       end
-      [
-        get_song_in_pos(mpd, curr_song_in_queue, 1),
-        get_song_in_pos(mpd, curr_song_in_queue, 2),
-        get_song_in_pos(mpd, curr_song_in_queue, 3),
-        more_songs,
-      ].compact
-    else
-      []
     end
-    # if mpd_queue(mpd).present? && current_song(mpd)
-    #   variable = if is_an_effect?(current_song(mpd))
-    #     -1
-    #   else
-    #     0
-    #   end
-    #   curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-    #   item_remaining = mpd_queue(mpd).size - curr_song_in_queue.pos - 6 - variable
-    #   more_songs = if item_remaining/2 > 0
-    #     "...+#{item_remaining/2}"
-    #   end
-    #   [
-    #     get_song_in_pos(mpd, curr_song_in_queue, 2+variable),
-    #     get_song_in_pos(mpd, curr_song_in_queue, 4+variable),
-    #     get_song_in_pos(mpd, curr_song_in_queue, 6+variable),
-    #     more_songs,
-    #   ].compact
-    # else
-    #   []
-    # end
+    songs
   end
 
   def normalize_file_name(file_name)
@@ -105,13 +51,6 @@ module JukeHelper
   end
 
   private
-
-  def get_song_in_pos(mpd, song, pos)
-    if song.pos + pos >= 0
-      song_in_pos = mpd_queue(mpd)[song.pos + pos]
-      song_in_pos && normalize_file_name(song_in_pos.file)
-    end
-  end
 
   def current_song(mpd)
     @current_song ||= mpd.current_song

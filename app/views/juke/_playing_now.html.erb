@@ -1,25 +1,14 @@
-<div style="height: 600px;">
-  <div style="height: 40%;">
-    <p class="lead font-20 text-align-left" >
-      Previous:<br>
-      <% previous_songs(MPD_INSTANCE).each do |song_name| %>
-        <%= song_name %><br>
-      <% end %>
-    </p>
+<div style="text-align:left;">
+  <div>
+    Previous:<br>
+    <% previous_songs(MPD_INSTANCE).each do |song_name| %>
+      <%= song_name %><br>
+    <% end %>
   </div>
-  <div style="height: 20%;">
-    <p class="lead font-25">
-      <b>Playing Now:</b><br>
-      <%= truncate(playing_now(MPD_INSTANCE.current_song), :length => 30, :omission => '...') %>
-    </p>
-  </div>
-  <div style="height: 40%;">
-    <p class="lead font-20 text-align-left" >
-      Next:<br>
-      <% next_songs(MPD_INSTANCE).each do |song_name| %>
-        <%= song_name %><br>
-      <% end %>
-    </p>
+  <div>
+    Next:<br>
+    <% next_songs(MPD_INSTANCE).each do |song_name| %>
+      <%= song_name %><br>
+    <% end %>
   </div>
 </div>
-

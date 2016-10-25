@@ -1,27 +1,18 @@
 <!-- Default panel contents -->
 <div id="list-panel-heading-non-fixed">
-  <span>
-    <b>
-      FGSF 주크박스
-      <span class="padding-left-10px">
-        <%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %>
-      </span>
-    </b>
-  </span>
+  <b>FGSF 주크박스</b>
 </div>
-
 <div id="list-panel-heading">
-  <span>
-    FGSF 주크박스
-    <span class="padding-left-10px">
-      <b><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></b>
-    </span>
-  </span>
+  <b>FGSF 주크박스</b>
 </div>
 
 <div class="panel panel-default">
   <!-- List group -->
   <div class="list-group">
+    <button type="button" class="list-group-item">
+      <%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %>
+    </button>
+
     <% @songs.each do |song| %>
     <button type="button" class="btn_add_song list-group-item text-align-center" \
       name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
@@ -32,21 +23,17 @@
 </div>
 
 <div id="info_screen" class="dark">
-  <div>
-    <h1 class="button scrolly sml_margin">
-      Now Playing...<br>
-      <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
-    </h1>
-  </div>
+  <h3 class="sml_margin">
+    Now Playing...<br>
+    <p id="screen_title"><%= render partial: 'title' %></p>
+  </h3>
 </div>
 
 <div id="info_screen_non_fixed" class="dark">
-  <div>
-    <h1 class="button scrolly sml_margin">
-      Now Playing...<br>
-      <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
-    </h1>
-  </div>
+  <h3 class="sml_margin">
+    Now Playing...<br>
+    <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
+  </h3>
 </div>
 
 <script>

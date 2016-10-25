@@ -1,42 +1,12 @@
-/*
-* Globals
-*/
-
-/* Links */
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
-
-/* Custom default button */
-.btn-default,
-.btn-default:hover,
-.btn-default:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
-}
-
-
-/*
-* Base structure
-*/
-
 html,
 body {
   height: 100%;
-
+  width: 100%;
 }
-body {
 
+body {
   text-align: center;
   text-shadow: 0 1px 1px rgba(0,0,0,.5);
-}
-
-.cover-background-color {
-  background-color: #333;
 }
 
 .font-20 {
@@ -59,19 +29,14 @@ body {
   text-align: center;
 }
 
-#juke_control span {
-  cursor: pointer;
-}
-
 #list-panel-heading {
   position:fixed;
   top: 0;
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-image: url(bar_image.jpg);
+  background-image: url('bar_image.jpg');
   text-align: center;
-  color: #fff;
   z-index: 10;
 }
 
@@ -81,14 +46,22 @@ body {
   padding-top: 5px;
   padding-bottom: 5px;
   text-align: center;
-  color: #fff;
+}
+
+#info_screen{
+  position: fixed;
+  bottom:0;
+  margin: 0;
+  background-image: url('bar_image.jpg');
+  text-align: center;
+  width: 100%;
+  z-index: 10;
 }
 
 #info_screen_non_fixed {
   bottom:0;
   margin: 0;
   text-align: center;
-  color: #fff;
   width: 100%;
 }
 
@@ -140,11 +113,6 @@ body {
 /*
 * Header
 */
-.masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .masthead-nav > li {
   display: inline-block;
 }
@@ -156,8 +124,6 @@ body {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -173,72 +139,32 @@ body {
   border-bottom-color: #fff;
 }
 
-@media (min-width: 768px) {
-  .masthead-brand {
-    float: left;
-  }
-  .masthead-nav {
-
-  }
+.sml_margin{
+  margin:1em 0 1em 0;
+  bottom:0;
 }
 
-
-/*
-* Cover
-*/
-
-.cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
+.dark {
+  color: rgba(black, 0.55);
 }
 
-
-/*
-* Footer
-*/
-
-.mastfoot {
-  color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
-  font-size: .7em;
-  width: 100% !important;
-
+#header {
+  position: absolute;
+  margin: 0;
+  background-image: url(main_01.jpg);
+  padding: 10em 0 4em 0;
+  text-align: center;
+  width: 100%;
 }
 
-
-/*
-* Affix and center
-*/
-
-@media (min-width: 768px) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
+.medium-font {
+  font-size: 3em !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
 
-@media (min-width: 992px) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 700px;
-  }
+.heavy-font {
+  font-size: 7em !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
 }
