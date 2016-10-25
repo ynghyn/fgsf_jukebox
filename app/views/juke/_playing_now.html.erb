@@ -1,13 +1,13 @@
-<div style="text-align:left;">
-  <div>
-    Previous:<br>
-    <% previous_songs(MPD_INSTANCE).each do |song_name| %>
+<div style="text-align:left;font-size:1.2em;">
+  <div style="margin-left:100px;float:left;">
+    Last played:<br>
+    <% if song_name = previous_songs(MPD_INSTANCE).last %>
       <%= song_name %><br>
     <% end %>
   </div>
-  <div>
-    Next:<br>
-    <% next_songs(MPD_INSTANCE).each do |song_name| %>
+  <div style="margin-right:100px;float:right;">
+    Coming up:<br>
+    <% if song_name = next_songs(MPD_INSTANCE).first %>
       <%= song_name %><br>
     <% end %>
   </div>
