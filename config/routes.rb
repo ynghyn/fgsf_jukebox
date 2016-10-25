@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'juke#list'
+  get 'comments/report', to: 'comments#report'
+  get 'comments/local_time_refresh', to: 'comments#local_time_refresh'
+
 
   get 'juke/control', to: 'juke#index'
   get 'juke/playing_now', to: 'juke#playing_now'

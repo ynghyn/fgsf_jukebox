@@ -1,4 +1,3 @@
-
 <div class="mastfoot">
   <div style="line-height:1.5; width:100%;text-align:right;z-index:100;position:absolute;padding-right:5px;">
     <a href="/juke/list?bypass=bss" style="text-decoration:none;"onclick="return popup(this, 'Music Library');">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
@@ -39,6 +38,18 @@
 
 </section>
 
+<div>
+  <h1 id="time"></h1>
+  <script type='text/javascript'>
+  	function el(tid) {return document.getElementById(tid);}
+  	function serverTime(s){
+  		el("time").innerHTML= 	"Time is " + s.hour +
+  							":" + s.minute +
+  							":"+s.second;
+  	}
+  </script>
+</div>
+
 <script type="text/javascript">
   function checkTime(i) {
     return (i < 10) ? "0" + i : i;
@@ -51,6 +62,7 @@
       h = '00'
     } else if (h == 0) {
       h = '12'
+
     }
     var m = checkTime(today.getMinutes());
     $('#current_time').text(h + ":" + m);

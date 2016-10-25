@@ -8,6 +8,7 @@
 /***************************************************************/
 
 
+
 /*      LIST PAGE      */
 
 .sml_margin{
@@ -24,6 +25,7 @@ p#screen_title{
   position: fixed;
   bottom:0;
   margin: 0;
+  background-image: url(main_01.jpg);
   background-image: url(bar_image.jpg);
   background-size: cover;
   background-position: center center;
