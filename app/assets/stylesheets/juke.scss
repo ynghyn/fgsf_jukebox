@@ -174,8 +174,15 @@ body {
 
 #current_time {
   position: fixed;
-  margin-left: 100px;
-  margin-top: 20px;
+  margin-left: 5%;
+  margin-top: 2%;
   z-index: 5;
   color: #fff;
+}
+
+#playing_now {
+  position: absolute;
+  bottom: 50px;
+  font-size:1.2em;
+  width: 100%;
 }
