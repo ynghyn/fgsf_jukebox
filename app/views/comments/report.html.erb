@@ -1,0 +1,50 @@
+<style>
+  th{
+    font-weight:500;
+  }
+ table, th, td{
+   font-weight: 100;
+   border: 1px dotted grey;
+   text-align: left;
+   line-height: 1.5;
+   padding:0 5px;
+   }
+
+   .report{
+     width:95%;
+     margin:2em auto auto auto;"
+   }
+</style>
+<script type='text/javascript'>
+  setInterval(function() {$('#time_now').load('/comments/local_time_refresh');}, 1000);
+</script>
+
+
+<div class="report">
+  <h1><b>REPORTS</b></h1>
+  <div id="time_now">
+    <%= render partial: 'local_time_refresh' %>
+  </div>
+</div>
+
+  <table class="report" >
+    <tbody>
+      <tr>
+        <th width="2%;">ID</th>
+        <th width="2%;">User_ID</th>
+        <th width="12%">Commenter</th>
+        <th width="">Body</th>
+        <th width="23%">created_at</th>
+      </tr>
+
+      <% @comment.each do |comment|%>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.user_id %></td>
+        <td><%= comment.commenter %></td>
+        <td><%= comment.body %></td>
+        <td><%= comment.created_at.localtime.strftime("%Y-%m-%e %a %I:%M:%S %p %Z")%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
