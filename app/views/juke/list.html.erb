@@ -1,13 +1,39 @@
+<<<<<<< HEAD
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading cover-background-color">
     Music Library
     <span class="padding-left-10px"><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></span>
   </div>
+=======
+<!-- Default panel contents -->
+<div id="list-panel-heading-non-fixed">
+  <span>
+    <b>
+      FGSF 주크박스
+      <span class="padding-left-10px">
+        <%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %>
+      </span>
+    </b>
+  </span>
+</div>
+
+<div id="list-panel-heading">
+  <span>
+    FGSF 주크박스
+    <span class="padding-left-10px">
+      <b><%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %></b>
+    </span>
+  </span>
+</div>
+
+<div class="panel panel-default">
+>>>>>>> master
   <!-- List group -->
   <div class="list-group">
     <% @songs.each do |song| %>
     <button type="button" class="btn_add_song list-group-item text-align-center" \
+<<<<<<< HEAD
     name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
     <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
   </button>
@@ -20,6 +46,15 @@
   </div>
 </div>
 </div>
+=======
+      name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+      <span class="glyphicon glyphicon-play" aria-hidden="true"></span> <%= song.file %>
+    </button>
+    <% end %>
+  </div>
+</div>
+
+>>>>>>> master
 <div id="info_screen" class="dark">
   <div>
     <h1 class="button scrolly sml_margin">
@@ -29,6 +64,20 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <script>
   setInterval(function() {$('#screen_title').load('/juke/title');}, 1000);
+=======
+<div id="info_screen_non_fixed" class="dark">
+  <div>
+    <h1 class="button scrolly sml_margin">
+      Now Playing...<br>
+      <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
+    </h1>
+  </div>
+</div>
+
+<script>
+  setInterval(function() {$('#screen_title').load('/juke/title');}, 10000);
+>>>>>>> master
 </script>
