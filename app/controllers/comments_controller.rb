@@ -3,9 +3,17 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
+  def report
+    @comment = Comment.all
+  end
+
   def create
     Comment.create(comment_params.merge(user_id: current_user.id))
     redirect_to root_path
+  end
+
+  def local_time_refresh
+    render partial: 'local_time_refresh'
   end
 
   private

@@ -43,8 +43,19 @@
     </div>
   </div>
 </section>
+<div>
+<h1 id="time"></h1>
+<script type='text/javascript'>
+	function el(tid) {return document.getElementById(tid);}
+	function serverTime(s){
+		el("time").innerHTML= 	"Time is " + s.hour +
+							":" + s.minute +
+							":"+s.second;
+	}
+</script>
+</div>
 
-<script type="text/javascript">
+<script type='text/javascript' src='http://json-time.appspot.com/time.json?callback=serverTime'>
   (function () {
     function checkTime(i) {
       return (i < 10) ? "0" + i : i;
@@ -55,7 +66,7 @@
       h = checkTime(today.getHours()),
       m = checkTime(today.getMinutes()),
       s = checkTime(today.getSeconds());
-      document.getElementById('current_time').innerHTML = h + ":" + m;
+      document.getElementById('current_time').innerHTML = h + ":" + m + ":" + s;
       t = setTimeout(function () {
         startTime()
       }, 500);
