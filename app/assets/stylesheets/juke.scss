@@ -173,11 +173,13 @@ body {
 }
 
 #current_time {
-  position: fixed;
+  position: absolute;
   margin-left: 5%;
   margin-top: 2%;
+  margin-right: 2%;
   z-index: 5;
   color: #fff;
+  width: 100%;
 }
 
 #playing_now {
