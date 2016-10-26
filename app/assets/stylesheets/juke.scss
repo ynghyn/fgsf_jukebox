@@ -151,8 +151,7 @@ body {
 #header {
   position: absolute;
   margin: 0;
-  background-image: url(main_01.jpg);
-  background-size: cover;
+  background-color: black;
   padding: 10em 0 4em 0;
   text-align: center;
   color: #fff;
@@ -161,22 +160,20 @@ body {
 }
 
 .medium-font {
-  font-size: 3em !important;
+  font-size: 3em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
 .heavy-font {
-  font-size: 4em !important;
+  font-size: 4em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
 
 #current_time {
   position: absolute;
-  margin-left: 5%;
-  margin-top: 2%;
-  margin-right: 2%;
+  text-align: center;
   z-index: 5;
   color: #fff;
   width: 100%;
@@ -184,7 +181,20 @@ body {
 
 #playing_now {
   position: absolute;
+  top: 50px;
+  font-size:1.2em !important;
+  width: 100%;
+}
+
+#title {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#carousel-comments {
+  position: absolute;
   bottom: 50px;
   font-size:1.2em;
   width: 100%;
+  color: white;
 }
