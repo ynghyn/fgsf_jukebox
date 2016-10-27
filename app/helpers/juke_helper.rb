@@ -3,7 +3,7 @@ module JukeHelper
   LIST_GROUP_ITEM_INFO = 'list-group-item-info'.freeze
 
   def is_an_effect?(song)
-    JukeController::ALL_EFFECTS.any? { |effect| song.file.include?(effect) }
+    song.file ==JukeController::CASSETTE_EFFECT
   end
 
   def alternate_list_css(css_class)
@@ -33,7 +33,8 @@ module JukeHelper
     if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
       (0...curr_song_in_queue.pos).each do |i|
-        songs << mpd_queue(mpd)[i]
+        song = mpd_queue(mpd)[i]
+        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
       end
     end
     songs
@@ -44,7 +45,8 @@ module JukeHelper
     if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
       (curr_song_in_queue.pos+1...mpd_queue(mpd).size).each do |i|
-        songs << mpd_queue(mpd)[i]
+        song = mpd_queue(mpd)[i]
+        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
       end
     end
     songs
