@@ -1097,13 +1097,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: #929292;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
-  text-decoration: underline;
+  color: #FF2C55;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -1609,6 +1608,8 @@ pre code {
   margin-left: auto;
 }
 .row {
+  margin-top:6px;
+  margin-bottom: 1px;
   margin-right: -15px;
   margin-left: -15px;
 }
@@ -1649,7 +1650,7 @@ pre code {
   width: 33.33333333%;
 }
 .col-xs-3 {
-  width: 25%;
+  width: 20%;
 }
 .col-xs-2 {
   width: 16.66666667%;
@@ -1774,6 +1775,7 @@ pre code {
 .col-xs-offset-0 {
   margin-left: 0;
 }
+
 @media (min-width: 768px) {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
@@ -3420,7 +3422,7 @@ fieldset[disabled] .btn-link {
 }
 .btn-link:hover,
 .btn-link:focus {
-  color: #23527c;
+  color: #FF2C55;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4745,7 +4747,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   z-index: 2;
-  color: #23527c;
+  color: #FF2C55;
   background-color: #eee;
   border-color: #ddd;
 }
