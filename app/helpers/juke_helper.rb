@@ -3,7 +3,7 @@ module JukeHelper
   LIST_GROUP_ITEM_INFO = 'list-group-item-info'.freeze
 
   def is_an_effect?(song)
-    JukeController::ALL_EFFECTS.any? { |effect| song.file.include?(effect) }
+    song.file ==JukeController::CASSETTE_EFFECT
   end
 
   def alternate_list_css(css_class)
@@ -15,12 +15,16 @@ module JukeHelper
   end
 
   def playing_now(song)
-    if song.try(:file) && is_an_effect?(song)
+    if song && is_an_effect?(song)
       'changing tape..'
-    elsif song.try(:file)
-      normalize_file_name(song.file)
+    elsif song
+      hash = song.to_h
+      title = hash[:title] || normalize_file_name(song.file)
+      artist = hash[:artist]
+      album = hash[:album]
+      "#{title}<br/>#{artist}<br/>#{album}".html_safe
     else
-      ''
+      'Please choose a song.'
     end
   end
 
@@ -29,7 +33,8 @@ module JukeHelper
     if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
       (0...curr_song_in_queue.pos).each do |i|
-        songs << mpd_queue(mpd)[i].file
+        song = mpd_queue(mpd)[i]
+        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
       end
     end
     songs
@@ -40,7 +45,8 @@ module JukeHelper
     if current_song(mpd)
       curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
       (curr_song_in_queue.pos+1...mpd_queue(mpd).size).each do |i|
-        songs << mpd_queue(mpd)[i].file
+        song = mpd_queue(mpd)[i]
+        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
       end
     end
     songs

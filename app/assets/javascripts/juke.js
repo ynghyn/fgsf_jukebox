@@ -27,9 +27,9 @@ $(document).ready(
           warningFlash.show();
           setInterval = setTimeout(function()  { warningFlash.fadeOut(1000) }, 2000);
         }
-      }).error(function() {
+      }).error(function(data) {
         clearIntervalAndHide();
-        alertFlash.text('Reached limit! 10분후에 또 예약 해주세요~');
+        alertFlash.text(data.responseJSON.msg);
         alertFlash.show();
         setInterval = setTimeout(function() { alertFlash.fadeOut(1000) }, 2000);
       });
