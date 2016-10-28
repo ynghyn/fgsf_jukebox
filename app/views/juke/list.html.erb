@@ -1,26 +1,20 @@
-<div class="mastfoot">
-  <div style="margin-top:140px; width:100%; text-align:right; z-index:100; position:absolute; padding-right:5px;">
-    <a href="/juke/control" style="text-decoration:none;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
-  </div>
-</div>
-<!-- Default panel contents -->
-<div id="list-panel-heading-non-fixed">
-  <b>FGSF 주크박스</b>
-</div>
-<div id="list-panel-heading">
-  <b>FGSF 주크박스</b>
+
+<div class="list_header">
+
+
+  <h1><span class="glyphicon glyphicon-music" style="font-size:.7em;"></span>&nbsp;JUKE </h1>
+
+  <h2 id="list_greeting">Get all the music you want.</h2>
+
+
 </div>
 
-<div class="panel panel-default">
-
-  <!-- List group -->
-  <div class="list-group">
-    <button type="button" class="list-group-item">
-      <%= link_to '(Leave us a comment!)', comments_path, class: 'link-color' %>
-    </button>
-
-    <% @songs.each do |song| %>
-    <button type="button" class="btn_add_song list-group-item text-align-center" \
+<div id="list_body">
+  <div class="panel panel-default">
+    <!-- List group -->
+    <div class="list-group">
+      <% @songs.each do |song| %>
+      <button type="button" class="btn_add_song list-group-item text-align-center" \
       name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
       <%= song.to_h[:title] || song.file %>
     </button>
@@ -29,21 +23,35 @@
 </div>
 
 
-<div id="info_screen" class="dark">
-  <h3 class="sml_margin">
-    Now Playing...<br>
-    <p id="screen_title"><%= render partial: 'title' %></p>
-  </h3>
 </div>
 
 
-<div id="info_screen_non_fixed" class="dark">
-  <h3 class="sml_margin">
-    Now Playing...<br>
-    <p class="controller" id="screen_title"><%= render partial: 'title' %></p>
-  </h3>
-</div>
+<div id="footer">
+  <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom">
+    <%= image_tag("main_05.jpg", :id => "now-playing-background") %>
+  </div>
 
-<script>
-  setInterval(function() {$('#screen_title').load('/juke/title');}, 10000);
-</script>
+  <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
+    <div class="display">
+      <div class="song-info">
+        <%= image_tag("main_05.jpg", :id => "now-playing-artwork") %>
+      </div>
+      <div id="info_screen_non_fixed">
+        <div class="sml_margin">
+          <h4 id="screen_title"><%= render partial: 'title' %></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
+    <div class="row">
+      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a></div>
+      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-heart"></i><br>New</a></div>
+      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-book"></i><br>Library</a></div>
+      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a></div>
+      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a></div>
+    </div>
+  </div>
+</div>
