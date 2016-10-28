@@ -1,30 +1,42 @@
-
 <div class="list_header">
-
-
   <h1><span class="glyphicon glyphicon-music" style="font-size:.7em;"></span>&nbsp;JUKE </h1>
-
   <h2 id="list_greeting">Get all the music you want.</h2>
-
-
 </div>
 
 <div id="list_body">
-  <div class="panel panel-default">
-    <!-- List group -->
-    <div class="list-group">
-      <% @songs.each do |song| %>
-      <button type="button" class="btn_add_song list-group-item text-align-center" \
-      name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
-      <%= song.to_h[:title] || song.file %>
-    </button>
-    <% end %>
+  <div data-role="page" id="pageone" >
+    <div class="panel panel-default">
+      <!-- List group -->
+      <div class="list-group">
+        <% @songs.each_with_index do |song, index| %>
+          <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song list-group-item text-align-left" dataId="page<%= index %>">
+            <%= song.to_h[:title] || song.file %>
+          </a>
+        <% end %>
+      </div>
+    </div>
   </div>
+  <% @songs.each_with_index do |song, index| %>
+    <div data-role="page" id="page<%= index %>">
+      <div style="text-align: left;">
+        <a href="#pageone"><i class="glyphicon glyphicon-arrow-left"></i> Go back</a>
+      </div>
+
+      <div style="text-align: left;">
+        <div id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
+        <div><%= title(song) %></div>
+        <div><%= artist(song) %></div>
+        <div><%= album(song) %></div>
+      </div>
+
+      <div style="position:absolute;bottom: 130px;">
+        <button type="button" class="btn_add_song btn btn-primary" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+          예약하기
+        </button>
+      </div>
+    </div>
+  <% end %>
 </div>
-
-
-</div>
-
 
 <div id="footer">
   <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom">
@@ -43,7 +55,6 @@
       </div>
     </div>
   </div>
-
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">

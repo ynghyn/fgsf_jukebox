@@ -56,6 +56,17 @@ module JukeHelper
     file_name.split('/').last.split('.')[-2]
   end
 
+  def artist(song)
+    song.to_h[:artist]
+  end
+
+  def title(song)
+    song.to_h[:title] || normalize_file_name(song.file)
+  end
+
+  def album(song)
+    song.to_h[:album]
+  end
   private
 
   def current_song(mpd)
