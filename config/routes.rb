@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'juke/clear', to: 'juke#clear'
   get 'juke/title', to: 'juke#title'
   get 'juke/mp3_image', to: 'juke#mp3_image'
+  get 'juke/construction', to: 'juke#construction'
 
   resources :comments
 end
