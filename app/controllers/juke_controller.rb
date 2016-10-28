@@ -43,11 +43,11 @@ class JukeController < ApplicationController
     elsif params[:bypass] != BYPASS_CODE && reached_limit?
       # Limit to 3 songs per 10 minutes
       record_music_selection(params[:song_name], false)
-      [429, 'Try again in 10 minutes.']
+      [429, '10분후에 더 예약 해주세요~']
     elsif params[:bypass] != BYPASS_CODE && !within_open_hour?
       # Only allow queueing during business hour
       record_music_selection(params[:song_name], false)
-      [400, 'You can only reserve during 9am-1pm on Sundays.']
+      [400, 'You can only reserve during operating hours [Sunday 9am-1pm ]']
     elsif @current_song
       record_music_selection(params[:song_name], true)
       add_song_to_mpd(params[:song_name])
