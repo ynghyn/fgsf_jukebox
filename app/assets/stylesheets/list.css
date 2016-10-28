@@ -19,7 +19,7 @@ body{
   width: 100%;
   height: 60px;
   background: linear-gradient(90deg, #8C65FE, #46A6FA);
-
+  z-index:500;
 
 }
 
@@ -30,7 +30,6 @@ body{
   font-family: Helvetica;
   font-size: 2em;
   vertical-align: middle !important;
-
 }
 
 #list_greeting{
@@ -52,7 +51,7 @@ body{
 /****************/
 
 #list_body{
-  margin-top: 250px !important;
+  margin-top: 60px !important;
 }
 
 

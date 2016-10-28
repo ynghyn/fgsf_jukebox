@@ -10,6 +10,20 @@
 </div>
 
 <div id="list_body">
+  <div class="panel panel-default">
+    <!-- List group -->
+    <div class="list-group">
+      <% @songs.each do |song| %>
+      <button type="button" class="btn_add_song list-group-item text-align-center" \
+      name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+      <%= song.to_h[:title] || song.file %>
+    </button>
+    <% end %>
+  </div>
+</div>
+
+
+</div>
 
 
 <div id="footer">
