@@ -6,14 +6,12 @@ class JukeController < ApplicationController
   before_action :initialize_mpd
 
   CASSETTE_EFFECT = 'cassette.wav'.freeze
-  CASSETTE2_EFFECT = 'cassette2.mp3'.freeze
-  CD_PLAYER_EFFECT = 'cdplayer.wav'.freeze
-  ALL_EFFECTS = [CASSETTE_EFFECT, CD_PLAYER_EFFECT, CASSETTE2_EFFECT].freeze
-
   BYPASS_CODE = 'bss'.freeze
   MAX_QUEUE_COUNT = 3
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
+
+  SEMAPHORE = Mutex.new
 
   def index
   end
@@ -45,18 +43,19 @@ class JukeController < ApplicationController
     elsif params[:bypass] != BYPASS_CODE && reached_limit?
       # Limit to 3 songs per 10 minutes
       record_music_selection(params[:song_name], false)
-      [429, 'Try again in 10 minutes.']
+      [429, '10분후에 더 예약 해주세요~']
+    elsif params[:bypass] != BYPASS_CODE && !within_open_hour?
+      # Only allow queueing during business hour
+      record_music_selection(params[:song_name], false)
+      [400, 'You can only reserve during operating hours [Sunday 9am-1pm ]']
     elsif @current_song
       record_music_selection(params[:song_name], true)
-      #MPD_INSTANCE.add(choose_effect)
-      MPD_INSTANCE.add(params[:song_name])
-      MPD_INSTANCE.play if MPD_INSTANCE.stopped?
+      add_song_to_mpd(params[:song_name])
       [200, '예약되었습니다!']
     else
       record_music_selection(params[:song_name], true)
       MPD_INSTANCE.clear
-      #MPD_INSTANCE.add(choose_effect)
-      MPD_INSTANCE.add(params[:song_name])
+      add_song_to_mpd(params[:song_name])
       MPD_INSTANCE.play
       [200, '예약되었습니다!']
     end
@@ -86,7 +85,7 @@ class JukeController < ApplicationController
 
   # API endpoint
   def next
-    #MPD_INSTANCE.next
+    MPD_INSTANCE.next unless is_an_effect?(@current_song)
     MPD_INSTANCE.next
   end
 
@@ -94,7 +93,7 @@ class JukeController < ApplicationController
   # Go back twice because of 'cassette' effect queues
   def previous
     return if @current_song.pos == 0
-    #MPD_INSTANCE.previous
+    MPD_INSTANCE.previous unless is_an_effect?(@current_song)
     MPD_INSTANCE.previous
   end
 
@@ -117,7 +116,7 @@ class JukeController < ApplicationController
   end
 
   def choose_effect
-    ALL_EFFECTS[rand(3)]
+    CASSETTE_EFFECT
   end
 
   def song_already_queued?(file_name)
@@ -130,5 +129,19 @@ class JukeController < ApplicationController
 
   def reached_limit?
     MusicSelection.where(MUSIC_SELECTION_QUERY, 10.minutes.ago, true, @current_user.id).count >= 3
+  end
+
+  def within_open_hour?
+    time_now = Time.now.in_time_zone('Pacific Time (US & Canada)')
+    time_now.wday == 0 && # Sunday
+      time_now.hour >= 9 && # Between 9AM - 1PM
+      time_now.hour < 13
+  end
+
+  def add_song_to_mpd(file_name)
+    SEMAPHORE.synchronize {
+      MPD_INSTANCE.add(choose_effect)
+      MPD_INSTANCE.add(file_name)
+    }
   end
 end
