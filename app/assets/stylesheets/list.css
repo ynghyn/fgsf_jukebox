@@ -1,15 +1,16 @@
 /*!
- *  This is stylesheet for /juke/list
- *  Made by: Jiwoo Park
- *  Version 1.0
- */
+*  This is stylesheet for /juke/list
+*  Made by: Jiwoo Park
+*  Version 1.0
+*/
+body{
+  text-shadow: none;
 
- body{
-   text-shadow: none;
+}
 
- }
-
-/*   Header     */
+/****************/
+/*    Header    */
+/****************/
 
 .list_header{
   position:fixed;
@@ -46,25 +47,64 @@
 }
 
 
-
-/*   body     */
+/****************/
+/*     body     */
+/****************/
 
 #list_body{
   margin-top: 250px !important;
 }
 
-/*   footer     */
 
- .nav-text{
-   font-size: 12px;
- }
 
- .nav-text > i{
-   font-size: 25px;
- }
+/****************/
+/*    footer    */
+/****************/
 
- .now-playing{
-   background:gray;
-   height:60px;
-   margin-bottom:59px;
- }
+.nav-text{
+  font-size: 12px;
+}
+
+.nav-text > i{
+  font-size: 25px;
+}
+
+.now-playing-bottom{
+  overflow:hidden;
+  height:70px;
+  margin-bottom:56px;
+  z-index:100;
+  padding: 0 !important;
+}
+.now-playing-top{
+  overflow:hidden;
+  height:70px;
+  margin-bottom:56px;
+  z-index:300;
+  padding: 0 !important;
+}
+
+.song-info{
+  width:100%;
+  margin: auto;
+  height:70px;
+  position: fixed;
+  padding: 5px;
+}
+img#now-playing-background {
+  width: 110%;
+  transform: scale(1.1);
+  -webkit-filter: blur(10px);
+}
+
+img#now-playing-artwork{
+  width: 60px;
+  height: 60px;
+  display: -webkit-box;
+  margin-left: 15px;
+}
+
+
+#bottomNav{
+  background-color: white;
+}
