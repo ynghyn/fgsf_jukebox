@@ -1,3 +1,5 @@
+require 'mp3info'
+
 class JukeController < ApplicationController
   include JukeHelper
 
@@ -10,6 +12,7 @@ class JukeController < ApplicationController
   MAX_QUEUE_COUNT = 3
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
+  ROOT_PATH = File.expand_path('~/Music').freeze
 
   SEMAPHORE = Mutex.new
 
@@ -105,6 +108,15 @@ class JukeController < ApplicationController
   # API endpoint
   def clear
     MPD_INSTANCE.clear
+  end
+
+  def mp3_image
+    image = if params[:file].present?
+      Mp3Info.open("#{ROOT_PATH}/#{params[:file]}") do |mp3|
+        mp3.tag2.pictures[0][1]
+      end
+    end
+    send_data image, :type => 'image/png', :disposition => 'inline'
   end
 
   private

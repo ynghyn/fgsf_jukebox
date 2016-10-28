@@ -174,7 +174,7 @@ body {
 }
 
 .heavy-font {
-  font-size: 4em;
+  font-size: 3em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
 }
@@ -200,8 +200,8 @@ body {
 }
 
 #carousel-comments {
-  position: absolute;
-  bottom: 50px;
+  position: fixed;
+  bottom: 10px;
   font-size:1.2em;
   width: 100%;
   color:white;
