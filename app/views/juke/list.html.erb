@@ -12,77 +12,24 @@
 <div id="list_body">
 
 
-  <div class="">
-    <div class="">
-      <span>body</span>
-
-    </div>
-  </div>
-
-  <div class="">
-    <div class="">
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-
-      <span>Album artwork</span>
-      <span>current_title</span>
-      <br /><br /><br /><br /><br /><br />
-
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-      <br />asdfasdfasdf<br /><br />asdfasdfasdf<br />
-    </div>
-  </div>
-</div>
-
-
-
 <div id="footer">
   <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom">
     <%= image_tag("main_05.jpg", :id => "now-playing-background") %>
   </div>
 
   <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
-    <div class="song-info">
-      <%= image_tag("main_05.jpg", :id => "now-playing-artwork") %>
+    <div class="display">
+      <div class="song-info">
+        <%= image_tag("main_05.jpg", :id => "now-playing-artwork") %>
+      </div>
+      <div id="info_screen_non_fixed">
+        <div class="sml_margin">
+          <h4 id="screen_title"><%= render partial: 'title' %></h4>
+        </div>
+      </div>
     </div>
-
   </div>
+
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">

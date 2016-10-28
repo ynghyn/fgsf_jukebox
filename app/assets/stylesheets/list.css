@@ -85,23 +85,40 @@ body{
 }
 
 .song-info{
-  width:100%;
+  width:20%;
   margin: auto;
   height:70px;
   position: fixed;
-  padding: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.display{
+  height: 100%;
+  width:90%;
+  margin-left:5%;
+  margin-right:5%;
+
 }
 img#now-playing-background {
   width: 110%;
   transform: scale(1.1);
   -webkit-filter: blur(10px);
+
 }
 
 img#now-playing-artwork{
   width: 60px;
   height: 60px;
   display: -webkit-box;
-  margin-left: 15px;
+  margin-left: 5px;
+}
+
+div#screen_title{
+  margin: 0 !important;
+  height: 100%;
+  font-size: 0.9em;
+
 }
 
 
