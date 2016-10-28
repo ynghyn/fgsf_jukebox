@@ -117,6 +117,10 @@ class JukeController < ApplicationController
       end
     end
     send_data image, :type => 'image/png', :disposition => 'inline'
+  rescue => e
+    Rails.logger.error e
+    file = File.open(Rails.root.join('app', 'assets', 'images', 'camera.jpg'))
+    send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
 
   private

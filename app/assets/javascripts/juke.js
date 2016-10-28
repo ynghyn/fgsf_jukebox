@@ -16,11 +16,8 @@ $(document).ready(
 
     $('.toggle-song').click(function() {
       var dataId = $(this).attr('dataId');
-      console.log(dataId);
       var $jacket = $('#' + dataId + 'Jacket');
-      console.log($jacket);
       var fileName = $jacket.attr('fileName');
-      console.log(fileName);
       $jacket.html('<img src="/juke/mp3_image?file=' + fileName + '" width="100" height="100">');
     });
 
