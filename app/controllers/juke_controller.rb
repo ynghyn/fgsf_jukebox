@@ -123,6 +123,11 @@ class JukeController < ApplicationController
     send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
 
+  def construction
+    file = File.open(Rails.root.join('app', 'assets', 'images', 'construction.jpg'))
+    send_data file.read, :type => 'image/png', :disposition => 'inline'
+  end
+
   private
 
   def initialize_mpd
