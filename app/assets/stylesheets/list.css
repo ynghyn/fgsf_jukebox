@@ -19,7 +19,7 @@ body{
   width: 100%;
   height: 60px;
   background: linear-gradient(90deg, #8C65FE, #46A6FA);
-  z-index:500;
+  z-index:50;
 
 }
 
