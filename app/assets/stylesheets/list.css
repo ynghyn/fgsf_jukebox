@@ -51,8 +51,9 @@ body{
 /****************/
 
 #list_body{
-  margin-top: 60px !important;
-  margin-bottom: 125px !important;
+  margin-top: 60px;
+  margin-bottom: 125px;
+
 }
 
 
@@ -144,4 +145,27 @@ p#title{
 
 #bottomNav{
   background-color: white;
+}
+
+
+
+/********************************/
+/******  List Info Slider  ******/
+/********************************/
+
+.list_info_slider{
+  font-size:1.5em;
+  font-weight: lighter;
+
+}
+
+.list_info_slider > img{
+  margin: 20px 0 30px 0;
+  width:200px;
+  height:200px;
+}
+
+.large_font{
+  font-size:2.4em;
+  font-weight: 100;
 }

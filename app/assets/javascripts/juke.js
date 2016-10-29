@@ -26,7 +26,7 @@ $(document).ready(
       console.log(href.substr(1));
       var $div = $('#' + href.substr(1));
       console.log($div);
-      $div.html('<img src="/juke/construction">');
+      $div.html('<img src="/juke/construction" width="300" height="300">');
     });
 
     $('.btn_add_song').click(function() {
@@ -60,5 +60,3 @@ $(document).ready(
     });
   }
 );
-
-
