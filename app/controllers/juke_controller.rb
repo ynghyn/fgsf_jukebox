@@ -49,6 +49,9 @@ class JukeController < ApplicationController
     render partial: 'artwork'
   end
 
+  def album_jacket
+    render partial: 'album_jacket'
+  end
 
   # API endpoint
   def add_song
@@ -131,6 +134,15 @@ class JukeController < ApplicationController
       end
     end
     send_data image, :type => 'image/png', :disposition => 'inline'
+  rescue => e
+    Rails.logger.error e
+    file = File.open(Rails.root.join('app', 'assets', 'images', 'camera.jpg'))
+    send_data file.read, :type => 'image/png', :disposition => 'inline'
+  end
+
+  def construction
+    file = File.open(Rails.root.join('app', 'assets', 'images', 'construction.jpg'))
+    send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
 
   private

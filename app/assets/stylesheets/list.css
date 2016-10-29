@@ -52,6 +52,7 @@ body{
 
 #list_body{
   margin-top: 60px !important;
+  margin-bottom: 125px !important;
 }
 
 
@@ -75,7 +76,9 @@ body{
   margin-bottom:56px !important;
   z-index:100;
   padding: 0 !important;
+  background: linear-gradient(90deg, #8C65FE, #46A6FA);
 }
+
 .now-playing-top{
 
   overflow:hidden;
@@ -87,12 +90,11 @@ body{
 
 .song-info{
   width:20%;
-  margin: auto;
   height:70px;
   position: fixed;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  margin: 0;
 }
+
 
 .display{
   height: 100%;
@@ -105,12 +107,10 @@ img#now-playing-background {
   width: 110%;
   transform: scale(1.1);
   -webkit-filter: blur(10px);
-
 }
-
-img#now-playing-artwork{
-  width: 60px;
-  height: 60px;
+img.now-playing-artwork{
+  width: 70px;
+  height: 70px;
   display: -webkit-box;
   margin-left: 15px;
 }

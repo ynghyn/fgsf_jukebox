@@ -1,39 +1,94 @@
-
 <div class="list_header">
   <h1><span class="glyphicon glyphicon-music" style="font-size:.7em;"></span>&nbsp;JUKE </h1>
   <h2 id="list_greeting">Get all the music you want.</h2>
 </div>
 
 <div id="list_body">
-  <div class="panel panel-default">
-    <!-- List group -->
-    <div class="list-group">
-      <% @songs.each do |song| %>
-          <button type="button" class="btn_add_song list-group-item text-align-center" \
-          name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
-          <%= song.to_h[:title] || song.file %>
-          </button>
-      <% end%>
+  <div data-role="page" id="pageLibrary" >
+    <div class="panel panel-default">
+      <!-- List group -->
+      <div class="list-group">
+        <% @songs.each_with_index do |song, index| %>
+          <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song list-group-item text-align-left" dataId="page<%= index %>">
+            <%= song.to_h[:title] || song.file %>
+          </a>
+        <% end %>
+      </div>
     </div>
+  </div>
+  <% @songs.each_with_index do |song, index| %>
+    <div data-role="page" id="page<%= index %>">
+      <div style="text-align: left;">
+        <a href="#pageLibrary"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
+      </div>
+
+      <div class="text-align-left">
+        <div id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
+        <div><%= title(song) %></div>
+        <div><%= artist(song) %></div>
+        <div><%= album(song) %></div>
+      </div>
+
+
+      <div style="position:absolute;bottom: 130px;">
+        <button type="button" class="btn_add_song btn btn-primary" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+          예약하기
+        </button>
+      </div>
+    </div>
+  <% end %>
+
+  <div data-role="page" id="pageNow">
+  </div>
+
+  <div data-role="page" id="pageNew" >
+  </div>
+
+  <div data-role="page" id="pageSearch" >
+  </div>
+
+  <div data-role="page" id="pageFeed" >
   </div>
 </div>
 
-
 <div id="footer">
+  <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom"></div>
+  <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
+    <div class="display">
+      <div id='album-jacket' class="song-info">
+        <%= render partial: 'album_jacket' %>
+      </div>
+      <div id="info_screen_non_fixed">
+        <div class="sml_margin">
+          <h4 id="screen_title"><%= render partial: 'title' %></h4>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <%= render partial: 'title' %>
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">
-      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a></div>
-      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-heart"></i><br>New</a></div>
-      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-book"></i><br>Library</a></div>
-      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a></div>
-      <div class="col-xs-3 text-center"><a href="#" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a></div>
+      <div class="col-xs-3 text-center">
+        <a href="#pageNow" class="under-construction nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a>
+      </div>
+      <div class="col-xs-3 text-center">
+        <a href="#pageNew" class="under-construction nav-text"><i class="glyphicon glyphicon-heart"></i><br>New</a>
+      </div>
+      <div class="col-xs-3 text-center">
+        <a href="#pageLibrary" class="nav-text"><i class="glyphicon glyphicon-book"></i><br>Library</a>
+      </div>
+      <div class="col-xs-3 text-center">
+        <a href="#pageSearch" class="under-construction nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
+      </div>
+      <div class="col-xs-3 text-center">
+        <a href="#pageFeed" class="under-construction nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
   setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
+  setInterval(function() {$('#album-jacket').load('/juke/album_jacket');}, 5000);
 </script>

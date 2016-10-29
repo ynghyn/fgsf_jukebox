@@ -14,6 +14,21 @@ $(document).ready(
       alertFlash.hide();
     }
 
+    $('.toggle-song').click(function() {
+      var dataId = $(this).attr('dataId');
+      var $jacket = $('#' + dataId + 'Jacket');
+      var fileName = $jacket.attr('fileName');
+      $jacket.html('<img src="/juke/mp3_image?file=' + fileName + '" width="100" height="100">');
+    });
+
+    $('.under-construction').click(function () {
+      var href = $(this).attr('href');
+      console.log(href.substr(1));
+      var $div = $('#' + href.substr(1));
+      console.log($div);
+      $div.html('<img src="/juke/construction">');
+    });
+
     $('.btn_add_song').click(function() {
       var url = this.name;
       $.getJSON(url, function(data) {
