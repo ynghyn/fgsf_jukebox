@@ -1,1 +1,5 @@
-<%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), size: '444x444' if @current_song.try(:file) %>
+<% unless @current_song.nil? %>
+  <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), size: '444x444' if @current_song.try(:file) %>
+<% else %>
+  <%= image_tag("main_04.jpg", :id => "index-box-left-image") %>
+<% end %>
