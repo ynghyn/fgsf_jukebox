@@ -107,7 +107,7 @@ img#now-playing-background {
   -webkit-filter: blur(10px);
 }
 
-img#now-playing-artwork{
+img.now-playing-artwork{
   width: 70px;
   height: 70px;
   display: -webkit-box;
