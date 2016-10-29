@@ -90,9 +90,9 @@ body{
 
 .song-info{
   width:20%;
-  height:70px;
+  height:60px;
   position: fixed;
-  margin: 0;
+  margin: 5px 0;
 }
 
 
@@ -108,11 +108,10 @@ img#now-playing-background {
   transform: scale(1.1);
   -webkit-filter: blur(10px);
 }
-img.now-playing-artwork{
-  width: 70px;
-  height: 70px;
+div#now-playing-artwork{
+  height: 60px;
   display: -webkit-box;
-  margin-left: 15px;
+  margin: 5px 0 5px 15px !important;
 }
 
 h4#screen_title{

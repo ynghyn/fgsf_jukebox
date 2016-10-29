@@ -1,1 +1,1 @@
-<%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), class: 'now-playing-artwork' if @current_song.try(:file) %>
+<%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)) %>
