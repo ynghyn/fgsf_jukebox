@@ -1,5 +1,5 @@
 <% unless @current_song.nil? %>
-  <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)) %>
+  <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), :id => 'now-playing-artwork' %>
 <% else %>
-  <%= image_tag("main_04.jpg", :id => "now-playing-artwork") %>
+  <%= image_tag("main_04.jpg") %>
 <% end %>
