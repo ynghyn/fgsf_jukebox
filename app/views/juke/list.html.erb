@@ -18,20 +18,21 @@
   </div>
   <% @songs.each_with_index do |song, index| %>
     <div data-role="page" id="page<%= index %>">
-      <div style="text-align: left;">
-        <a href="#pageLibrary"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
-      </div>
-
-      <div class="text-align-left">
-        <div id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
-        <div><%= title(song) %></div>
-        <div><%= artist(song) %></div>
-        <div><%= album(song) %></div>
+      <div style="text-align: left; margin:10px;">
+        <a href="#pageLibrary" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
       </div>
 
 
-      <div style="position:absolute;bottom: 130px;">
-        <button type="button" class="btn_add_song btn btn-primary" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+      <div class="">
+        <div class="list_info_slider" id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
+        <div class="list_info_slider large_font"><%= title(song) %></div>
+        <div class="list_info_slider"><%= artist(song) %></div>
+        <div class="list_info_slider"><%= album(song) %></div>
+      </div>
+
+
+      <div style="position:absolute;bottom: 130px; margin:5%; width:90%;">
+        <button type="button" class="btn_add_song btn btn-info" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
           예약하기
         </button>
       </div>
