@@ -1,10 +1,9 @@
-<div style="margin-left:50px;float:left;text-align:left;">
-  <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), size: '100x100' if @current_song.try(:file) %>
-</div>
-
-<div style="margin-right:50px;float:right;text-align:right;">
-  Coming up:<br>
-  <% if song = next_songs(MPD_INSTANCE).first %>
-    <%= song.to_h[:title] || song.file %><br>
-  <% end %>
-</div>
+<% unless @current_song.nil? %>
+  <p id="title"><%= MPD_INSTANCE.current_song.to_h[:title]%></p>
+  <p id="artist"><%= MPD_INSTANCE.current_song.to_h[:artist]%></p>
+  <p id="album"><%= MPD_INSTANCE.current_song.to_h[:album]%></p>
+<% else %>
+  <p id="title">Nothing is playing?☹️</p>
+  <p id="artist">You can add songs</p>
+  <p id="album">to the playlist! 🎶</p>
+<% end %>

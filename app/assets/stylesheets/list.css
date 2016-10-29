@@ -57,9 +57,9 @@ body{
 
 
 
-/****************/
-/*    footer    */
-/****************/
+/*******************************/
+/*    footer [Now Playing]     */
+/*******************************/
 
 .nav-text{
   font-size: 12px;
@@ -70,27 +70,29 @@ body{
 }
 
 .now-playing-bottom{
+
   overflow:hidden;
   height:70px;
-  margin-bottom:56px;
+  margin-bottom:56px !important;
   z-index:100;
   padding: 0 !important;
   background: linear-gradient(90deg, #8C65FE, #46A6FA);
 }
 
 .now-playing-top{
+
   overflow:hidden;
   height:70px;
-  margin-bottom:56px;
+  margin-bottom:56px !important;
   z-index:300;
   padding: 0 !important;
 }
 
 .song-info{
   width:20%;
-  height:70px;
+  height:60px;
   position: fixed;
-  margin: 0;
+  margin: 5px 0;
 }
 
 
@@ -106,20 +108,38 @@ img#now-playing-background {
   transform: scale(1.1);
   -webkit-filter: blur(10px);
 }
-
-img.now-playing-artwork{
-  width: 70px;
-  height: 70px;
+div#now-playing-artwork{
+  height: 60px;
   display: -webkit-box;
+  margin: 5px 0 5px 15px !important;
 }
 
-div#screen_title{
-  margin: 0 !important;
-  height: 100%;
-  font-size: 0.9em;
+h4#screen_title{
+  margin: 6px !important;
+  height: 58px;
+  font-size: 1em;
 
 }
 
+p#title, p#artist, p#album{
+  font-weight:200;
+  margin:1px 0;
+
+  font-size: 1.1em;
+}
+
+p#title{
+  font-size: 1.3em;
+  font-weight: 400;
+
+
+}
+
+
+
+/*******************************/
+/*     footer [Bottom Nav]     */
+/*******************************/
 
 #bottomNav{
   background-color: white;
