@@ -1,9 +1,8 @@
 #notice-flash, #alert-flash, #warning-flash {
   z-index: 100;
 }
-
+@import "juke";
+@import "list";
+@import "comment";
 @import "bootstrap";
 @import "bootstrap-theme";
-@import "juke";
-@import "comment";
-@import "list";

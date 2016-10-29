@@ -3,33 +3,52 @@
 </div>
 
 <div id="current_time" class="medium-font"></div>
+
+
 <div id="header" class="dark">
-  <div class="heavy-font">
-    <p id="title"><%= render partial: 'title' %></p>
+  <div class="index-outer-box">
+    <div class="index-box-left">
+      <div id="artwork">
+        <%= render partial: 'artwork' %>
+      </div>
+    </div>
 
-    <ul id='juke_control' class="nav masthead-nav">
-      <li>
-        <span data_url="/juke/previous" class="glyphicon glyphicon-backward" aria-hidden="true"></span>
-      </li>
-      <li id="play_button_container">
-        <%= render partial: 'play_button' %>
-      </li>
-      <li>
-        <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-      </li>
-      <li>
-        <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-      </li>
-      <li>
-        <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-      </li>
-    </ul>
-  </div>
+    <div class="index-box-middle">
+      <div class="index-box-middle-wrapper">
+        <div id="song_info">
+          <%= render partial: 'song_info' %>
+        </div>
 
-  <div id="playing_now">
-    <%= render partial: 'playing_now' %>
+        <div class="heavy-font">
+          <ul id='juke_control' class="nav masthead-nav">
+            <li id="play_button_container">
+              <%= render partial: 'play_button' %>
+            </li>
+            <li>
+              <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+            </li>
+            <li>
+              <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+            </li>
+            <li>
+              <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="index-box-right">
+      <div class="index-box-right-wrapper text-align-left">
+        <span>Up Coming Songs...</span>
+        <div class="coming_up" id="coming_up">
+          <%= render partial: 'coming_up' %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 
 <!-- Carousel slides -->
 <div id="carousel-comments" class="carousel slide" data-ride="carousel">
@@ -40,63 +59,65 @@
   </ol>
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      아이디어가 멋져부러 - 찬양팀
+      Your Comment Here !!
     </div>
-    <div class="item">
-      오디오 소리가 시끄럽다 - 오목사님
+
+    <% @comments.each do |c| %>
+    <div class="item ac">
+      <%= c.body %> - <%= c.commenter %>
     </div>
-    <div class="item">
-      하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라 - 요 3:16
-    </div>
+    <% end %>
   </div>
 </div>
 
 <script type="text/javascript">
-  function popup(mylink, windowname) {
-    if (! window.focus)return true;
-    var href;
-    if (typeof(mylink) == 'string') href=mylink;
-    else href=mylink.href;
-    window.open(href, windowname, 'width=400,height=700');
-    return false;
+function popup(mylink, windowname) {
+  if (! window.focus)return true;
+  var href;
+  if (typeof(mylink) == 'string') href=mylink;
+  else href=mylink.href;
+  window.open(href, windowname, 'width=400,height=700');
+  return false;
+}
+
+function checkTime(i) {
+  return (i < 10) ? "0" + i : i;
+}
+
+function startTime() {
+  var today = new Date();
+  var h = today.getHours() % 12;
+  if (h == 0 && h > 12) {
+    h = '00'
+  } else if (h == 0) {
+    h = '12'
+
   }
+  var m = checkTime(today.getMinutes());
+  var s = checkTime(today.getSeconds());
+  $('#current_time').html(h + ":" + m + ":" + s);
+}
 
-  function checkTime(i) {
-    return (i < 10) ? "0" + i : i;
-  }
-
-  function startTime() {
-    var today = new Date();
-    var h = today.getHours() % 12;
-    if (h == 0 && h > 12) {
-      h = '00'
-    } else if (h == 0) {
-      h = '12'
-
-    }
-    var m = checkTime(today.getMinutes());
-    var s = checkTime(today.getSeconds());
-    $('#current_time').html(h + ":" + m + ":" + s);
-  }
-
-  setInterval(function() {
-    startTime();
-  }, 1000);
-
-  setInterval(function() {
-    $('#title').load('/juke/title');
-    $('#playing_now').load('/juke/playing_now');
-    $('li#play_button_container').load('/juke/play_button');
-  }, 3000);
-
-  $('body').keyup(function(e){
-    if(e.keyCode == 32){
-      // user has pressed spacebar
-      $.getJSON('/juke/pause_or_play', function() {
-        $('li#play_button_container').load('/juke/play_button');
-      });
-    }
-  });
-
+setInterval(function() {
   startTime();
+}, 1000);
+
+setInterval(function() {
+  //$('#title').load('/juke/title');
+  $('#artwork').load('/juke/artwork');
+  $('#song_info').load('/juke/song_info');
+  $('#coming_up').load('/juke/coming_up');
+  $('li#play_button_container').load('/juke/play_button');
+}, 3000);
+
+$('body').keyup(function(e){
+  if(e.keyCode == 32){
+    // user has pressed spacebar
+    $.getJSON('/juke/pause_or_play', function() {
+      $('li#play_button_container').load('/juke/play_button');
+    });
+  }
+});
+
+startTime();
 </script>

@@ -145,8 +145,8 @@ body {
 .sml_margin{
   margin:0 !important;
   bottom:0;
-  padding-top:5px;
-  padding-bottom:5px;
+
+
   padding-right:5px;
   padding-left:5px;
   height: 100%;
@@ -158,11 +158,10 @@ body {
 
 #header {
   position: absolute;
-  margin: 0;
-  background-color: black;
-  padding: 10em 0 4em 0;
+  background-image: url('background_gray.jpg');
+  padding: 15em 0 15em 0;
   text-align: center;
-  color: #fff;
+  color:white;
   width: 100%;
   height: 100%;
 }
@@ -187,9 +186,12 @@ body {
   width: 100%;
 }
 
+
+
+
 #playing_now {
-  position: absolute;
-  top: 50px;
+  margin: 30px auto 30px auto;
+
   font-size:1.2em !important;
   width: 100%;
 }
@@ -205,4 +207,73 @@ body {
   font-size:1.2em;
   width: 100%;
   color:white;
+}
+
+/********************************/
+/******  Edited by Jiwoo   ******/
+/********************************/
+
+#juke_control{
+  display: -webkit-inline-box;
+  font-size: 0.8em;
+}
+
+#index-box-left-image{
+  height: 444px;
+  width: 444px;
+
+}
+
+
+
+
+.index-outer-box{
+  display: -webkit-inline-box;
+  height: 450px;
+}
+
+.index-box-left, .index-box-middle, .index-box-right{
+  width:450px;
+  border:3px solid gray !important;
+
+
+}
+
+.index-box-middle, .index-box-right{
+
+  background: linear-gradient(to left top, rgba(77,139,197,0.4), rgba(20,87,149,0.4));
+}
+
+.index-box-middle-wrapper{
+  margin: 130px 0;
+}
+
+.index-box-right-wrapper{
+  margin: 15px;
+}
+
+.index-box-right-wrapper > span{
+  font-size: 1.6em;
+}
+
+p#info-title, p#info-artist, p#info-album{
+  font-weight:100;
+  font-size: 1.8em;
+  margin: 4px;
+}
+
+p#info-title{
+  font-size: 2.2em !important;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
+.coming_up{
+  margin: 0 15px 15px 15px;
+}
+.dynamic-height{
+  width: 400px;
+  max-height: 360px;
+  overflow-y: auto;
+  font-size: 1.7em;
 }

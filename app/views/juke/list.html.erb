@@ -1,12 +1,7 @@
 
 <div class="list_header">
-
-
   <h1><span class="glyphicon glyphicon-music" style="font-size:.7em;"></span>&nbsp;JUKE </h1>
-
   <h2 id="list_greeting">Get all the music you want.</h2>
-
-
 </div>
 
 <div id="list_body">
@@ -14,36 +9,19 @@
     <!-- List group -->
     <div class="list-group">
       <% @songs.each do |song| %>
-      <button type="button" class="btn_add_song list-group-item text-align-center" \
-      name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
-      <%= song.to_h[:title] || song.file %>
-    </button>
-    <% end %>
+          <button type="button" class="btn_add_song list-group-item text-align-center" \
+          name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+          <%= song.to_h[:title] || song.file %>
+          </button>
+      <% end%>
+    </div>
   </div>
-</div>
-
-
 </div>
 
 
 <div id="footer">
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom">
-    <%= image_tag("main_05.jpg", :id => "now-playing-background") %>
-  </div>
 
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
-    <div class="display">
-      <div class="song-info">
-        <%= image_tag("main_05.jpg", :id => "now-playing-artwork") %>
-      </div>
-      <div id="info_screen_non_fixed">
-        <div class="sml_margin">
-          <h4 id="screen_title"><%= render partial: 'title' %></h4>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <%= render partial: 'title' %>
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">

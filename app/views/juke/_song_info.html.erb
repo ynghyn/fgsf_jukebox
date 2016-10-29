@@ -1,0 +1,9 @@
+<% unless @current_song.nil? %>
+  <p id="info-title"><%= MPD_INSTANCE.current_song.to_h[:title]%></p>
+  <p id="info-artist"><%= MPD_INSTANCE.current_song.to_h[:artist]%></p>
+  <p id="info-album"><%= MPD_INSTANCE.current_song.to_h[:album]%></p>
+<% else %>
+  <p id="info-title">Nothing is playing?&nbsp;☹️</p>
+  <p id="info-artist">You can add songs</p>
+  <p id="info-album">to the playlist!&nbsp;🎶</p>
+<% end %>

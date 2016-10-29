@@ -17,6 +17,7 @@ class JukeController < ApplicationController
   SEMAPHORE = Mutex.new
 
   def index
+    @comments = Comment.all
   end
 
   def list
@@ -35,6 +36,19 @@ class JukeController < ApplicationController
   def play_button
     render partial: 'play_button'
   end
+
+  def song_info
+    render partial: 'song_info'
+  end
+
+  def coming_up
+    render partial: 'coming_up'
+  end
+
+  def artwork
+    render partial: 'artwork'
+  end
+
 
   # API endpoint
   def add_song
