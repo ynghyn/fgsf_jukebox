@@ -48,21 +48,7 @@
 </div>
 
 <div id="footer">
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom"></div>
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
-    <div class="display">
-      <div id='album-jacket' class="song-info">
-         <%= render partial: 'album_jacket' %>
-      </div>
-
-      <div id="info_screen_non_fixed">
-        <div class="sml_margin">
-          <h4 id="screen_title"><%= render partial: 'title' %></h4>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <%= render partial: 'title' %>
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">
@@ -87,5 +73,4 @@
 
 <script>
   setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
-  setInterval(function() {$('#album-jacket').load('/juke/album_jacket');}, 5000);
 </script>
