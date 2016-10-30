@@ -1,7 +1,7 @@
 <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
   <!-- below code displays default background image when the playlist is empty -->
   <% unless @current_song.nil? %>
-    <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), :id => "now-playing-background"%>
+    <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => URI.encode(@current_song.try(:file))), :id => "now-playing-background"%>
   <% else %>
     <%= image_tag("main_04.jpg", :id => "now-playing-background") %>
   <% end %>
@@ -11,7 +11,7 @@
   <div class="display">
     <div class="song-info">
       <% unless @current_song.nil? %>
-        <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => @current_song.try(:file)), size: '60x60' if @current_song.try(:file)%>
+        <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => URI.encode(@current_song.try(:file))), size: '60x60' if @current_song.try(:file)%>
       <% else %>
         <%= image_tag("main_04.jpg", :id => "now-playing-artwork") %>
       <% end %>
