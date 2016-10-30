@@ -51,8 +51,8 @@ body{
 /****************/
 
 #list_body{
-  margin-top: 60px !important;
-  margin-bottom: 125px !important;
+  margin-top: 60px;
+  margin-bottom: 126px;
 }
 
 
@@ -69,16 +69,6 @@ body{
   font-size: 25px;
 }
 
-.now-playing-bottom{
-
-  overflow:hidden;
-  height:70px;
-  margin-bottom:56px !important;
-  z-index:100;
-  padding: 0 !important;
-  background: linear-gradient(90deg, #8C65FE, #46A6FA);
-}
-
 .now-playing-top{
 
   overflow:hidden;
@@ -93,6 +83,12 @@ body{
   height:70px;
   position: fixed;
   margin: 0;
+}
+
+.song-info > img{
+  width:60px;
+  height:60px;
+  margin: 5px;
 }
 
 
@@ -144,4 +140,27 @@ p#title{
 
 #bottomNav{
   background-color: white;
+}
+
+
+
+/********************************/
+/******  List Info Slider  ******/
+/********************************/
+
+.list_info_slider{
+  font-size:1.5em;
+  font-weight: lighter;
+
+}
+
+.list_info_slider > img{
+  margin: 20px 0 30px 0;
+  width:200px;
+  height:200px;
+}
+
+.large_font{
+  font-size:2.4em;
+  font-weight: 100;
 }

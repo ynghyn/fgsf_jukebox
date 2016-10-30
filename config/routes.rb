@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'juke/list', to: 'juke#list'
   get 'juke/album_jacket', to: 'juke#album_jacket'
   get 'juke/title', to: 'juke#title'
+  get 'juke/feed_comment', to: 'juke#feed_comment'
 
   # Images
   get 'juke/mp3_image', to: 'juke#mp3_image'

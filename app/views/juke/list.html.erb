@@ -18,55 +18,37 @@
   </div>
   <% @songs.each_with_index do |song, index| %>
     <div data-role="page" id="page<%= index %>">
-      <div style="text-align: left;">
-        <a href="#pageLibrary"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
-      </div>
-
-      <div class="text-align-left">
-        <div id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
-        <div><%= title(song) %></div>
-        <div><%= artist(song) %></div>
-        <div><%= album(song) %></div>
+      <div style="text-align: left; margin:10px;">
+        <a href="#pageLibrary" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
       </div>
 
 
-      <div style="position:absolute;bottom: 130px;">
-        <button type="button" class="btn_add_song btn btn-primary" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
+      <div class="">
+        <div class="list_info_slider" id="page<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
+        <div class="list_info_slider"><%= title(song) %></div>
+        <div class="list_info_slider"><%= artist(song) %></div>
+        <div class="list_info_slider"><%= album(song) %></div>
+      </div>
+
+
+      <div style="margin:5%; width:90%;">
+        <button type="button" class="btn_add_song btn btn-info" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
           예약하기
         </button>
       </div>
     </div>
   <% end %>
 
-  <div data-role="page" id="pageNow">
-  </div>
-
-  <div data-role="page" id="pageNew" >
-  </div>
-
-  <div data-role="page" id="pageSearch" >
-  </div>
-
+  <div data-role="page" id="pageNow">&nbsp;&nbsp;</div>
+  <div data-role="page" id="pageNew" >&nbsp;&nbsp;</div>
+  <div data-role="page" id="pageSearch" >&nbsp;&nbsp;</div>
   <div data-role="page" id="pageFeed" >
+    <%= render partial: 'form' %>
   </div>
 </div>
 
 <div id="footer">
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-bottom"></div>
-  <div class="col-xs-12 navbar-fixed-bottom now-playing-top">
-    <div class="display">
-      <div id='album-jacket' class="song-info">
-         <%= render partial: 'album_jacket' %>
-      </div>
-
-      <div id="info_screen_non_fixed">
-        <div class="sml_margin">
-          <h4 id="screen_title"><%= render partial: 'title' %></h4>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <%= render partial: 'title' %>
 
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">
@@ -83,7 +65,7 @@
         <a href="#pageSearch" class="under-construction nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a href="#pageFeed" class="under-construction nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
+        <a id="pageFeedLocator" href="#pageFeed" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
       </div>
     </div>
   </div>
@@ -91,5 +73,4 @@
 
 <script>
   setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
-  setInterval(function() {$('#album-jacket').load('/juke/album_jacket');}, 5000);
 </script>

@@ -1,0 +1,14 @@
+<h4>We appreciate your feedback!</h4>
+<%= form_for(Comment.new) do |f| %>
+  <p>
+    <%= f.label :작성자 %><br>
+    <%= f.text_field :commenter, class: 'input-comment', style: 'margin:5%;width:90%;' %>
+  </p>
+  <p>
+    <%= f.label :내용 %><br>
+    <%= f.text_area :body, class: 'input-comment', style: 'margin:5%;width:90%;' %>
+  </p>
+  <p>
+    <%= f.submit '작성하기', class: 'input-comment btn btn-success'%>
+  </p>
+<% end %>
