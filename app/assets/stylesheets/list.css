@@ -52,7 +52,7 @@ body{
 
 #list_body{
   margin-top: 60px;
-  margin-bottom: 70px;
+  margin-bottom: 126px;
 }
 
 
@@ -67,16 +67,6 @@ body{
 
 .nav-text > i{
   font-size: 25px;
-}
-
-.now-playing-bottom{
-
-  overflow:hidden;
-  height:70px;
-  margin-bottom:56px !important;
-  z-index:100;
-  padding: 0 !important;
-  background: linear-gradient(90deg, #8C65FE, #46A6FA);
 }
 
 .now-playing-top{
