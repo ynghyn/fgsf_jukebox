@@ -27,6 +27,12 @@ $ ps aux | grep mpd
 $ kill -9 PROCESSID
 ```
 - Required sound effects are placed under `misc/`. Copy them onto your music dierectory.
+- Turning off screen saver from raspberry pi
+```
+$ sudo xset s off
+$ sudo xset -dpms
+$ sudo xset s noblank
+```
 
 ### Database
 `Coming soon.`

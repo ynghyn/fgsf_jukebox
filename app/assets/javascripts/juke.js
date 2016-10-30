@@ -58,5 +58,23 @@ $(document).ready(
         $('li#play_button_container').load('/juke/play_button');
       });
     });
+
+    $('#new_comment').submit(function(e) {
+      e.preventDefault();
+      var url = "/comments";
+
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#new_comment").serialize(), // serializes the form's elements.
+        success: function(data) {
+          $('#pageFeed').html(data);
+        }
+      });
+    });
+
+    $('#pageFeedLocator').click(function() {
+      $('#pageFeed').load('/juke/feed_comment');
+    });
   }
 );

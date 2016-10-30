@@ -49,6 +49,7 @@
   </div>
 
   <div data-role="page" id="pageFeed" >
+    <%= render partial: 'form' %>
   </div>
 </div>
 
@@ -84,7 +85,7 @@
         <a href="#pageSearch" class="under-construction nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a href="#pageFeed" class="under-construction nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
+        <a id="pageFeedLocator" href="#pageFeed" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
       </div>
     </div>
   </div>

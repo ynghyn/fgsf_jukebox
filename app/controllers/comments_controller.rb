@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
 
   def create
     Comment.create(comment_params.merge(user_id: current_user.id))
-    redirect_to root_path
+    render partial: 'comments/thanks'
   end
 
   def local_time_refresh
