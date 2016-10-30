@@ -133,7 +133,7 @@ class JukeController < ApplicationController
 
   def mp3_image
     image = if params[:file].present?
-      Mp3Info.open("#{ROOT_PATH}/#{params[:file]}") do |mp3|
+      Mp3Info.open("#{ROOT_PATH}/#{URI.decode(params[:file])}") do |mp3|
         mp3.tag2.pictures[0][1]
       end
     end
@@ -153,6 +153,8 @@ class JukeController < ApplicationController
 
   def initialize_mpd
     MPD_INSTANCE.reconnect unless MPD_INSTANCE.connected?
+    MPD_INSTANCE.queue # TODO: remove this line
+    MPD_INSTANCE.current_song # TODO: remove this line
     @current_song = MPD_INSTANCE.current_song
     @music_queue = MPD_INSTANCE.queue
   end
