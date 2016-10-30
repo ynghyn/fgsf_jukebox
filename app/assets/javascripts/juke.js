@@ -23,10 +23,8 @@ $(document).ready(
 
     $('.under-construction').click(function () {
       var href = $(this).attr('href');
-      console.log(href.substr(1));
       var $div = $('#' + href.substr(1));
-      console.log($div);
-      $div.html('<img src="/juke/construction" width="300" height="300">');
+      $div.html('<img src="/juke/construction" width="200" height="200">');
     });
 
     $('.btn_add_song').click(function() {
@@ -59,10 +57,11 @@ $(document).ready(
       });
     });
 
-    $('#new_comment').submit(function(e) {
+    $('body').delegate('form', 'submit', function(e) {
+      // and you'll need this to prevent
+      // the form's 'default' action
       e.preventDefault();
       var url = "/comments";
-
       $.ajax({
         type: "POST",
         url: url,
