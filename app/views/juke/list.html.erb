@@ -19,7 +19,7 @@
   <% @songs.each_with_index do |song, index| %>
     <div data-role="page" id="page<%= index %>">
       <div style="text-align: left; margin:10px;">
-        <a href="#pageLibrary" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i> Back</a>
+        <a href="#pageLibrary" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i><span id="list_slider_back_text"> Back</span></a>
       </div>
 
 
@@ -31,7 +31,7 @@
       </div>
 
 
-      <div style="margin:5%; width:90%;">
+      <div style="margin:3% 15% 50px 15%; width:70%;">
         <button type="button" class="btn_add_song btn btn-info" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s) %>&song_name=<%= URI.encode(song.file) %>">
           예약하기
         </button>

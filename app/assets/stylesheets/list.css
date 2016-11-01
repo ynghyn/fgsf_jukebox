@@ -13,6 +13,7 @@ body{
 /****************/
 
 .list_header{
+
   position:fixed;
   display: flex;
   top:0;
@@ -163,4 +164,85 @@ p#title{
 .large_font{
   font-size:2.4em;
   font-weight: 100;
+}
+
+
+/******************************************************************/
+/******  Style adjustment for iphone 4/4S/5/5S optimization  ******/
+/******************************************************************/
+
+@media (max-width: 330px) {
+  .list_header {
+    font-size: 0.9em;
+    height: 40px;
+  }
+
+  .sml_margin{
+
+  }
+  .now-playing-top{
+    height: 60px;
+    margin-bottom: 47px !important;
+  }
+  .song-info > img{
+    height: 50px;
+    width: 50px;
+    margin: 5px 0;
+
+  }
+
+
+  #list_body{
+    margin-top: 40px;
+    margin-bottom: 107px;
+
+  }
+  h4#screen_title{
+    margin:5px !important;
+    height: 50px;
+  }
+
+  p#title{
+    font-size: 1.1em;
+  }
+
+  p#artist, p#album{
+    font-size:0.9em;
+  }
+
+  .nav-text{
+    font-size: 10px;
+  }
+
+  .nav-text > i{
+    font-size: 15px;
+  }
+
+  #list_slider_back{
+    height: 25px;
+    width: 50px;
+    padding: 0;
+  }
+
+  #list_slider_back i{
+    font-size: 1.5em;
+
+  }
+
+  #list_slider_back_text{
+    display: none;
+  }
+
+  .list_info_slider{
+    font-size: 1.3em;
+  }
+
+  .list_info_slider > img{
+    margin:0 0 7px 0;
+    width: 150px;
+    height: 150px;
+
+  }
+
+
 }
