@@ -14,8 +14,6 @@ class JukeController < ApplicationController
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
   ROOT_PATH = File.expand_path('~/Music').freeze
 
-  SEMAPHORE = Mutex.new
-
   def index
     @comments = Comment.all
   end
@@ -109,7 +107,6 @@ class JukeController < ApplicationController
 
   # API endpoint
   def next
-    MPD_INSTANCE.next unless is_an_effect?(@current_song)
     MPD_INSTANCE.next
   end
 
@@ -117,7 +114,6 @@ class JukeController < ApplicationController
   # Go back twice because of 'cassette' effect queues
   def previous
     return if @current_song.pos == 0
-    MPD_INSTANCE.previous unless is_an_effect?(@current_song)
     MPD_INSTANCE.previous
   end
 
@@ -183,9 +179,6 @@ class JukeController < ApplicationController
   end
 
   def add_song_to_mpd(file_name)
-    SEMAPHORE.synchronize {
-      MPD_INSTANCE.add(choose_effect)
-      MPD_INSTANCE.add(file_name)
-    }
+    MPD_INSTANCE.add(file_name)
   end
 end
