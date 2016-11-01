@@ -35,7 +35,26 @@ $ sudo xset s noblank
 ```
 
 ### Database
-`Coming soon.`
+```
+//If you want to export/import DB tables to another machine:
+
+// - Export
+
+$ sqlite3 db/development.sqlite3
+sqlite> .output desired_output_file_name.sql
+sqlite> .dump table_name (or no table_name for the entire db)
+
+//then desired_output_file_name.sql will be created in db/ directory
+
+// - Import
+
+$ sqlite3 development.sqlite3
+sqlite> .read database_file_name_to_import.sql
+
+// !!Important !!
+// An error might raise due to the existance of table_name in current database.
+// However, you can ignore the error as the data will still be inserted and stored in the table.
+```
 
 ### TODO
 - [ruby-mp3info](https://github.com/moumar/ruby-mp3info) - MP3 tag info collector
