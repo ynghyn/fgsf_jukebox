@@ -1,7 +1,7 @@
-<% unless @current_song.nil? %>
-  <p id="title"><%= MPD_INSTANCE.current_song.to_h[:title]%></p>
-  <p id="artist"><%= MPD_INSTANCE.current_song.to_h[:artist]%></p>
-  <p id="album"><%= MPD_INSTANCE.current_song.to_h[:album]%></p>
+<% unless MPDClient.current_song.nil? %>
+  <p id="title"><%= MPDClient.current_song[:title]%></p>
+  <p id="artist"><%= MPDClient.current_song[:artist]%></p>
+  <p id="album"><%= MPDClient.current_song[:album]%></p>
 <% else %>
   <p id="title">Nothing is playing?☹️</p>
   <p id="artist">You can add songs</p>
