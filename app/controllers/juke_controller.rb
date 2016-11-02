@@ -149,8 +149,6 @@ class JukeController < ApplicationController
 
   def initialize_mpd
     MPD_INSTANCE.reconnect unless MPD_INSTANCE.connected?
-    MPD_INSTANCE.queue # TODO: remove this line
-    MPD_INSTANCE.current_song # TODO: remove this line
     @current_song = MPD_INSTANCE.current_song
     @music_queue = MPD_INSTANCE.queue
   end

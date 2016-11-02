@@ -67,6 +67,7 @@ module JukeHelper
   def album(song)
     song.to_h[:album]
   end
+
   private
 
   def current_song(mpd)
