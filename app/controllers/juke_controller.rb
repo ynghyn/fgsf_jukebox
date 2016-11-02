@@ -7,7 +7,6 @@ class JukeController < ApplicationController
   before_action :get_or_create_user, only: [:index, :list, :add_song]
   before_action :initialize_mpd
 
-  CASSETTE_EFFECT = 'cassette.wav'.freeze
   BYPASS_CODE = 'bss'.freeze
   MAX_QUEUE_COUNT = 3
 
@@ -23,7 +22,7 @@ class JukeController < ApplicationController
   end
 
   def list
-    @songs = MPD_INSTANCE.songs.select { |song| !is_an_effect?(song) }
+    @songs = MPDClient.songs
   end
 
   # partial endpoint
@@ -59,7 +58,7 @@ class JukeController < ApplicationController
   def add_song
     status, msg = if !params[:song_name].present?
       [400, 'You must select a song']
-    elsif @current_song && song_already_queued?(params[:song_name])
+    elsif MPDClient.current_song && song_already_queued?(params[:song_name])
       record_music_selection(params[:song_name], false)
       [202, '이미 예약목록에 있습니다']
     elsif params[:bypass] != BYPASS_CODE && reached_limit?
@@ -70,15 +69,9 @@ class JukeController < ApplicationController
       # Only allow queueing during business hour
       record_music_selection(params[:song_name], false)
       [400, 'You can only reserve during operating hours [Sunday 9am-1pm ]']
-    elsif @current_song
-      record_music_selection(params[:song_name], true)
-      add_song_to_mpd(params[:song_name])
-      [200, '예약되었습니다!']
     else
       record_music_selection(params[:song_name], true)
-      MPD_INSTANCE.clear
       add_song_to_mpd(params[:song_name])
-      MPD_INSTANCE.play
       [200, '예약되었습니다!']
     end
     respond_to do |format|
@@ -95,7 +88,7 @@ class JukeController < ApplicationController
   def pause_or_play
     if MPD_INSTANCE.playing?
       MPD_INSTANCE.pause = true
-    elsif @music_queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
+    elsif MPDClient.playlist.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
       MPD_INSTANCE.play
     end
   end
@@ -113,13 +106,13 @@ class JukeController < ApplicationController
   # API endpoint
   # Go back twice because of 'cassette' effect queues
   def previous
-    return if @current_song.pos == 0
+    return if MPDClient.current_song[:pos] == 0
     MPD_INSTANCE.previous
   end
 
   # API endpoint
   def play
-    MPD_INSTANCE.play if @music_queue.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
+    MPD_INSTANCE.play if MPDClient.playlist.present? && (MPD_INSTANCE.paused? || MPD_INSTANCE.stopped?)
   end
 
   # API endpoint
@@ -149,16 +142,10 @@ class JukeController < ApplicationController
 
   def initialize_mpd
     MPD_INSTANCE.reconnect unless MPD_INSTANCE.connected?
-    @current_song = MPD_INSTANCE.current_song
-    @music_queue = MPD_INSTANCE.queue
-  end
-
-  def choose_effect
-    CASSETTE_EFFECT
   end
 
   def song_already_queued?(file_name)
-    @music_queue[@current_song.pos..-1].any? { |song| song.file == file_name }
+    MPDClient.playlist[MPDClient.current_song[:pos]..-1].any? { |song| song[:file] == file_name }
   end
 
   def record_music_selection(song_name, queued)
@@ -177,6 +164,6 @@ class JukeController < ApplicationController
   end
 
   def add_song_to_mpd(file_name)
-    MPD_INSTANCE.add(file_name)
+    MPDClient.add_song(file_name)
   end
 end

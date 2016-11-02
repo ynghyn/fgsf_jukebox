@@ -1,21 +1,6 @@
 module JukeHelper
-  LIST_GROUP_ITEM_SUCCESS = 'list-group-item-success'.freeze
-  LIST_GROUP_ITEM_INFO = 'list-group-item-info'.freeze
-
-  def is_an_effect?(song)
-    song.file ==JukeController::CASSETTE_EFFECT
-  end
-
-  def alternate_list_css(css_class)
-    if css_class == LIST_GROUP_ITEM_INFO
-      LIST_GROUP_ITEM_SUCCESS
-    else
-      LIST_GROUP_ITEM_INFO
-    end
-  end
-
   def playing_now(song)
-    if song && is_an_effect?(song)
+    if song && MPDClient.is_an_effect?(song)
       'changing tape..'
     elsif song
       hash = song.to_h
@@ -28,25 +13,25 @@ module JukeHelper
     end
   end
 
-  def previous_songs(mpd)
+  def previous_songs
     songs = []
-    if current_song(mpd)
-      curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-      (0...curr_song_in_queue.pos).each do |i|
-        song = mpd_queue(mpd)[i]
-        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
+    if MPDClient.current_song
+      curr_song_in_queue = MPDClient.playlist.find { |m| m == MPDClient.current_song }
+      (0...curr_song_in_queue[:pos]).each do |i|
+        song = MPDClient.playlist[i]
+        songs << MPDClient.playlist[i] unless MPDClient.is_an_effect?(song)
       end
     end
     songs
   end
 
-  def next_songs(mpd)
+  def next_songs
     songs = []
-    if current_song(mpd)
-      curr_song_in_queue = mpd_queue(mpd).find { |m| m == current_song(mpd) }
-      (curr_song_in_queue.pos+1...mpd_queue(mpd).size).each do |i|
-        song = mpd_queue(mpd)[i]
-        songs << mpd_queue(mpd)[i] unless is_an_effect?(song)
+    if MPDClient.current_song
+      curr_song_in_queue = MPDClient.playlist.find { |m| m == MPDClient.current_song }
+      (curr_song_in_queue[:pos]+1...MPDClient.playlist.size).each do |i|
+        song = MPDClient.playlist[i]
+        songs << MPDClient.playlist[i] unless MPDClient.is_an_effect?(song)
       end
     end
     songs
@@ -66,15 +51,5 @@ module JukeHelper
 
   def album(song)
     song.to_h[:album]
-  end
-
-  private
-
-  def current_song(mpd)
-    @current_song ||= mpd.current_song
-  end
-
-  def mpd_queue(mpd)
-    @mpd_queue ||= mpd.queue
   end
 end

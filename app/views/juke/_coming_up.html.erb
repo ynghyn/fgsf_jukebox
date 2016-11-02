@@ -1,5 +1,5 @@
 <p class="text-align-left dynamic-height" >
-  <% next_songs(MPD_INSTANCE).each do |song_name| %>
+  <% next_songs.each do |song_name| %>
     <%= song_name.to_h[:title] %><br>
   <% end %>
 </p>
