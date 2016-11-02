@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   get 'juke/coming_up', to: 'juke#coming_up'
   get 'juke/artwork', to: 'juke#artwork'
   get 'juke/list', to: 'juke#list'
-  get 'juke/album_jacket', to: 'juke#album_jacket'
   get 'juke/title', to: 'juke#title'
   get 'juke/feed_comment', to: 'juke#feed_comment'
 

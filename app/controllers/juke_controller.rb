@@ -12,7 +12,11 @@ class JukeController < ApplicationController
   MAX_QUEUE_COUNT = 3
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
-  ROOT_PATH = File.expand_path('~/Music').freeze
+  MUSIC_PATH = if Rails.env == 'production'
+    '/home/pi/Music'
+  else
+    File.expand_path('~/Music')
+  end.freeze
 
   def index
     @comments = Comment.all
@@ -45,10 +49,6 @@ class JukeController < ApplicationController
 
   def artwork
     render partial: 'artwork'
-  end
-
-  def album_jacket
-    render partial: 'album_jacket'
   end
 
   def feed_comment
@@ -129,7 +129,7 @@ class JukeController < ApplicationController
 
   def mp3_image
     image = if params[:file].present?
-      Mp3Info.open("#{ROOT_PATH}/#{URI.decode(params[:file])}") do |mp3|
+      Mp3Info.open("#{MUSIC_PATH}/#{params[:file]}") do |mp3|
         mp3.tag2.pictures[0][1]
       end
     end

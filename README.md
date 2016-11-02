@@ -4,6 +4,7 @@ A jukebox where music plays on a central hub with ability for users to DJ the so
 ### Environments
 - **Ruby version**: 2.3.1
 - **Rails version**: 5.0.0.1
+- `rvmsudo rails s -b 0.0.0.0 -p80 --env production`
 
 ### System dependencies
 1) Install Music Player Daemon which is a daemon server that enables you to control song library, playlists, and control of audio. Rails will communicate with MPD as a client to enqueue and play music.
