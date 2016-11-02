@@ -47,10 +47,6 @@ class JukeController < ApplicationController
     render partial: 'artwork'
   end
 
-  def album_jacket
-    render partial: 'album_jacket'
-  end
-
   def feed_comment
     render partial: 'form'
   end
@@ -129,7 +125,7 @@ class JukeController < ApplicationController
 
   def mp3_image
     image = if params[:file].present?
-      Mp3Info.open("#{ROOT_PATH}/#{URI.decode(params[:file])}") do |mp3|
+      Mp3Info.open("#{ROOT_PATH}/#{params[:file]}") do |mp3|
         mp3.tag2.pictures[0][1]
       end
     end
