@@ -20,7 +20,15 @@
     <div id="info_screen_non_fixed">
       <div class="sml_margin">
         <h4 id="screen_title">
-          <% render partial: 'playing_now' %>
+          <% unless MPDClient.current_song.nil? %>
+            <p id="title"><%= MPDClient.current_song[:title]%></p>
+            <p id="artist"><%= MPDClient.current_song[:artist]%></p>
+            <p id="album"><%= MPDClient.current_song[:album]%></p>
+          <% else %>
+            <p id="title">Nothing is playing?☹️</p>
+            <p id="artist">You can add songs</p>
+            <p id="album">to the playlist! 🎶</p>
+          <% end %>
         </h4>
       </div>
     </div>

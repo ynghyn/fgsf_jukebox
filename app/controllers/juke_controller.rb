@@ -26,10 +26,6 @@ class JukeController < ApplicationController
   end
 
   # partial endpoint
-  def playing_now
-    render partial: 'playing_now'
-  end
-
   def title
     render partial: 'title'
   end
@@ -49,6 +45,7 @@ class JukeController < ApplicationController
   def artwork
     render partial: 'artwork'
   end
+
 
   def feed_comment
     render partial: 'form'

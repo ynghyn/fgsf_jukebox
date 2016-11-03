@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get 'juke/list', to: 'juke#list'
 
   # Partials
-  get 'juke/playing_now', to: 'juke#playing_now'
   get 'juke/play_button', to: 'juke#play_button'
   get 'juke/song_info', to: 'juke#song_info'
   get 'juke/coming_up', to: 'juke#coming_up'
