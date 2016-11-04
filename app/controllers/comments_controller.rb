@@ -9,12 +9,12 @@ class CommentsController < ApplicationController
 
   def create
     if comment_params[:commenter].empty? || comment_params[:body].empty?
+      #render partial: 'comments/rewrite'
       flash[:notice] = "Please fill the form."
       render partial: 'juke/form'
     else
       Comment.create(comment_params.merge(user_id: current_user.id))
-      flash[:notice] = "Comment has successfully posted."
-      render partial: 'juke/form'
+      render partial: 'comments/thanks'
     end
   end
 
