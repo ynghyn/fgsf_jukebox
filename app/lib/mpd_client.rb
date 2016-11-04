@@ -2,6 +2,9 @@ class MPDClient
   CASSETTE_EFFECT = 'cassette.wav'.freeze
 
   @@queue = []
+  @@worker_mutex = Mutex.new
+  @@dequeue_mutex = Mutex.new
+  @@worker_thread = nil
 
   def self.current_song
     # Caching will help unload server calls to MPD
@@ -23,23 +26,61 @@ class MPDClient
     @@songs ||= MPD_INSTANCE.songs.select { |song| !is_an_effect?(song) }
   end
 
+  def self.song_already_queued?(file_name)
+    @@queue.include?(file_name) ||
+      (
+        MPDClient.current_song &&
+        MPDClient.playlist[MPDClient.current_song[:pos]..-1].any? { |song| song[:file] == file_name }
+      )
+  end
+
   def self.is_an_effect?(song)
     song.to_h[:file] == CASSETTE_EFFECT
   end
 
   def self.add_song(song)
+    ensure_worker_running
     @@queue << song
   end
 
   def self.dequeue
-    start_fresh = current_song.nil?
-    unless @@queue.empty?
-      Rails.logger.info "Queue: #{@@queue.inspect}"
-      song = @@queue.shift
-      MPD_INSTANCE.clear if start_fresh
-      MPD_INSTANCE.add(CASSETTE_EFFECT)
-      MPD_INSTANCE.add(song)
-      MPD_INSTANCE.play if start_fresh
+    # Mutex ensures that we only have one instance of dequeue at a time
+    @@dequeue_mutex.synchronize do
+      unless @@queue.empty?
+        Rails.logger.info "Queue: #{@@queue.inspect}"
+        play_from_begging = current_song.nil?
+        song = @@queue.shift
+        MPD_INSTANCE.clear if play_from_begging
+        MPD_INSTANCE.add(CASSETTE_EFFECT)
+        MPD_INSTANCE.add(song)
+        MPD_INSTANCE.play if play_from_begging
+      end
     end
+  end
+
+  private
+
+  def self.ensure_worker_running
+    return if worker_running?
+
+    # Mutex: make sure only one Thread runs at a time.
+    @@worker_mutex.synchronize do
+      return if worker_running?
+      start_worker
+    end
+  end
+
+  def self.start_worker
+    # A never-ending thread that dequeues music every 2 seconds
+    @@worker_thread = Thread.new do
+      while true
+        MPDClient.dequeue
+        sleep 2
+      end
+    end
+  end
+
+  def self.worker_running?
+    @@worker_thread && @@worker_thread.alive?
   end
 end
