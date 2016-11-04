@@ -10,7 +10,7 @@
       <div class="list-group">
         <% @songs.each_with_index do |song, index| %>
           <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song list-group-item text-align-left" dataId="page<%= index %>">
-            <%= song.to_h[:title] || song.file %>
+            <%= song.to_h[:artist] %>&nbsp;-&nbsp;<%= song.to_h[:title] || song.file %>
           </a>
         <% end %>
       </div>
@@ -39,9 +39,16 @@
     </div>
   <% end %>
 
-  <div data-role="page" id="pageNow">&nbsp;&nbsp;</div>
+  <div data-role="page" id="pageNow">
+    <%= render partial: 'now' %>
+  </div>
   <div data-role="page" id="pageNew" >&nbsp;&nbsp;</div>
-  <div data-role="page" id="pageSearch" >&nbsp;&nbsp;</div>
+
+  <div data-role="page" id="pageSearch">
+    <div>
+       <%= render partial: 'search' %>
+    </div>
+  </div>
   <div data-role="page" id="pageFeed" >
     <%= render partial: 'form' %>
   </div>
@@ -53,7 +60,7 @@
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">
       <div class="col-xs-3 text-center">
-        <a href="#pageNow" class="under-construction nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a>
+        <a id="pageNowLocator"href="#pageNow" class="under-construction nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a>
       </div>
       <div class="col-xs-3 text-center">
         <a href="#pageNew" class="under-construction nav-text"><i class="glyphicon glyphicon-heart"></i><br>New</a>
@@ -62,7 +69,7 @@
         <a href="#pageLibrary" class="nav-text"><i class="glyphicon glyphicon-book"></i><br>Library</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a href="#pageSearch" class="under-construction nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
+        <a id="pageSearchLocator" href="#pageSearch" class="nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
       </div>
       <div class="col-xs-3 text-center">
         <a id="pageFeedLocator" href="#pageFeed" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
