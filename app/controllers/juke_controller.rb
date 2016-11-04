@@ -23,6 +23,7 @@ class JukeController < ApplicationController
 
   def list
     @songs = MPDClient.songs
+    @playlist = MPDClient.playlist
   end
 
   # partial endpoint
@@ -46,10 +47,19 @@ class JukeController < ApplicationController
     render partial: 'artwork'
   end
 
-
   def feed_comment
     render partial: 'form'
   end
+
+  def lib_search
+    render partial: 'search'
+  end
+
+  def music_now
+    render partial: 'now'
+  end
+
+
 
   # API endpoint
   def add_song
@@ -134,6 +144,7 @@ class JukeController < ApplicationController
     file = File.open(Rails.root.join('app', 'assets', 'images', 'construction.jpg'))
     send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
+
 
   private
 
