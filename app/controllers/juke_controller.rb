@@ -8,10 +8,14 @@ class JukeController < ApplicationController
   before_action :initialize_mpd
 
   BYPASS_CODE = 'bss'.freeze
-  MAX_QUEUE_COUNT = 4
+  MAX_QUEUE_COUNT = 3
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
-  MUSIC_PATH = '/home/pi/Music'.freeze # Only works on raspberry pi
+  MUSIC_PATH = if Rails.env == 'production'
+    '/home/pi/Music'
+  else
+    File.expand_path('~/Music')
+  end.freeze
 
   def index
     @comments = Comment.all
@@ -19,7 +23,6 @@ class JukeController < ApplicationController
 
   def list
     @songs = MPDClient.songs
-    @playlist = MPDClient.playlist
   end
 
   # partial endpoint
@@ -55,29 +58,26 @@ class JukeController < ApplicationController
     render partial: 'now'
   end
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> master
   # API endpoint
   def add_song
     status, msg = if !params[:song_name].present?
       [400, 'You must select a song']
-    elsif MPDClient.song_already_queued?(params[:song_name])
+    elsif MPDClient.current_song && song_already_queued?(params[:song_name])
       record_music_selection(params[:song_name], false)
       [202, '이미 예약목록에 있습니다']
     elsif params[:bypass] != BYPASS_CODE && reached_limit?
-      # Limit to 4 songs per 10 minutes
+      # Limit to 3 songs per 10 minutes
       record_music_selection(params[:song_name], false)
       [429, '10분후에 더 예약 해주세요~']
     elsif params[:bypass] != BYPASS_CODE && !within_open_hour?
       # Only allow queueing during business hour
       record_music_selection(params[:song_name], false)
-      [400, 'Operating hours: Sunday 9am-1pm =)']
+      [400, 'You can only reserve during operating hours [Sunday 9am-1pm ]']
     else
       record_music_selection(params[:song_name], true)
-      MPDClient.add_song(params[:song_name])
+      add_song_to_mpd(params[:song_name])
       [200, '예약되었습니다!']
     end
     respond_to do |format|
@@ -144,17 +144,8 @@ class JukeController < ApplicationController
     send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
 
-<<<<<<< HEAD
-  def exist_in_list?(title)
-    for i in 0..MPDClient.playlist.count
-      title == MPDClient.playlist[i]
-    end
-  end
 
 
-
-=======
->>>>>>> master
 
   private
 
@@ -162,17 +153,16 @@ class JukeController < ApplicationController
     MPD_INSTANCE.reconnect unless MPD_INSTANCE.connected?
   end
 
+  def song_already_queued?(file_name)
+    MPDClient.playlist[MPDClient.current_song[:pos]..-1].any? { |song| song[:file] == file_name }
+  end
+
   def record_music_selection(song_name, queued)
     MusicSelection.create(song: song_name, queued: queued, user_id: @current_user.id)
   end
 
   def reached_limit?
-    MusicSelection.where(
-      MUSIC_SELECTION_QUERY,
-      10.minutes.ago,
-      true,
-      @current_user.id
-    ).count >= MAX_QUEUE_COUNT
+    MusicSelection.where(MUSIC_SELECTION_QUERY, 10.minutes.ago, true, @current_user.id).count >= 3
   end
 
   def within_open_hour?
@@ -181,7 +171,6 @@ class JukeController < ApplicationController
       time_now.hour >= 9 && # Between 9AM - 1PM
       time_now.hour < 13
   end
-<<<<<<< HEAD
 
   def add_song_to_mpd(file_name)
     MPDClient.add_song(file_name)
@@ -189,6 +178,4 @@ class JukeController < ApplicationController
 
 
 
-=======
->>>>>>> master
 end

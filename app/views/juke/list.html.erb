@@ -10,7 +10,12 @@
       <div class="list-group">
         <% @songs.each_with_index do |song, index| %>
           <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song list-group-item text-align-left" dataId="page<%= index %>">
-            <%= song.to_h[:artist] %>&nbsp;-&nbsp;<%= song.to_h[:title] || song.file %>
+            <span><%= song.to_h[:artist] %>&nbsp;-&nbsp;<%= song.to_h[:title] || song.file %></span>
+            <span style="float:right;">
+            <% if MPDClient.song_already_queued?(song.file) %>
+              <i class="glyphicon glyphicon-ok"></i>
+            <% end %>
+            </span>
           </a>
         <% end %>
       </div>
