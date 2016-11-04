@@ -48,12 +48,12 @@ class MPDClient
     @@dequeue_mutex.synchronize do
       unless @@queue.empty?
         Rails.logger.info "Queue: #{@@queue.inspect}"
-        start_fresh = current_song.nil?
+        play_from_begging = current_song.nil?
         song = @@queue.shift
-        MPD_INSTANCE.clear if start_fresh
+        MPD_INSTANCE.clear if play_from_begging
         MPD_INSTANCE.add(CASSETTE_EFFECT)
         MPD_INSTANCE.add(song)
-        MPD_INSTANCE.play if start_fresh
+        MPD_INSTANCE.play if play_from_begging
       end
     end
   end
