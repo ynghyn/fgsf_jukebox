@@ -72,7 +72,7 @@ $(document).ready(
       });
     });
     $('#pageSearchLocator').click(function() {
-      $('#pageSearch').load('/juke/search');
+      $('#pageSearch').load('/juke/lib_search');
     });
 
     $('#pageFeedLocator').click(function() {
