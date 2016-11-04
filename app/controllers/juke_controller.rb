@@ -23,7 +23,6 @@ class JukeController < ApplicationController
 
   def list
     @songs = MPDClient.songs
-    @playlist = MPDClient.playlist
   end
 
   # partial endpoint
@@ -145,6 +144,14 @@ class JukeController < ApplicationController
     send_data file.read, :type => 'image/png', :disposition => 'inline'
   end
 
+  def exist_in_list?(title)
+    for i in 0..MPDClient.playlist.count
+      title == MPDClient.playlist[i]
+    end
+  end
+
+
+
 
   private
 
@@ -174,4 +181,7 @@ class JukeController < ApplicationController
   def add_song_to_mpd(file_name)
     MPDClient.add_song(file_name)
   end
+
+
+
 end
