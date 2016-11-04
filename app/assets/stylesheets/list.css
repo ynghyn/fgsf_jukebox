@@ -145,6 +145,7 @@ p#title{
 
 
 
+
 /********************************/
 /******  List Info Slider  ******/
 /********************************/
@@ -164,6 +165,23 @@ p#title{
 .large_font{
   font-size:2.4em;
   font-weight: 100;
+}
+
+
+/********************************/
+/******  Hojin's Edit      ******/
+/********************************/
+
+.commenter{
+  width: 50%;
+  margin: auto;
+
+}
+
+.body{
+  width: 70%;
+  height: 70px;
+  margin: auto;
 }
 
 
@@ -243,6 +261,7 @@ p#title{
     height: 150px;
 
   }
+
 
 
 }

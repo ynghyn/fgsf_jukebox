@@ -8,8 +8,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    Comment.create(comment_params.merge(user_id: current_user.id))
-    render partial: 'comments/thanks'
+    if comment_params[:commenter].empty? || comment_params[:body].empty?
+      flash[:notice] = "Please fill the form."
+      render partial: 'juke/form'
+    else
+      Comment.create(comment_params.merge(user_id: current_user.id))
+      flash[:notice] = "Comment has successfully posted."
+      render partial: 'juke/form'
+    end
   end
 
   def local_time_refresh
