@@ -11,11 +11,7 @@ class JukeController < ApplicationController
   MAX_QUEUE_COUNT = 4
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
-  MUSIC_PATH = if Rails.env == 'production'
-    '/home/pi/Music'
-  else
-    File.expand_path('~/Music')
-  end.freeze
+  MUSIC_PATH = '/home/pi/Music'.freeze # Only works on raspberry pi
 
   def index
     @comments = Comment.all
