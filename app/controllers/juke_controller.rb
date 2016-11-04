@@ -11,7 +11,12 @@ class JukeController < ApplicationController
   MAX_QUEUE_COUNT = 4
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
-  MUSIC_PATH = '/home/pi/Music'.freeze # Only works on raspberry pi
+  MUSIC_PATH = if File.expand_path('~/Music').include?('root')
+    # Raspberry Pi 3
+    '/home/pi/Music'
+  else
+    File.expand_path('~/Music')
+  end.freeze
 
   def index
     @comments = Comment.all
@@ -124,7 +129,7 @@ class JukeController < ApplicationController
   def mp3_image
     image = if params[:file].present?
       Mp3Info.open("#{MUSIC_PATH}/#{params[:file]}") do |mp3|
-        mp3.tag2.pictures[0][1]
+        mp3.tag2.pictures.try(:[], 0).try(:[], 1)
       end
     end
     send_data image, :type => 'image/png', :disposition => 'inline'
