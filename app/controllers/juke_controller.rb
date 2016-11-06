@@ -19,7 +19,7 @@ class JukeController < ApplicationController
   end.freeze
 
   def index
-    @comments = Comment.all
+    @comments = Comment.order(created_at: :desc)
   end
 
   def list
@@ -55,7 +55,7 @@ class JukeController < ApplicationController
     render partial: 'search'
   end
 
-  def music_now
+  def now
     render partial: 'now'
   end
 

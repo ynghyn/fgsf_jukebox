@@ -80,7 +80,7 @@ $(document).ready(
     });
 
     $('#pageNowLocator').click(function() {
-      $('#pageNow').load('/juke/music_now');
+      $('#pageNow').load('/juke/now');
     });
 
 

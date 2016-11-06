@@ -1,6 +1,7 @@
 <div class="list_header">
   <h1><span class="glyphicon glyphicon-music" style="font-size:.7em;"></span>&nbsp;JUKE </h1>
   <h2 id="list_greeting">Get all the music you want.</h2>
+  <h2 style="text-align:right; font-weight:lighter;font-size:.7em; color:white;"><%= MPDClient.songs.count - 1 %></h2>
 </div>
 
 <div id="list_body">
@@ -65,24 +66,39 @@
   <div class="col-xs-12 navbar-fixed-bottom"  id="bottomNav">
     <div class="row">
       <div class="col-xs-3 text-center">
-        <a id="pageNowLocator"href="#pageNow" class="under-construction nav-text"><i class="glyphicon glyphicon-music"></i><br>Now</a>
+        <a id="pageNowLocator" href="#pageNow" class="under-construction nav-text" onClick="removeNowPlayingOnLoad()"><i class="glyphicon glyphicon-music"></i><br>Now</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a href="#pageNew" class="under-construction nav-text"><i class="glyphicon glyphicon-heart"></i><br>New</a>
+        <a href="#pageNew" class="under-construction nav-text" onClick="addNowPlayingOnLoad()"><i class="glyphicon glyphicon-heart"></i><br>New</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a href="#pageLibrary" class="nav-text"><i class="glyphicon glyphicon-book"></i><br>Library</a>
+        <a href="#pageLibrary" class="nav-text" onClick="addNowPlayingOnLoad()"><i class="glyphicon glyphicon-book"></i><br>Library</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a id="pageSearchLocator" href="#pageSearch" class="nav-text"><i class="glyphicon glyphicon-search"></i><br>Search</a>
+        <a id="pageSearchLocator" href="#pageSearch" class="nav-text" onClick="addNowPlayingOnLoad()"><i class="glyphicon glyphicon-search"></i><br>Search</a>
       </div>
       <div class="col-xs-3 text-center">
-        <a id="pageFeedLocator" href="#pageFeed" class="nav-text"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
+        <a id="pageFeedLocator" href="#pageFeed" class="nav-text" onClick="addNowPlayingOnLoad()"><i class="glyphicon glyphicon-comment"></i><br>Feed</a>
       </div>
     </div>
   </div>
 </div>
 
+
 <script>
-  setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
+  setInterval(function() {
+    $('#screen_title').load('/juke/title');
+    $('#now-info').load('/juke/now');
+  }, 5000);
+
+  function removeNowPlayingOnLoad(){
+   document.getElementById('now-playing-div-1').style.display = "none"
+   document.getElementById('now-playing-div-2').style.display = "none"
+ }
+
+ function addNowPlayingOnLoad(){
+   document.getElementById('now-playing-div-1').style.display = ""
+   document.getElementById('now-playing-div-2').style.display = ""
+ }
+
 </script>

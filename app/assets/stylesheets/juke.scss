@@ -309,3 +309,35 @@ p#info-title{
    list-style-type: none;
    padding: 0;
 }
+
+
+
+/********************************/
+/******      /juke/now     ******/
+/********************************/
+
+
+
+.now-outter-wrapper{
+  width: 110%;
+  position: fixed;
+   height: 700px;
+   overflow: hidden;
+   background-image: url(main_02.jpg);
+   background-size: cover;
+   background-attachment: fixed,fixed;
+   	  background-repeat: no-repeat;
+   background-position: center center;
+   filter: blur(15px);
+   transform: scale(1.5);
+}
+
+.now-info.artwork{
+
+
+}
+
+.now-info-data{
+
+
+}
