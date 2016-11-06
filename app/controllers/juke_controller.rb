@@ -19,7 +19,7 @@ class JukeController < ApplicationController
   end.freeze
 
   def index
-    @comments = Comment.all
+    @comments = Comment.order(created_at: :desc)
   end
 
   def list
