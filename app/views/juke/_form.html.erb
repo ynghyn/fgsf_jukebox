@@ -1,18 +1,21 @@
-<h4>We appreciate your feedback!</h4><br>
-<div class="alert"><%= flash[:notice] %></div>
+<br><h4 style="font-family: Arial Black">We appreciate your feedback!</h4><br>
+<div class="feed_alert"><%= flash[:notice] %></div><br>
 <%= form_for(Comment.new) do |f| %>
   <p>
-    <%= f.label :작성자 %>
+    <div class="label_commenter">
+      작성자
+    </div>
     <div class="commenter">
-    <%= f.text_field :commenter, class: 'input-comment', style: 'margin:5%;width:90%;' %>
+    <%= f.text_field :commenter, class: 'input-comment-commenter' %>
     </div>
-  </p><br>
+  </p>
   <p>
-
-    <%= f.label :내용 %>
-    <div class="body">
-    <%= f.text_area :body, class: 'input-comment', style: 'margin:5%;width:90%;' %>
+    <div class="label_body">
+      내용
     </div>
+    <div class="body">
+    <%= f.text_area :body, class: 'input-comment-body' %>
+  </div><br>
   </p>
   <p>
     <%= f.submit '작성하기', class: 'input-comment btn btn-info'%>

@@ -172,19 +172,41 @@ p#title{
 /******  Hojin's Edit      ******/
 /********************************/
 
-.commenter{
-  width: 50%;
-  margin: auto;
+.feed_alert{
+font-size-adjust: 2.5em;
+color: red;
 
+}
+
+.label_commenter{
+font-family: Arial Black;
+font-weight: bold;
+
+}
+
+.label_body{
+font-family: Arial Black;
+font-weight: bold;
+}
+
+.commenter{
+  width: 80%;
+  margin: auto;
+  height: 50px;
 }
 
 .body{
-  width: 70%;
-  height: 70px;
+  width: 80%;
   margin: auto;
+  height: 100%;
 }
 
+.thank{
+  margin-top:150px;
+  font-size: 30px;
+  font-family: Arial Black;
 
+}
 /******************************************************************/
 /******  Style adjustment for iphone 4/4S/5/5S optimization  ******/
 /******************************************************************/
