@@ -145,6 +145,7 @@ p#title{
 
 
 
+
 /********************************/
 /******  List Info Slider  ******/
 /********************************/
@@ -167,6 +168,45 @@ p#title{
 }
 
 
+/********************************/
+/******  Hojin's Edit      ******/
+/********************************/
+
+.feed_alert{
+font-size-adjust: 2.5em;
+color: red;
+
+}
+
+.label_commenter{
+font-family: Arial Black;
+font-weight: bold;
+
+}
+
+.label_body{
+font-family: Arial Black;
+font-weight: bold;
+}
+
+.commenter{
+  width: 80%;
+  margin: auto;
+  height: 50px;
+}
+
+.body{
+  width: 80%;
+  margin: auto;
+  height: 100%;
+}
+
+.thank{
+  margin-top:150px;
+  font-size: 30px;
+  font-family: Arial Black;
+
+}
 /******************************************************************/
 /******  Style adjustment for iphone 4/4S/5/5S optimization  ******/
 /******************************************************************/
@@ -243,6 +283,7 @@ p#title{
     height: 150px;
 
   }
+
 
 
 }
