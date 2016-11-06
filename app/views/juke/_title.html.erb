@@ -1,4 +1,4 @@
-<div class="col-xs-12 navbar-fixed-bottom now-playing-top">
+<div id="now-playing-div-1" class="col-xs-12 navbar-fixed-bottom now-playing-top">
   <!-- below code displays default background image when the playlist is empty -->
   <% unless MPDClient.current_song.nil? %>
     <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => MPDClient.current_song[:file]), :id => "now-playing-background"%>
@@ -7,7 +7,7 @@
   <% end %>
 </div>
 
-<div class="col-xs-12 navbar-fixed-bottom now-playing-top">
+<div id="now-playing-div-2" class="col-xs-12 navbar-fixed-bottom now-playing-top">
   <div class="display">
     <div class="song-info">
       <% unless MPDClient.current_song.nil? %>
@@ -25,9 +25,9 @@
             <p id="artist"><%= MPDClient.current_song[:artist]%></p>
             <p id="album"><%= MPDClient.current_song[:album]%></p>
           <% else %>
-            <p id="title">Nothing is playing?☹️</p>
+            <p id="title">Nothing is playing?</p>
             <p id="artist">You can add songs</p>
-            <p id="album">to the playlist! 🎶</p>
+            <p id="album">to the playlist!</p>
           <% end %>
         </h4>
       </div>

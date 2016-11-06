@@ -55,7 +55,7 @@ class JukeController < ApplicationController
     render partial: 'search'
   end
 
-  def music_now
+  def now
     render partial: 'now'
   end
 

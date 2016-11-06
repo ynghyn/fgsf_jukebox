@@ -1,5 +1,5 @@
 <div id="search_input_text">
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by title, artist, album...">
+  <input type="text" id="myInput" onkeyup="search()" placeholder="Search by title, artist, album...">
 </div>
 
 
@@ -23,7 +23,7 @@
 
 
 <script>
-function myFunction() {
+function search() {
 
   var input, filter, ul, li, a, i;
   input = document.getElementById('myInput');

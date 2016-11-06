@@ -1,2 +1,34 @@
+<div class="now-outter-wrapper">
+  <div class="now-inner-wrapper" id="now-wrapper" onload="removeNowPlayingOnLoad()">
+    <div class="now-info">
+      <div class="now-info-artwork">
+        <% unless MPDClient.current_song.nil? %>
+          <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => MPDClient.current_song[:file]), size: '60x60' %>
+        <% else %>
+          <%= image_tag("main_04.jpg", :id => "now-playing-artwork") %>
+        <% end %>
+      </div>
 
-<span style="font-size:3EM;">now</span>
+      <div class="now-info-data">
+        <% unless MPDClient.current_song.nil? %>
+          <p id="title"><%= MPDClient.current_song[:title]%></p>
+          <p id="artist"><%= MPDClient.current_song[:artist]%></p>
+          <p id="album"><%= MPDClient.current_song[:album]%></p>
+        <% else %>
+          <p id="title">Nothing is playing?</p>
+          <p id="artist">You can add songs</p>
+          <p id="album">to the playlist!</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="music-by-artist">
+
+    </div>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+  setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
+</script>
