@@ -1,0 +1,44 @@
+<div id="search_input_text">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by title, artist, album...">
+</div>
+
+
+<ul id="myUL">
+  <div id="search_result_body">
+    <% @songs.each_with_index do |song,index| %>
+    <li>
+      <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song list-group-item text-align-left" dataId="page<%= index %>">
+        <span><%= song.to_h[:artist] %>&nbsp;-&nbsp;<%= song.to_h[:title] || song.file %></span>
+        <span style="float:right;">
+        <% if MPDClient.song_already_queued?(song.file) %>
+          <i class="glyphicon glyphicon-ok"></i>
+        <% end %>
+        </span>
+      </a>
+    </li>
+
+    <% end %>
+  </div>
+</ul>
+
+
+<script>
+function myFunction() {
+
+  var input, filter, ul, li, a, i;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUL");
+  li = ul.getElementsByTagName('li');
+
+
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>

@@ -71,9 +71,18 @@ $(document).ready(
         }
       });
     });
+    $('#pageSearchLocator').click(function() {
+      $('#pageSearch').load('/juke/search');
+    });
 
     $('#pageFeedLocator').click(function() {
       $('#pageFeed').load('/juke/feed_comment');
     });
+
+    $('#pageNowLocator').click(function() {
+      $('#pageNow').load('/juke/music_now');
+    });
+
+
   }
 );
