@@ -18,7 +18,7 @@ $(document).ready(
       var dataId = $(this).attr('dataId');
       var $jacket = $('#' + dataId + 'Jacket');
       var fileName = $jacket.attr('fileName');
-      $jacket.html('<img src="/juke/mp3_image?file=' + fileName + '" width="100" height="100">');
+      // $jacket.html('<img src="/juke/mp3_image?file=' + fileName + '" width="100" height="100">');
     });
 
     $('.under-construction').click(function () {
