@@ -1,0 +1,38 @@
+<div class="new-outter-wrapper">
+  <div class="new-background"></div>
+  <div class="new-inner-wrapper">
+    <div class="new-songs">
+      <h2 class="text-align-left">New Songs&nbsp;<span class="glyphicon glyphicon-equalizer"></span></h2><hr>
+    </div>
+
+    <div class="new-songs-list">
+      <% @songs.last(6).each do |song| %>
+      <div class="new-songs-tile">
+        <div class="tile-images"></div>
+
+        <div class="tile-info">
+          <span id="info-line-1"><%= song.to_h[:title] || song.file %></span><br>
+          <span id="info-line-2"><%= song.to_h[:artist] %></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="discover">
+      <h2 class="text-align-left">Discover&nbsp;<span class="glyphicon glyphicon-headphones"></span></h2><hr>
+    </div>
+
+    <div class="new-songs-list">
+      <% @songs.first(6).each do |song| %>
+      <div class="new-songs-tile">
+        <div class="tile-images"></div>
+
+        <div class="tile-info">
+          <span id="info-line-1"><%= song.to_h[:title] || song.file %></span><br>
+          <span id="info-line-2"><%= song.to_h[:artist] %></span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

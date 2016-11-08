@@ -1,25 +1,27 @@
-<br><h4 style="font-family: sans-serif;">We appreciate your feedback!</h4><br>
-<div class="feed_alert"><%= flash[:notice] %></div><br>
-<div id="form-body">
-  <%= form_for(Comment.new) do |f| %>
-    <p>
-      <div class="label_commenter">
-        작성자
-      </div>
-      <div class="commenter">
-      <%= f.text_field :commenter, class: 'input-comment-commenter' %>
-      </div>
-    </p>
-    <p>
-      <div class="label_body">
-        내용
-      </div>
-      <div class="body">
-      <%= f.text_area :body, class: 'input-comment-body' %>
-    </div><br>
-    </p>
-    <p>
-      <%= f.submit '작성하기', class: 'input-comment btn btn-info'%>
-    </p>
-  <% end %>
+<div class="form-background">
+  <br><h4 style="font-family: sans-serif;">We appreciate your feedback!</h4><br>
+  <div class="feed_alert"><%= flash[:notice] %></div><br>
+  <div id="form-body">
+    <%= form_for(Comment.new) do |f| %>
+      <p>
+        <div class="label_commenter">
+          작성자
+        </div>
+        <div class="commenter">
+        <%= f.text_field :commenter, class: 'input-comment-commenter' %>
+        </div>
+      </p>
+      <p>
+        <div class="label_body">
+          내용
+        </div>
+        <div class="body">
+        <%= f.text_area :body, class: 'input-comment-body' %>
+      </div><br>
+      </p>
+      <p>
+        <%= f.submit '작성하기', class: 'input-comment btn btn-info'%>
+      </p>
+    <% end %>
+  </div>
 </div>

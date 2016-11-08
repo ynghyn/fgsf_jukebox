@@ -292,12 +292,13 @@ p#info-title{
 }
 
 #search_input_text{
+  margin: -20px 0 0 -19px;
   background: white !important;
   height: 50px !important;
   width:100%;
   position: fixed;
   z-index: 100;
-  border-bottom:1px solid #ddd;
+  /*border-bottom:1px solid #ddd;*/
 }
 
 #search_result_body{
@@ -355,13 +356,13 @@ p#info-title{
   margin-right: 10%;
   width:80%;
 
-  /*
+
   -webkit-transition:height 0.3s;
 	-moz-transition:height 0.3s;
 	-ms-transition:height 0.3s;
 	-o-transition:height 0.3s;
 	transition:all 0.3s;
-  */
+
 
 }
 
@@ -387,13 +388,14 @@ p#info-title{
   bottom:0;
   height: 60%;
   width: 250px;
-  margin: 0 10%;
+  margin: auto;
   position: relative;
 
 
 }
 .now-info-artwork img{
   width:100%;
+  height:250px;
 
   border-radius: 50%;
 }
@@ -402,7 +404,6 @@ p#info-title{
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
-  /* background-color: #fff; */
   color:white;
 }
 
@@ -413,13 +414,11 @@ p#info-title{
   margin-top: 10px;
   margin-bottom:10px;
 
-  /*
   -webkit-transition:height 0.3s;
 	-moz-transition:height 0.3s;
 	-ms-transition:height 0.3s;
 	-o-transition:height 0.3s;
 	transition:all 0.3s;
-  */
 
   .now-info-data {
     margin-right:20px;
@@ -441,23 +440,28 @@ p#info-title{
     margin:0;
     top:0;
 
+    img{
+      height : 75px;
+    }
+
   }
+
 }
 
 .slide-up{
+
   #other-songs-by-artist{
     position: fixed;
     margin-top: 75px;
 
-    /*
     -webkit-transition:height 0.3s;
     -moz-transition:height 0.3s;
     -ms-transition:height 0.3s;
     -o-transition:height 0.3s;
     transition:all 0.3s;
 
-    */
   }
+
 
   #other-songs-list{
     margin-top: 115px;
