@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require classie
 //= require jquery
 //= require jquery_ujs
 //= require jquery.mobile-1.4.5

@@ -83,6 +83,9 @@ $(document).ready(
       $('#pageNow').load('/juke/now');
     });
 
+    $('#pageNewLocator').click(function() {
+      $('#pageNew').load('/juke/new');
+    });
 
   }
 );

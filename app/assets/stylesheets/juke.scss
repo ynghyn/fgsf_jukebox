@@ -316,28 +316,189 @@ p#info-title{
 /******      /juke/now     ******/
 /********************************/
 
-
-
-.now-outter-wrapper{
-  width: 110%;
-  position: fixed;
-   height: 700px;
-   overflow: hidden;
-   background-image: url(main_02.jpg);
-   background-size: cover;
-   background-attachment: fixed,fixed;
-   	  background-repeat: no-repeat;
-   background-position: center center;
-   filter: blur(15px);
-   transform: scale(1.5);
+#other-songs-by-artist{
+  background-color: rgba(54,54,54,0.3);
+  width: 100%;
 }
 
-.now-info.artwork{
 
+
+.now-outter-background{
+  width: 100%;
+  height: 700px;
+  position: fixed;
+  filter: blur(15px);
+  transform: scale(1.5);
+  opacity: 0.9;
+}
+
+.now-outter-background img{
+  height: 100%;
+  width: 100%;
+}
+
+.now-outter-wrapper{
+  position: relative;
+
+}
+
+.now-inner-background{
+  width:100%;
+}
+
+
+
+.now-info{
+  margin-top:40px;
+  margin-bottom:50px;
+  margin-left: 10%;
+  margin-right: 10%;
+  width:80%;
+
+  /*
+  -webkit-transition:height 0.3s;
+	-moz-transition:height 0.3s;
+	-ms-transition:height 0.3s;
+	-o-transition:height 0.3s;
+	transition:all 0.3s;
+  */
 
 }
 
 .now-info-data{
+  color: white;
+  margin-top:5px;
+  font-size: 1.2em;
+  height: 40%;
+  margin-bottom:10px;
+}
+
+.now-info-data p#title{
+  font-size:1.5em;
+}
+
+.now-info-data p#artist, p#album{
+  font-size:0.8em !important;
+  font-weight: 100 !important;
+
+}
+.now-info-artwork{
+
+  bottom:0;
+  height: 60%;
+  width: 250px;
+  margin: 0 10%;
+  position: relative;
+
+
+}
+.now-info-artwork img{
+  width:100%;
+
+  border-radius: 50%;
+}
+.now-list-group-item{
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  /* background-color: #fff; */
+  color:white;
+}
+
+.smaller{
+  height: 100px;
+  display: flex;
+  position: fixed;
+  margin-top: 10px;
+  margin-bottom:10px;
+
+  /*
+  -webkit-transition:height 0.3s;
+	-moz-transition:height 0.3s;
+	-ms-transition:height 0.3s;
+	-o-transition:height 0.3s;
+	transition:all 0.3s;
+  */
+
+  .now-info-data {
+    margin-right:20px;
+		right:0;
+    position:absolute;
+
+    p#title{
+      font-size: 1.1em;
+    }
+    p#artist, p#album{
+      font-size:0.7em;
+    }
+  }
+
+  .now-info-artwork{
+    width:25%;
+    position: absolute;
+    left:0;
+    margin:0;
+    top:0;
+
+  }
+}
+
+.slide-up{
+  #other-songs-by-artist{
+    position: fixed;
+    margin-top: 75px;
+
+    /*
+    -webkit-transition:height 0.3s;
+    -moz-transition:height 0.3s;
+    -ms-transition:height 0.3s;
+    -o-transition:height 0.3s;
+    transition:all 0.3s;
+
+    */
+  }
+
+  #other-songs-list{
+    margin-top: 115px;
+    padding-top: 50px;
+    max-height: 450px;
+    overflow-y: auto;
+    position: fixed;
+
+  }
+
+}
+
+
+/******************************************************************/
+/******  Style adjustment for iphone 4/4S/5/5S optimization  ******/
+/******************************************************************/
+
+@media (max-width: 330px) {
+  .now-info-artwork{
+    margin:auto;
+  }
+
+  .now-info-artwork img{
+    width:70%;
+  }
+  .now-info{
+    margin-top: 10px;
+  }
+  .now-info-data{
+    font-size:1em;
+  }
+  .smaller{
+    /*
+    -webkit-transition:height 0s;
+  	-moz-transition:height 0s;
+  	-ms-transition:height 0s;
+  	-o-transition:height 0s;
+  	transition:all 0s;
+    */
+
+  }
 
 
 }

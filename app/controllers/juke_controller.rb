@@ -59,6 +59,9 @@ class JukeController < ApplicationController
     render partial: 'now'
   end
 
+  def new
+    render partial: 'new'
+  end
   # API endpoint
   def add_song
     status, msg = if !params[:song_name].present?

@@ -1,34 +1,94 @@
+<div class="now-outter-background">
+  <% unless MPDClient.current_song.nil? %>
+    <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => MPDClient.current_song[:file], :size => '500x500')%>
+  <% else %>
+    <%= image_tag("main_04.jpg", :id => "now-info-artwork") %>
+  <% end %>
+
+
+</div>
+
 <div class="now-outter-wrapper">
   <div class="now-inner-wrapper" id="now-wrapper" onload="removeNowPlayingOnLoad()">
-    <div class="now-info">
-      <div class="now-info-artwork">
-        <% unless MPDClient.current_song.nil? %>
-          <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => MPDClient.current_song[:file]), size: '60x60' %>
-        <% else %>
-          <%= image_tag("main_04.jpg", :id => "now-playing-artwork") %>
-        <% end %>
-      </div>
+    <div class="now-inner-background">
+      <div class="now-info">
+        <div class="now-info-data">
+          <% unless MPDClient.current_song.nil? %>
+            <p id="title"><%= MPDClient.current_song[:title]%></p>
+            <p id="artist"><%= MPDClient.current_song[:artist]%></p>
+            <p id="album"><%= MPDClient.current_song[:album]%></p>
+          <% else %>
+            <p id="title">Nothing is playing?</p>
+            <p id="artist">You can add songs</p>
+            <p id="album">to the playlist!</p>
+          <% end %>
+        </div>
 
-      <div class="now-info-data">
-        <% unless MPDClient.current_song.nil? %>
-          <p id="title"><%= MPDClient.current_song[:title]%></p>
-          <p id="artist"><%= MPDClient.current_song[:artist]%></p>
-          <p id="album"><%= MPDClient.current_song[:album]%></p>
-        <% else %>
-          <p id="title">Nothing is playing?</p>
-          <p id="artist">You can add songs</p>
-          <p id="album">to the playlist!</p>
-        <% end %>
+        <div class="now-info-artwork">
+          <% unless MPDClient.current_song.nil? %>
+            <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => MPDClient.current_song[:file]) %>
+          <% end %>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="music-by-artist">
+  <div class="list-group">
+      <span class='now-list-group-item text-align-left' id="other-songs-by-artist">Other songs also by <%= MPDClient.current_song[:artist] unless MPDClient.current_song.nil? %>...</span>
 
-    <div class="music-by-artist">
+  </div>
 
-    </div>
-
+  <div class="list-group">
+    <div class="music-list-dynamic-height" id="other-songs-list">
+      <% @songs.each_with_index do |song, index| %>
+      <li style="list-style-type: none;">
+        <a href="#page<%= index %>" data-transition="slide" type="button" class="toggle-song now-list-group-item text-align-left" dataId="page<%= index %>">
+          <span><%= song.to_h[:title] || song.file %>&nbsp;-&nbsp;<%= song.to_h[:album] %></span>
+          <span style="float:right; z-index:100;">
+          <% if MPDClient.song_already_queued?(song.file) %>
+            <i class="glyphicon glyphicon-ok"></i>
+          <% end %>
+          </span>
+        </a>
+      </li>
+      <% end %>
+      </div>
   </div>
 </div>
 
-<script type="text/javascript">
-  setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
+
+
+
+<script>
+    function init() {
+        window.addEventListener('scroll', function(e){
+            var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+                shrinkOn = 40,
+                now_info = document.querySelector(".now-info"),
+                music_by_artist = document.querySelector(".music-by-artist"),
+                screenWidth = screen.width,
+                widthLimit = 370;
+
+            if (distanceY > shrinkOn && screenWidth > widthLimit) {
+                classie.add(now_info,"smaller");
+            } else {
+                if (classie.has(now_info,"smaller")) {
+                    classie.remove(now_info,"smaller");
+                }
+            }
+
+            if (distanceY > shrinkOn && screenWidth > widthLimit) {
+                classie.add(music_by_artist,"slide-up");
+            } else {
+                if (classie.has(music_by_artist,"slide-up")) {
+                    classie.remove(music_by_artist,"slide-up");
+                }
+            }
+
+        });
+    }
+
+    window.onload = init();
+    setInterval(function() {$('#screen_title').load('/juke/title');}, 5000);
 </script>
