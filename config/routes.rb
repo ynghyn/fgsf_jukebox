@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'juke/feed_comment', to: 'juke#feed_comment'
   get 'juke/search', to: 'juke#lib_search'
   get 'juke/new', to: 'juke#new'
+  get 'juke/now', to: 'juke#now'
 
   # Images
   get 'juke/mp3_image', to: 'juke#mp3_image'
