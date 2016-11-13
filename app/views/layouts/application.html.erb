@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= favicon_link_tag 'logo.png', :rel => 'apple-touch-icon', :type => 'image/png' %>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=1;" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes"/>
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>FGSF Jukebox</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
-
-
   </head>
 
   <body>
@@ -23,7 +23,7 @@
     <% elsif flash[:notice] %>
       <div class="notice"><%= flash[:notice] %></div>
     <% end %>
-  
+
     <div id='notice-flash' class="notice sticky-top bg-info init-hide"></div>
     <div id='alert-flash' class="notice sticky-top bg-danger init-hide"></div>
     <div id='warning-flash' class="notice sticky-top bg-warning init-hide"></div>

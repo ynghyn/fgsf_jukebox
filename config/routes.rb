@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get 'comments/report', to: 'comments#report'
   get 'comments/local_time_refresh', to: 'comments#local_time_refresh'
 
-
   # Main pages
   get 'juke/control', to: 'juke#index'
   get 'juke/list', to: 'juke#list'

@@ -6,9 +6,13 @@
     </div>
 
     <div class="new-songs-list">
-      <% @songs.last(6).each do |song| %>
+      <% @songs_new.each_with_index do |song,index| %>
       <div class="new-songs-tile">
-        <div class="tile-images"></div>
+        <div class="tile-images">
+          <a href="#new<%= index %>" data-transition="slide" type="button" class="toggle-song text-align-left" dataId="new<%= index %>" style="padding:0;">
+            <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => song.file)%>
+          </a>
+        </div>
 
         <div class="tile-info">
           <span id="info-line-1"><%= song.to_h[:title] || song.file %></span><br>
@@ -23,16 +27,20 @@
     </div>
 
     <div class="new-songs-list">
-      <% @songs.first(6).each do |song| %>
-      <div class="new-songs-tile">
-        <div class="tile-images"></div>
+        <% @songs_by_en.each_with_index do |song,index| %>
+        <div class="new-songs-tile">
+          <div class="tile-images">
+            <a href="#discover<%= index %>" data-transition="slide" type="button" class="toggle-song text-align-left" dataId="discover<%= index %>" style="padding:0;">
+              <%= image_tag url_for(:controller => 'juke', :action => 'mp3_image', :file => song.file)%>
+            </a>
+          </div>
 
-        <div class="tile-info">
-          <span id="info-line-1"><%= song.to_h[:title] || song.file %></span><br>
-          <span id="info-line-2"><%= song.to_h[:artist] %></span>
+          <div class="tile-info">
+            <span id="info-line-1"><%= song.to_h[:title] || song.file %></span><br>
+            <span id="info-line-2"><%= song.to_h[:artist] %></span>
+          </div>
         </div>
-      </div>
-      <% end %>
+        <% end %>
     </div>
   </div>
 </div>
