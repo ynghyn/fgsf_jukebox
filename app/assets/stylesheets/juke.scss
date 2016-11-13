@@ -292,7 +292,7 @@ p#info-title{
 }
 
 #search_input_text{
-  margin: -20px 0 0 -19px;
+  margin: -40px 0 0 -19px;
   background: white !important;
   height: 50px !important;
   width:100%;
@@ -311,8 +311,6 @@ p#info-title{
    padding: 0;
 }
 
-
-
 /********************************/
 /******      /juke/now     ******/
 /********************************/
@@ -322,8 +320,6 @@ p#info-title{
   width: 100%;
 }
 
-
-
 .now-outter-background{
   width: 100%;
   height: 700px;
@@ -331,6 +327,7 @@ p#info-title{
   filter: blur(15px);
   transform: scale(1.5);
   opacity: 0.9;
+  background-color:black;
 }
 
 .now-outter-background img{
@@ -356,13 +353,13 @@ p#info-title{
   margin-right: 10%;
   width:80%;
 
-
+/*
   -webkit-transition:height 0.3s;
 	-moz-transition:height 0.3s;
 	-ms-transition:height 0.3s;
 	-o-transition:height 0.3s;
 	transition:all 0.3s;
-
+*/
 
 }
 
@@ -411,15 +408,15 @@ p#info-title{
   height: 100px;
   display: flex;
   position: fixed;
-  margin-top: 10px;
+  margin-top: -10px;
   margin-bottom:10px;
-
+/*
   -webkit-transition:height 0.3s;
 	-moz-transition:height 0.3s;
 	-ms-transition:height 0.3s;
 	-o-transition:height 0.3s;
 	transition:all 0.3s;
-
+*/
   .now-info-data {
     margin-right:20px;
 		right:0;
@@ -441,39 +438,35 @@ p#info-title{
     top:0;
 
     img{
-      height : 75px;
+      height : 80px;
     }
 
   }
 
 }
-
-.slide-up{
-
   #other-songs-by-artist{
     position: fixed;
-    margin-top: 75px;
-
+    margin-top: 60px;
+/*
     -webkit-transition:height 0.3s;
     -moz-transition:height 0.3s;
     -ms-transition:height 0.3s;
     -o-transition:height 0.3s;
     transition:all 0.3s;
-
+*/
   }
 
+  .other-songs-list {
+    width: 100%;
+    margin-top: 100px;
+    padding-bottom:50px;
+    padding-top:25px;
 
-  #other-songs-list{
-    margin-top: 115px;
-    padding-top: 50px;
+    overflow-y: scroll;
     max-height: 450px;
-    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     position: fixed;
-
   }
-
-}
-
 
 /******************************************************************/
 /******  Style adjustment for iphone 4/4S/5/5S optimization  ******/

@@ -9,6 +9,9 @@ class JukeController < ApplicationController
 
   BYPASS_CODE = 'bss'.freeze
   MAX_QUEUE_COUNT = 4
+  MPD_SONGS_COUNT = MPDClient.songs.count
+
+
 
   MUSIC_SELECTION_QUERY = 'created_at > ? AND queued = ? AND user_id = \'?\''.freeze
   MUSIC_PATH = if File.expand_path('~/Music').include?('root')
@@ -24,6 +27,10 @@ class JukeController < ApplicationController
 
   def list
     @songs = MPDClient.songs
+    @songs_by_current_artist = MPD_INSTANCE.where(artist: MPDClient.current_song[:artist]) unless MPDClient.current_song.nil?
+    @songs_new = MPD_INSTANCE.where(file: 'new_arrival').sample(8)
+    @songs_by_en = MPD_INSTANCE.where(file: '2_en').sample(8)
+
   end
 
   # partial endpoint
@@ -129,11 +136,11 @@ class JukeController < ApplicationController
   end
 
   def mp3_image
-    image = if params[:file].present?
-      Mp3Info.open("#{MUSIC_PATH}/#{params[:file]}") do |mp3|
-        mp3.tag2.pictures.try(:[], 0).try(:[], 1)
+
+      image = Mp3Info.open("#{MUSIC_PATH}/#{params[:file]}") do |mp3|
+        mp3.tag2.pictures[0][1]
       end
-    end
+
     send_data image, :type => 'image/png', :disposition => 'inline'
   rescue => e
     Rails.logger.error e
