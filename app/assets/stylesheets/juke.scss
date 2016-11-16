@@ -158,9 +158,10 @@ body {
 
 #header {
   position: absolute;
-  background-image: url('background_gray.jpg');
-  padding: 15em 0 15em 0;
+  background-image: url('fall_08.jpg');
+  padding: 20em 0 15em 0;
   text-align: center;
+  background-size: cover;
   color:white;
   width: 100%;
   height: 100%;
@@ -224,8 +225,11 @@ body {
 
 }
 
-
-
+.background-image{
+  /* background-image: url('background_gray.jpg'); */
+  background-color: rgba(0,0,0,0.6);
+  background-size: cover;
+}
 
 .index-outer-box{
   display: -webkit-inline-box;
