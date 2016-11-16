@@ -1,5 +1,5 @@
 <% unless MPDClient.current_song.nil? %>
-  <img src="/juke/mp3_image?file=<%= URI.encode(MPDClient.current_song[:file]) %>" width="444" height="444">
+  <img src="/juke/mp3_image?file=<%= URI.encode(MPDClient.current_song[:file]) %>" height="194" width="194">
 <% else %>
   <%= image_tag('main_05.jpg', :id => 'index-box-left-image') %>
 <% end %>

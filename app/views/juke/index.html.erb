@@ -1,53 +1,57 @@
 <div style="line-height:1.5; width:100%;text-align:right;z-index:100;position:absolute;padding-right:5px;">
   <a href="/juke/list?bypass=bss" style="text-decoration:none;"onclick="return popup(this, 'Music Library');">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 </div>
+<div class="control-div">
+  <div class="control-upper-div">
+    <div id="current_time" class="medium-font"></div>
+  </div>
 
-<div id="current_time" class="medium-font"></div>
-
-<div id="header" class="dark">
-  <div class="index-outer-box">
-    <div class="index-box-left">
-      <div id="artwork">
-        <%= render partial: 'artwork' %>
-      </div>
-    </div>
-
-    <div class="index-box-middle background-image">
-      <div class="index-box-middle-wrapper">
-        <div id="song_info">
-          <%= render partial: 'song_info' %>
+  <div class="control-lower-div">
+    <div id="header" class="dark">
+      <div class="index-outer-box">
+        <div class="index-box-left">
+          <div id="artwork">
+            <%= render partial: 'artwork' %>
+          </div>
         </div>
 
-        <div class="heavy-font">
-          <ul id='juke_control' class="nav masthead-nav">
-            <li id="play_button_container">
-              <%= render partial: 'play_button' %>
-            </li>
-            <li>
-              <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
-            </li>
-            <li>
-              <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
-            </li>
-            <li>
-              <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+        <div class="index-box-middle background-image">
+          <div class="index-box-middle-wrapper">
+            <div id="song_info">
+              <%= render partial: 'song_info' %>
+            </div>
 
-    <div class="index-box-right background-image">
-      <div class="index-box-right-wrapper text-align-left">
-        <span>Up Coming Songs...</span>
-        <div class="coming_up" id="coming_up">
-          <%= render partial: 'coming_up' %>
+            <div class="heavy-font">
+              <ul id='juke_control' class="nav masthead-nav">
+                <li id="play_button_container">
+                  <%= render partial: 'play_button' %>
+                </li>
+                <li>
+                  <span data_url="/juke/next" class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                </li>
+                <li>
+                  <span data_url="/juke/stop" class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                </li>
+                <li>
+                  <span data_url="/juke/clear" class="glyphicon glyphicon-eject" aria-hidden="true"></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="index-box-right background-image">
+          <div class="index-box-right-wrapper text-align-left">
+            <span>Up Coming Songs...</span>
+            <div class="coming_up" id="coming_up">
+              <%= render partial: 'coming_up' %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <!-- Carousel slides -->
 <div id="carousel-comments" class="medium-font carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
