@@ -52,26 +52,28 @@
     <%= render partial: 'now' %>
   </div>
 
+<% if MPD_INSTANCE.playing? %>
   <% @songs_by_current_artist.each_with_index do |song, index| %>
-  <div data-role="page" id="now<%= index %>">
-    <div style="text-align: left; margin:10px;">
-      <a href="#pageNow" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i><span id="list_slider_back_text"> Back</span></a>
-    </div>
+    <div data-role="page" id="now<%= index %>">
+      <div style="text-align: left; margin:10px;">
+        <a href="#pageNow" class="btn btn-info" id="list_slider_back"><i class="glyphicon glyphicon-arrow-left"></i><span id="list_slider_back_text"> Back</span></a>
+      </div>
 
-    <div>
-      <div class="list_info_slider" id="now<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
-      <div class="list_info_slider"><%= title(song) %></div>
-      <div class="list_info_slider"><%= artist(song) %></div>
-      <div class="list_info_slider"><%= album(song) %></div>
-    </div>
+      <div>
+        <div class="list_info_slider" id="now<%= index %>Jacket" fileName="<%= URI.encode(song.file) %>"></div>
+        <div class="list_info_slider"><%= title(song) %></div>
+        <div class="list_info_slider"><%= artist(song) %></div>
+        <div class="list_info_slider"><%= album(song) %></div>
+      </div>
 
-    <div style="margin:3% 15% 150px 15%; width:70%;">
-      <button type="button" class="btn_add_song btn btn-info" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s)%>&song_name=<%= URI.encode(song.file)%> ">
-        예약하기
-      </button>
+      <div style="margin:3% 15% 150px 15%; width:70%;">
+        <button type="button" class="btn_add_song btn btn-info" name="/juke/add_song?bypass=<%= URI.encode(params[:bypass].to_s)%>&song_name=<%= URI.encode(song.file)%> ">
+          예약하기
+        </button>
+      </div>
     </div>
-  </div>
   <% end %>
+<% end %>
 
   <!--------->
   <!-- NEW -->

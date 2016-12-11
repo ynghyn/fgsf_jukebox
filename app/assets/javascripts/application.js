@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require classie
+//= require slider
 //= require jquery
 //= require jquery_ujs
 //= require jquery.mobile-1.4.5
